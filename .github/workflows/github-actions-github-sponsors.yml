@@ -1,0 +1,128 @@
+name: Generate Sponsors README
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 30 15 * * 0-6
+permissions:
+  contents: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+
+      - name: Generate Sponsors 💖
+        uses: JamesIves/github-sponsors-readme-action@v1
+        with:
+          token: ${{ secrets.SPONSER_GIT_PERSONAL_ACCESS_TOKEN }}
+          template: '<a href="https://github.com/{{ login }}"><img src="{{ avatarUrl }}" width="45px" alt="{{ name }}" /></a>'
+          file: 'README.md'
+          minimum: 100
+          maximum: 499
+          marker: 'slime'
+          fallback: 'このレベルのスポンサーは現在いません'
+
+      - name: Generate Sponsors 💖
+        uses: JamesIves/github-sponsors-readme-action@v1
+        with:
+          token: ${{ secrets.SPONSER_GIT_PERSONAL_ACCESS_TOKEN }}
+          template: '<a href="https://github.com/{{ login }}"><img src="{{ avatarUrl }}" width="60px" alt="{{ name }}" /></a>'
+          file: 'README.md'
+          minimum: 500
+          maximum: 999
+          marker: 'wolf'
+          fallback: 'このレベルのスポンサーは現在いません'
+
+      - name: Generate Sponsors 💖
+        uses: JamesIves/github-sponsors-readme-action@v1
+        with:
+          token: ${{ secrets.SPONSER_GIT_PERSONAL_ACCESS_TOKEN }}
+          template: '<a href="https://github.com/{{ login }}"><img src="{{ avatarUrl }}" width="70px" alt="{{ name }}" /></a>'
+          file: 'README.md'
+          minimum: 1000
+          maximum: 4999
+          marker: 'warrior'
+          fallback: 'このレベルのスポンサーは現在いません'
+
+      - name: Generate Sponsors 💖
+        uses: JamesIves/github-sponsors-readme-action@v1
+        with:
+          token: ${{ secrets.SPONSER_GIT_PERSONAL_ACCESS_TOKEN }}
+          template: '<a href="https://github.com/{{ login }}"><img src="{{ avatarUrl }}" width="79px" alt="{{ name }}" /></a>'
+          file: 'README.md'
+          minimum: 5000
+          maximum: 9999
+          marker: 'auger'
+          fallback: 'このレベルのスポンサーは現在いません'
+
+      - name: Generate Sponsors 💖
+        uses: JamesIves/github-sponsors-readme-action@v1
+        with:
+          token: ${{ secrets.SPONSER_GIT_PERSONAL_ACCESS_TOKEN }}
+          template: '<a href="https://github.com/{{ login }}"><img src="{{ avatarUrl }}" width="90px" alt="{{ name }}" /></a>'
+          file: 'README.md'
+          minimum: 10000
+          maximum: 49999
+          marker: 'wizard'
+          fallback: 'このレベルのスポンサーは現在いません'
+
+      - name: Generate Sponsors 💖
+        uses: JamesIves/github-sponsors-readme-action@v1
+        with:
+          token: ${{ secrets.SPONSER_GIT_PERSONAL_ACCESS_TOKEN }}
+          template: '<a href="https://github.com/{{ login }}"><img src="{{ avatarUrl }}" width="105px" alt="{{ name }}" /></a>'
+          file: 'README.md'
+          minimum: 50000
+          maximum: 99999
+          marker: 'demon'
+          fallback: 'このレベルのスポンサーは現在いません'
+
+      - name: Generate Sponsors 💖
+        uses: JamesIves/github-sponsors-readme-action@v1
+        with:
+          token: ${{ secrets.SPONSER_GIT_PERSONAL_ACCESS_TOKEN }}
+          template: '<a href="https://github.com/{{ login }}"><img src="{{ avatarUrl }}" width="125px" alt="{{ name }}" /></a>'
+          file: 'README.md'
+          minimum: 100000
+          maximum: 499999
+          marker: 'elf'
+          fallback: 'このレベルのスポンサーは現在いません'
+
+      - name: Generate Sponsors 💖
+        uses: JamesIves/github-sponsors-readme-action@v1
+        with:
+          token: ${{ secrets.SPONSER_GIT_PERSONAL_ACCESS_TOKEN }}
+          template: '<a href="https://github.com/{{ login }}"><img src="{{ avatarUrl }}" width="150px" alt="{{ name }}" /></a>'
+          file: 'README.md'
+          minimum: 500000
+          maximum: 999999
+          marker: 'devilking'
+          fallback: 'このレベルのスポンサーは現在いません'
+
+      - name: Generate Sponsors 💖
+        uses: JamesIves/github-sponsors-readme-action@v1
+        with:
+          token: ${{ secrets.SPONSER_GIT_PERSONAL_ACCESS_TOKEN }}
+          template: '<a href="https://github.com/{{ login }}"><img src="{{ avatarUrl }}" width="200px" alt="{{ name }}" /></a>'
+          file: 'README.md'
+          minimum: 1000000
+          maximum: 1199999
+          marker: 'hero'
+          fallback: 'このレベルのスポンサーは現在いません'
+
+      - name: Generate Sponsors 💖
+        uses: JamesIves/github-sponsors-readme-action@v1
+        with:
+          token: ${{ secrets.SPONSER_GIT_PERSONAL_ACCESS_TOKEN }}
+          template: '<a href="https://github.com/{{ login }}"><img src="{{ avatarUrl }}" width="300px" alt="{{ name }}" /></a>'
+          file: 'README.md'
+          minimum: 1200000
+          marker: 'dragon'
+          fallback: 'このレベルのスポンサーは現在いません'
+
+      - name: Deploy to GitHub Pages 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.6.1
+        with:
+          branch: main
+          folder: '.'

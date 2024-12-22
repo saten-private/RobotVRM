@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ミナ</string>
+    <string name="title_activity_main">ミナ</string>
+    <string name="package_name">com.saten.robotvrm</string>
+    <string name="custom_url_scheme">com.saten.robotvrm</string>
+</resources>

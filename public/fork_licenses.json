@@ -1,0 +1,20 @@
+{
+  "ForkLicense.aituber-kit": {
+    "licenses": "MIT",
+    "repository": "https://github.com/tegnike/aituber-kit/tree/5c1be3dae7e38871839f37857e550b8f7387f718",
+    "publisher": "tegnike",
+    "email": "o3nike.teg.14@gmail.com",
+    "url": "https://github.com/tegnike",
+    "path": "ForkLicense.aituber-kitPath",
+    "licenseFile": "https://github.com/tegnike/aituber-kit/blob/5c1be3dae7e38871839f37857e550b8f7387f718/LICENSE"
+  },
+  "ForkLicense.ChatVRM": {
+    "licenses": "MIT",
+    "repository": "https://github.com/pixiv/ChatVRM/commit/9b6ffa5a248a69fa4922421060e0db99d3fb6aa7",
+    "publisher": "pixiv",
+    "email": "0b5vr@0b5vr.com",
+    "url": "https://github.com/pixiv",
+    "path": "ForkLicense.ChatVRMPath",
+    "licenseFile": "https://github.com/pixiv/ChatVRM/blob/9b6ffa5a248a69fa4922421060e0db99d3fb6aa7/LICENSE"
+  }
+}
