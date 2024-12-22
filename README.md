@@ -163,7 +163,7 @@ RobotVRMはオープンソースの、**pixiv**の[**pixiv/ChatVRM**](https://gi
 </h3>
 
 <p align="center">
-<!-- wolf --><a href="https://github.com/azuss-p"><img src="https:&#x2F;&#x2F;github.com&#x2F;azuss-p.png" width="60px" alt="azuss-p" /></a><!-- wolf -->
+<!-- wolf --><!-- wolf -->
 </p>
 
 <h3 align="center">
