@@ -51,7 +51,7 @@ RobotVRMの開発環境を構築するためのサーバーを家庭内LAN上に
 1. `.env.local`の以下の値を設定します
    - `ROBOTVRM_DEVELOPMENT_HOST`に固定したIPアドレス("X.X.X.X")を入力します
    - `NEXT_PUBLIC_ROBOTVRM_DOCS_URL`にアプリがGitHub上のドキュメントを参照するために、CloneしたリポジトリのGitHubのブランチのURLを入力します。このURLをルートとしてドキュメントを参照します
-     - saten-privateがオーナーの場合の例) "https://github.com/saten-private/RobotVRM/blob/first"
+     - saten-privateがオーナーの場合の例) "https://github.com/saten-private/RobotVRM/tree/main"
      - リポジトリが非公開の場合はドキュメントとして参照している部分のみ公開しているリポジトリを別途用意するか、同様の参照しているパスに対してドキュメントを作成すれば良いと思います
      - アプリ内から説明を参照するドキュメントのリンク部分に過ぎないので、設定しなくてもアプリの動作は可能です
 
