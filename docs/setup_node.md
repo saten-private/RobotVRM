@@ -44,4 +44,4 @@
 
 ## Windowsの場合
 
-[Guide on Installing Node.js & npm {macOS & Windows}](https://dev.to/kintonedevprogram/guide-on-installing-nodejs-npm-macos-windows-16ii)の手順をもとに[こちらのnodeバージョン](../.node-version)のnodeをインストールしました
+[ahandsel](https://dev.to/ahandsel)さんの[Guide on Installing Node.js & npm {macOS & Windows}](https://dev.to/kintonedevprogram/guide-on-installing-nodejs-npm-macos-windows-16ii)の手順をもとに[こちらのnodeバージョン](../.node-version)のnodeをインストールしました
