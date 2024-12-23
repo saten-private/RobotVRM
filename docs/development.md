@@ -227,6 +227,34 @@ sudo pnpm dev-store
      source ~/.bashrc
      ```
 
+#### rubyの環境を準備
+
+1. [rubyのセットアップ仕方](./setup_ruby.md)の手順を実施
+1. (macOSの場合)利用しているシェルに応じて読み込みます。ターミナルのコマンドを入力するところの前に`%`が表示されている場合はzsh、`$`が表示される場合はbashです。
+   - zsh
+     ```
+     source ~/.zshrc
+     ```
+   - bash
+     ```
+     source ~/.bashrc
+     ```
+1. 以下で[こちらのrubyバージョン](../.ruby-version)であることを確認(RobotVRMをカレントディレクトリで実行してください)
+   ```
+   ruby -v
+   ```
+
+#### bundlerのインストール
+
+1. 以下を実行しbunderをインストール
+   ```
+   gem install bundler -v "2.5.23"
+   ```
+1. 以下でインストールしたバージョンのbundlerであることを確認
+   ```
+   bundler -v
+   ```
+
 #### プロジェクトを開く
 
 1. 以下を実行することでAndroidプロジェクトを開くことができます
