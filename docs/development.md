@@ -193,7 +193,7 @@ sudo pnpm dev-store
 
 #### Android Studioをインストール・セットアップ
 
-[Android Studio](https://developer.android.com/studio?hl=ja)をインストールしセットアップします。standardの設定で大丈夫です
+[Android Studio](https://developer.android.com/studio?hl=ja)をインストールして起動し、セットアップします。standardの設定で大丈夫です
 
 #### JAVA_HOMEのパスを通す
 
