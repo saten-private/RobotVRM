@@ -239,6 +239,10 @@ sudo pnpm dev-store
 #### Androidアプリのビルド・インストール
 
 1. 開発者向けオプション設定したAndroidデバイスをUSBでPCに接続
+1. (Windowsの場合)ターミナルを起動してからプロセスに権限を与えていない場合pnpmを実行する前に与えてください([参照](https://qiita.com/ponsuke0531/items/4629626a3e84bcd9398f))。pnpmを実行する場合は、ターミナルを起動する度に実行してください。
+   ```
+   Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+   ```
 1. 以下を実行
    ```
    pnpm android
