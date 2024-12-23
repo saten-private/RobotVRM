@@ -137,9 +137,11 @@ RobotVRMの開発環境を構築するためのサーバーを家庭内LAN上に
 ### 初期ビルド(一度のみ基本的には実行すればOKのはず)
 
 - macOSの場合
+  1. 以下を実行しRobotVRMサーバーのビルドを一通り通します ※管理者権限必要
   ```
-  sudo pnpm build
+  sudo pnpm start
   ```
+  1. ビルドが終わってサーバーが起動したら`Ctrl+C`で終了します
 - Windowsの場合
   1. 管理者権限でターミナルを起動
      - Cursorエディタのターミナルを使用している場合はCursorエディタを管理者権限で起動すれば良いです
@@ -147,10 +149,11 @@ RobotVRMの開発環境を構築するためのサーバーを家庭内LAN上に
      ```
      Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
      ```
-  1. 以下を実行しRobotVRMサーバーを立てます ※管理者権限必要
+  1. 以下を実行しRobotVRMサーバーのビルドを一通り通します ※管理者権限必要
      ```
-     pnpm build
+     pnpm start
      ```
+  1. ビルドが終わってサーバーが起動したら`Ctrl+C`で終了します
 
 ### 開発環境サーバーを立ち上げる
 
