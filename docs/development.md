@@ -289,24 +289,18 @@ sudo pnpm dev-store
    ruby -v
    ```
 
-#### bundlerのインストール
+#### CocoaPodsのインストール
+
+※ bundlerで管理するとWindowsでAndroidのビルドする際にrubyが不要なのにbundlerのインストールを求めれてしまったので、直接CocoaPodsをインストールする
 
 1. 以下を実行しbunderをインストール
    ```
-   gem install bundler -v "2.5.23"
+   gem install cocoapods -v "1.16.2"
    ```
-1. 以下でインストールしたバージョンのbundlerであることを確認
+1. 以下でインストールしたバージョンのCocoaPodsであることを確認
    ```
-   bundler -v
+   pod --version
    ```
-
-#### Gemfileの依存関係をインストール
-
-以下を実行しGemfileの依存関係をインストール
-
-```
-bundle install
-```
 
 #### プロジェクトを開く
 
