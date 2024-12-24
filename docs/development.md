@@ -200,7 +200,9 @@ sudo pnpm dev-store
 
 #### JAVA_HOMEのパスを通す
 
-1. (macOSの場合)利用しているシェルに応じて次の1行を追記します。ターミナルのコマンドを入力するところの前に`%`が表示されている場合はzshなので`~/.zshrc`、`$`が表示される場合はbashなので`~/.bashrc`に追記してください、ファイルが無い場合は作成してください。以下はVimでの例
+##### macOSの場合
+
+1. 利用しているシェルに応じて次の1行を追記します。ターミナルのコマンドを入力するところの前に`%`が表示されている場合はzshなので`~/.zshrc`、`$`が表示される場合はbashなので`~/.bashrc`に追記してください、ファイルが無い場合は作成してください。以下はVimでの例
    1. ファイルを開く、ファイルが無い場合空ファイルとして開きます。(Vimの使い方は[こちら](https://zenn.dev/masatotezuka/articles/vim_command_220225)参照)
       - zsh
         ```
@@ -226,6 +228,17 @@ sudo pnpm dev-store
      ```
      source ~/.bashrc
      ```
+
+##### Windowsの場合
+
+[Buzzword Inc.](http://www.buzzword.co.jp/)さんの[PATHの設定及び環境変数JAVA_HOMEの設定](https://www.javadrive.jp/start/install/index4.html)を参考にJAVA_HOMEの環境変数を設定させて頂きました。
+
+1. [Buzzword Inc.](http://www.buzzword.co.jp/)さんの[PATHの設定及び環境変数JAVA_HOMEの設定](https://www.javadrive.jp/start/install/index4.html)の手順で下記のようにAndroid Studio内のjbrのパスを`JAVA_HOME`の環境変数として設定します。(システム環境変数でなくユーザー環境変数でも良いです)
+   ```
+   C:\Program Files\Android\Android Studio\jbr
+   ```
+1. 反映するためにターミナルを再起動する
+
 
 #### プロジェクトを開く
 
