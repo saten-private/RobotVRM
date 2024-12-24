@@ -18,7 +18,9 @@ ArduinoのロボットカーとHC-02のBluetoothデバイス準備。作者は[�
 
 ## RobotVRMのArduinoのコードをロボットカーに書き込み
 
-[こちら](../Arduino)のRobotVRMフォルダ(RobotVRM.inoを直接ではなく上位階層のRobotVRMフォルダ)をダウンロードしてArduinoで開いてロボットカーに書き込んでください
+[こちら](../Arduino)のRobotVRMフォルダをArduinoで開いてロボットカーに書き込んでください
+
+※ `RobotVRM.ino`を直接ダウンロードしても良いですかArduinoで開く場合は、`RobotVRM/RobotVRM.ino`でRobotVRMフォルダが無いと開けませんので、`RobotVRM`フォルダを作成してその中に`RobotVRM.ino`を入れてください
 
 ## ロボットカーにスマホを固定できる場所を作る(固定できればなんでも良いです)
 
