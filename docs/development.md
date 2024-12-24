@@ -384,7 +384,7 @@ Xcode > Settings > Accounts > 左下の"+"キーを押下 > "Apple ID"を選択�
 1. [デバイスの開発者向けオプションを設定](https://developer.android.com/studio/debug/dev-options?hl=ja)してあるAndroidデバイスでUSBで接続して開発環境でインストールしたRobotVRMアプリを起動している状態にします
 1. 下記キャプチャのようにIonicのExtensionの Debug > (RobotVRMアプリのアプリケーションID) を選択するとデバッグコンソールでログが表示されるようになります。この状態でブレークポイントを設定して止めることもできます。
    ![RobotVRMのデバッグの様子](./debug.jpg)
-   作者はデバッグでIonicのExtensionを頻繁に使うので、下記キャプチャのようにピン留めしておくことで常にタブの前の方に表示しています
+   作者はデバッグでIonicのExtensionを頻繁に使うので、下記キャプチャのようにピン留めして上の方にドラッグアンドドロップして常にタブの前の方に表示して使いやすくしています。
    ![ピン留めした様子](./ionic_pin.jpg)
 
 ## ドキュメント編集方法(Markdown)
