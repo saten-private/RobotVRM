@@ -377,7 +377,7 @@ Xcode > Settings > Accounts > 左下の"+"キーを押下 > "Apple ID"を選択�
 
 ### IonicのExtensionのインストール
 
-[Ionic](https://marketplace.visualstudio.com/items?itemName=ionic.ionic)のExtensionをCursorエディタ(又はVSCodeエディタ)にインストールしてください
+[IonicのExtension](https://marketplace.visualstudio.com/items?itemName=ionic.ionic)をCursorエディタ(又はVSCodeエディタ)にインストールしてください
 
 ### デバッグ手順
 
