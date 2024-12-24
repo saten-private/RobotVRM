@@ -231,7 +231,7 @@ sudo pnpm dev-store
 
 ##### Windowsの場合
 
-[Buzzword Inc.](http://www.buzzword.co.jp/)さんの[PATHの設定及び環境変数JAVA_HOMEの設定](https://www.javadrive.jp/start/install/index4.html)を参考にJAVA_HOMEの環境変数を設定させて頂きました。
+[Buzzword Inc.](http://www.buzzword.co.jp/)さんの[PATHの設定及び環境変数JAVA_HOMEの設定](https://www.javadrive.jp/start/install/index4.html)を参考に`JAVA_HOME`の環境変数を設定させて頂きました。
 
 1. [Buzzword Inc.](http://www.buzzword.co.jp/)さんの[PATHの設定及び環境変数JAVA_HOMEの設定](https://www.javadrive.jp/start/install/index4.html)の手順で下記のようにAndroid Studio内のjbrのパスを`JAVA_HOME`の環境変数として設定します。(システム環境変数でなくユーザー環境変数でも良いです)
    ```
@@ -377,7 +377,7 @@ Xcode > Settings > Accounts > 左下の"+"キーを押下 > "Apple ID"を選択�
 
 ### IonicのExtensionのインストール
 
-[Ionic](https://marketplace.visualstudio.com/items?itemName=ionic.ionic)のCursorエディタ(又はVSCodeエディタ)にインストールしてください
+[Ionic](https://marketplace.visualstudio.com/items?itemName=ionic.ionic)のExtensionをCursorエディタ(又はVSCodeエディタ)にインストールしてください
 
 ### デバッグ手順
 
