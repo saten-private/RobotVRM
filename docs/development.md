@@ -137,23 +137,23 @@ RobotVRMの開発環境を構築するためのサーバーを家庭内LAN上に
 ### 初期ビルド(一度のみ基本的には実行すればOKのはず)
 
 - macOSの場合
-  1. 以下を実行しRobotVRMサーバーのビルドを一通り通します ※管理者権限必要
-  ```
-  sudo pnpm start
-  ```
-  1. ビルドが終わってサーバーが起動したら`Ctrl+C`で終了します
+   1. 以下を実行しRobotVRMサーバーのビルドを一通り通します ※管理者権限必要
+      ```
+      sudo pnpm start
+      ```
+   1. ビルドが終わってサーバーが起動したら`Ctrl+C`で終了します
 - Windowsの場合
-  1. 管理者権限でターミナルを起動
-     - Cursorエディタのターミナルを使用している場合はCursorエディタを管理者権限で起動すれば良いです
-  1. ターミナルを起動してからプロセスに権限を与えていない場合pnpmを実行する前に与えてください([参照](https://qiita.com/ponsuke0531/items/4629626a3e84bcd9398f))。pnpmを実行する場合は、ターミナルを起動する度に実行してください。
-     ```
-     Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
-     ```
-  1. 以下を実行しRobotVRMサーバーのビルドを一通り通します ※管理者権限必要
-     ```
-     pnpm start
-     ```
-  1. ビルドが終わってサーバーが起動したら`Ctrl+C`で終了します
+   1. 管理者権限でターミナルを起動
+      - Cursorエディタのターミナルを使用している場合はCursorエディタを管理者権限で起動すれば良いです
+   1. ターミナルを起動してからプロセスに権限を与えていない場合pnpmを実行する前に与えてください([参照](https://qiita.com/ponsuke0531/items/4629626a3e84bcd9398f))。pnpmを実行する場合は、ターミナルを起動する度に実行してください。
+      ```
+      Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+      ```
+   1. 以下を実行しRobotVRMサーバーのビルドを一通り通します ※管理者権限必要
+      ```
+      pnpm start
+      ```
+   1. ビルドが終わってサーバーが起動したら`Ctrl+C`で終了します
 
 ### 開発環境サーバーを立ち上げる
 
