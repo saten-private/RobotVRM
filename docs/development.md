@@ -275,7 +275,7 @@ sudo pnpm dev-store
 #### rubyの環境を準備
 
 1. [rubyのセットアップ仕方](./setup_ruby.md)の手順を実施
-1. (macOSの場合)利用しているシェルに応じて読み込みます。ターミナルのコマンドを入力するところの前に`%`が表示されている場合はzsh、`$`が表示される場合はbashです。
+1. 利用しているシェルに応じて読み込みます。ターミナルのコマンドを入力するところの前に`%`が表示されている場合はzsh、`$`が表示される場合はbashです。
    - zsh
      ```
      source ~/.zshrc
@@ -293,10 +293,19 @@ sudo pnpm dev-store
 
 ※ bundlerで管理するとWindowsでAndroidのビルドする際にrubyが不要なのにbundlerのインストールを求めれてしまったので、直接CocoaPodsをインストールする
 
-1. 以下を実行しbunderをインストール
+1. 以下を実行しCocoaPodsをインストール
    ```
    gem install cocoapods -v "1.16.2"
    ```
+1. 利用しているシェルに応じて読み込みます。ターミナルのコマンドを入力するところの前に`%`が表示されている場合はzsh、`$`が表示される場合はbashです。
+   - zsh
+     ```
+     source ~/.zshrc
+     ```
+   - bash
+     ```
+     source ~/.bashrc
+     ```
 1. 以下でインストールしたバージョンのCocoaPodsであることを確認
    ```
    pod --version
