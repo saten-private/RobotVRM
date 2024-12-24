@@ -1,4 +1,6 @@
-# rubyのセットアップ仕方(macOSのみ)
+# rubyのセットアップ仕方
+
+## macOSの場合
 
 1. [HomeBrewのセットアップ仕方(macOSのみ)](./setup_brew.md)を実施していない人は実施してください
 1. rubyenvをインストール
@@ -39,3 +41,13 @@
    ```
    rbenv install (上記のバージョン)
    ```
+
+## Windowsの場合
+
+[こちらのrubyバージョン](../.ruby-version)のrubyを[tks_00](https://qiita.com/tks_00)さんの[「uru」を使って簡単に Ruby の複数のバージョン切り替えを実現する方法](https://qiita.com/tks_00/items/fc3a56e2f7c6cffbe2d7)を参考にインストールさせて頂きました。大まかな流れは下記です。
+
+1. `C:\Ruby`フォルダを作成する
+1. Devkitをインストールするため最新バージョンのrubyで良いので推奨されている`Ruby+Devkit X.X.X-X`のようなのを`C:\Ruby\rubyX.X.X`にインストールする
+1. [Archives](https://rubyinstaller.org/downloads/archives/)より[こちらのrubyバージョン](../.ruby-version)のrubyをダウンロードして解凍し`C:\Ruby\rubyX.X.X`に置く
+1. [tks_00](https://qiita.com/tks_00)さんの[「uru」を使って簡単に Ruby の複数のバージョン切り替えを実現する方法](https://qiita.com/tks_00/items/fc3a56e2f7c6cffbe2d7)でrubyのバージョン管理をできるようにする
+1. ターミナルを再起動し反映する
