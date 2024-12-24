@@ -393,7 +393,8 @@ Xcode > Settings > Accounts > 左下の"+"キーを押下 > "Apple ID"を選択�
 
 1. Cursorエディタでドキュメント(\*.md)を開く
 1. 下記キャプチャのようにMarkdownのプレビューを表示する
-   ![Markdownのプレビュー](./markdown_preview.jpg) - プレビューのボタンが表示されない場合は[Markdown Preview Enhanced](https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced)をインストールすると良いかもしれません
+   ![Markdownのプレビュー](./markdown_preview.jpg)
+   プレビューのボタンが表示されない場合は[Markdown Preview Enhanced](https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced)をインストールすると良いかもしれません
 1. プレビュー見ながら編集する
 
 ## リリース仕方(整備中)
