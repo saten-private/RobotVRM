@@ -127,7 +127,7 @@ RobotVRMはオープンソースの、**pixiv**の[**pixiv/ChatVRM**](https://gi
 </p>
 
 <h3 align="center">
-<img src="./docs/sponsor_icon/dragon.jpg" width="51" height="51" style="vertical-align: middle"> <a href="https://github.com/sponsors/saten-private">デーモンスポンサー US$500</a>
+<img src="./docs/sponsor_icon/demon.jpg" width="51" height="51" style="vertical-align: middle"> <a href="https://github.com/sponsors/saten-private">デーモンスポンサー US$500</a>
 </h3>
 
 <p align="center">
