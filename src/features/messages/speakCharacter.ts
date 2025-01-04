@@ -34,11 +34,11 @@ const createSpeakCharacter = () => {
       screenplay.talk.message = convertEnglishToJapaneseReading(
         screenplay.talk.message
       )
-      // 音声合成できない特殊文字を削除
-      screenplay.talk.message = excludeUnreadableCharacters(
-        screenplay.talk.message
-      )
     }
+    // 音声合成できない特殊文字を削除
+    screenplay.talk.message = excludeUnreadableCharacters(
+      screenplay.talk.message
+    )
 
     const fetchPromise = prevFetchPromise.then(async () => {
       const now = Date.now()
@@ -170,9 +170,9 @@ const createSpeakCharacterCurrentEmotion = () => {
     if (ss.changeEnglishToJapanese && ss.selectLanguage === 'ja') {
       // 英単語を日本語で読み上げる
       talk.message = convertEnglishToJapaneseReading(talk.message)
-      // 音声合成できない特殊文字を削除
-      talk.message = excludeUnreadableCharacters(talk.message)
     }
+    // 音声合成できない特殊文字を削除
+    talk.message = excludeUnreadableCharacters(talk.message)
 
     if (!abortController) {
       abortController = new AbortController()
