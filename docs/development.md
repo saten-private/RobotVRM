@@ -74,7 +74,7 @@ RobotVRMの開発環境を構築するためのサーバーを家庭内LAN上に
 
 ### Gemの設定(macOSのみ)
 
-1. 利用しているシェルに応じて次の1行を追記します。ターミナルのコマンドを入力するところの前に`%`が表示されている場合はzshなので`~/.zshrc`、`$`が表示される場合はbashなので`~/.bashrc`に追記してください、ファイルが無い場合は作成してください。以下はVimでの例
+1. 利用しているシェルに応じて次の行を追記します。ターミナルのコマンドを入力するところの前に`%`が表示されている場合はzshなので`~/.zshrc`、`$`が表示される場合はbashなので`~/.bashrc`に追記してください、ファイルが無い場合は作成してください。以下はVimでの例
    1. ファイルを開く、ファイルが無い場合空ファイルとして開きます。(Vimの使い方は[こちら](https://zenn.dev/masatotezuka/articles/vim_command_220225)参照)
       - zsh
         ```
@@ -134,27 +134,6 @@ RobotVRMの開発環境を構築するためのサーバーを家庭内LAN上に
 
 [オレオレ証明書の作成](./create_self_signed_cert_ssl.md)の手順で固定したIPアドレスの証明書を作成し、作成された証明書を`localhost+2-key.pem`と`localhost+2.pem`という名前でRobotVRMの`certificates`フォルダ配下に置いてください
 
-### 初期ビルド(一度のみ基本的には実行すればOKのはず)
-
-- macOSの場合
-   1. 以下を実行しRobotVRMサーバーのビルドを一通り通します ※管理者権限必要
-      ```
-      sudo pnpm start
-      ```
-   1. ビルドが終わってサーバーが起動したら`Ctrl+C`で終了します
-- Windowsの場合
-   1. 管理者権限でターミナルを起動
-      - Cursorエディタのターミナルを使用している場合はCursorエディタを管理者権限で起動すれば良いです
-   1. ターミナルを起動してからプロセスに権限を与えていない場合pnpmを実行する前に与えてください([参照](https://qiita.com/ponsuke0531/items/4629626a3e84bcd9398f))。pnpmを実行する場合は、ターミナルを起動する度に実行してください。
-      ```
-      Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
-      ```
-   1. 以下を実行しRobotVRMサーバーのビルドを一通り通します ※管理者権限必要
-      ```
-      pnpm start
-      ```
-   1. ビルドが終わってサーバーが起動したら`Ctrl+C`で終了します
-
 ### 開発環境サーバーを立ち上げる
 
 #### macOS
@@ -202,7 +181,7 @@ sudo pnpm dev-store
 
 ##### macOSの場合
 
-1. 利用しているシェルに応じて次の1行を追記します。ターミナルのコマンドを入力するところの前に`%`が表示されている場合はzshなので`~/.zshrc`、`$`が表示される場合はbashなので`~/.bashrc`に追記してください、ファイルが無い場合は作成してください。以下はVimでの例
+1. 利用しているシェルに応じて次の行を追記します。ターミナルのコマンドを入力するところの前に`%`が表示されている場合はzshなので`~/.zshrc`、`$`が表示される場合はbashなので`~/.bashrc`に追記してください、ファイルが無い場合は作成してください。以下はVimでの例
    1. ファイルを開く、ファイルが無い場合空ファイルとして開きます。(Vimの使い方は[こちら](https://zenn.dev/masatotezuka/articles/vim_command_220225)参照)
       - zsh
         ```
@@ -254,17 +233,35 @@ sudo pnpm dev-store
 
 #### Androidアプリのビルド・インストール
 
-1. 開発者向けオプション設定したAndroidデバイスをUSBでPCに接続
-1. (Windowsの場合)ターミナルを起動してからプロセスに権限を与えていない場合pnpmを実行する前に与えてください([参照](https://qiita.com/ponsuke0531/items/4629626a3e84bcd9398f))。pnpmを実行する場合は、ターミナルを起動する度に実行してください。
-   ```
-   Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
-   ```
-1. 以下を実行
-   ```
-   pnpm android
-   ```
-1. 認識されているAndroidデバイスを選択してビルド・インストール
-1. RobotVRMのアプリの画面が表示されればOKです
+- macOSの場合
+   1. 開発者向けオプション設定したAndroidデバイスをUSBでPCに接続
+   1. (index.htmlを生成するために **一度** だけ実行すれば良い)以下を実行しRobotVRMサーバーのビルドを一通り通します ※管理者権限必要
+      ```
+      sudo pnpm build
+      ```
+   1. 以下を実行
+      ```
+      pnpm android
+      ```
+   1. 認識されているAndroidデバイスを選択してビルド・インストール
+   1. RobotVRMのアプリの画面が表示されればOKです
+- Windowsの場合
+   1. 管理者権限でターミナルを起動
+      - Cursorエディタのターミナルを使用している場合はCursorエディタを管理者権限で起動すれば良いです
+   1. ターミナルを起動してからプロセスに権限を与えていない場合pnpmを実行する前に与えてください([参照](https://qiita.com/ponsuke0531/items/4629626a3e84bcd9398f))。pnpmを実行する場合は、ターミナルを起動する度に実行してください。
+      ```
+      Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+      ```
+   1. (index.htmlを生成するために **一度** だけ実行すれば良い)以下を実行しRobotVRMサーバーのビルドを一通り通します ※管理者権限必要
+      ```
+      pnpm build
+      ```
+   1. 以下を実行
+      ```
+      pnpm android
+      ```
+   1. 認識されているAndroidデバイスを選択してビルド・インストール
+   1. RobotVRMのアプリの画面が表示されればOKです
 
 ### iOS(macOSのみ)
 
@@ -355,7 +352,7 @@ Xcode > Settings > Accounts > 左下の"+"キーを押下 > "Apple ID"を選択�
 
 1. 以下を実行しXcodeプロジェクトを同期させます
    ```
-   pnpm sync
+   npx cap open ios
    ```
 1. Xcodeを開いた状態でiOSデバイスをPCに接続し認識させます
 1. Xcodeで対象のiOSデバイスを選択してCommand+Rのキーを押せば実機ビルド・インストールしようとする。その際、デバイスの登録を確認されるのでデバイスを登録する
@@ -369,6 +366,10 @@ Xcode > Settings > Accounts > 左下の"+"キーを押下 > "Apple ID"を選択�
 以後は以下を実行することでターミナル上(Cursorエディタなど)からiOSアプリをビルド・インストールできます。
 
 1. 開発向けに設定したiOSデバイスをUSBでPCに接続
+1. (index.htmlを生成するために **一度** だけ実行すれば良い)以下を実行しRobotVRMサーバーのビルドを一通り通します ※管理者権限必要
+   ```
+   sudo pnpm build
+   ```
 1. 以下を実行
    ```
    pnpm ios
