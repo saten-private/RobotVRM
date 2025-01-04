@@ -235,7 +235,7 @@ sudo pnpm dev-store
 
 - macOSの場合
    1. 開発者向けオプション設定したAndroidデバイスをUSBでPCに接続
-   1. (index.htmlを生成するために **一度** だけ実行すれば良い)以下を実行しRobotVRMサーバーのビルドを一通り通します ※管理者権限必要
+   1. (`webDir`を生成するために **一度** だけ直前に実行すれば良い)以下を実行しRobotVRMサーバーのビルドを一通り通します ※管理者権限必要
       ```
       sudo pnpm build
       ```
@@ -246,13 +246,14 @@ sudo pnpm dev-store
    1. 認識されているAndroidデバイスを選択してビルド・インストール
    1. RobotVRMのアプリの画面が表示されればOKです
 - Windowsの場合
+   1. 開発者向けオプション設定したAndroidデバイスをUSBでPCに接続
    1. 管理者権限でターミナルを起動
       - Cursorエディタのターミナルを使用している場合はCursorエディタを管理者権限で起動すれば良いです
    1. ターミナルを起動してからプロセスに権限を与えていない場合pnpmを実行する前に与えてください([参照](https://qiita.com/ponsuke0531/items/4629626a3e84bcd9398f))。pnpmを実行する場合は、ターミナルを起動する度に実行してください。
       ```
       Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
       ```
-   1. (index.htmlを生成するために **一度** だけ実行すれば良い)以下を実行しRobotVRMサーバーのビルドを一通り通します ※管理者権限必要
+   1. (`webDir`を生成するために **一度** だけ直前に実行すれば良い)以下を実行しRobotVRMサーバーのビルドを一通り通します ※管理者権限必要
       ```
       pnpm build
       ```
@@ -366,7 +367,7 @@ Xcode > Settings > Accounts > 左下の"+"キーを押下 > "Apple ID"を選択�
 以後は以下を実行することでターミナル上(Cursorエディタなど)からiOSアプリをビルド・インストールできます。
 
 1. 開発向けに設定したiOSデバイスをUSBでPCに接続
-1. (index.htmlを生成するために **一度** だけ実行すれば良い)以下を実行しRobotVRMサーバーのビルドを一通り通します ※管理者権限必要
+1. (`webDir`を生成するために **一度** だけ直前に実行すれば良い)以下を実行しRobotVRMサーバーのビルドを一通り通します ※管理者権限必要
    ```
    sudo pnpm build
    ```
