@@ -151,7 +151,7 @@ RobotVRMはオープンソースの、**pixiv**の[**pixiv/ChatVRM**](https://gi
 </p>
 
 <h3 align="center">
-<img src="./docs/sponsor_icon/warrior.webp" height="51" style="vertical-align: middle"> <a href="https://github.com/sponsors/saten-private">戦士スポンサー US$10</a>
+<img src="./docs/sponsor_icon/warrior.jpg" height="51" style="vertical-align: middle"> <a href="https://github.com/sponsors/saten-private">戦士スポンサー US$10</a>
 </h3>
 
 <p align="center">
@@ -159,7 +159,7 @@ RobotVRMはオープンソースの、**pixiv**の[**pixiv/ChatVRM**](https://gi
 </p>
 
 <h3 align="center">
-<img src="./docs/sponsor_icon/wolf.webp" height="51" style="vertical-align: middle"> <a href="https://github.com/sponsors/saten-private">ウルフスポンサー US$5</a>
+<img src="./docs/sponsor_icon/wolf.jpg" height="51" style="vertical-align: middle"> <a href="https://github.com/sponsors/saten-private">ウルフスポンサー US$5</a>
 </h3>
 
 <p align="center">
@@ -167,7 +167,7 @@ RobotVRMはオープンソースの、**pixiv**の[**pixiv/ChatVRM**](https://gi
 </p>
 
 <h3 align="center">
-<img src="./docs/sponsor_icon/slime.webp" width="51" style="vertical-align: middle"> <a href="https://github.com/sponsors/saten-private">スライムスポンサー US$1</a>
+<img src="./docs/sponsor_icon/slime.jpg" width="51" style="vertical-align: middle"> <a href="https://github.com/sponsors/saten-private">スライムスポンサー US$1</a>
 </h3>
 
 <p align="center">
