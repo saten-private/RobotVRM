@@ -67,6 +67,8 @@ export const processReceivedMessage = async (
       ) {
         continue
       }
+      // 発話できない文字を削除する
+      sentence = excludeUnreadableCharacters(sentence)
 
       // タグと返答を結合（音声再生で使用される）
       let aiText = `${tag} ${sentence}`
@@ -210,6 +212,8 @@ export const processAIResponse = async (
           ) {
             continue
           }
+          // 発話できない文字を削除する
+          sentence = excludeUnreadableCharacters(sentence)
 
           // タグと返答を結合（音声再生で使用される）
           let aiText = `${tag} ${sentence}`
@@ -403,6 +407,8 @@ export const processSpeakContent = async (content: string) => {
       ) {
         continue
       }
+      // 発話できない文字を削除する
+      sentence = excludeUnreadableCharacters(sentence)
 
       // タグと返答を結合（音声再生で使用される）
       let aiText = `${sentence}`
@@ -696,3 +702,12 @@ export const handleReceiveTextFromWsFn =
 
     homeStore.setState({ chatProcessing: state !== 'end' })
   }
+
+const excludeUnreadableCharacters = (text: string): string => {
+  return text
+    .replace(/[^\p{L}\p{N}\p{P}\p{Z}]/gu, '') // 文字、数字、句読点、空白以外を削除
+    .replace(/[\u200B-\u200D\uFEFF]/g, '') // ゼロ幅文字を削除
+    .replace(/\s+/g, ' ') // 連続する空白文字（改行含む）を単一のスペースに置換
+    .replace(/\\./g, '') // バックスラッシュで始まる文字を削除
+    .trim()
+}
