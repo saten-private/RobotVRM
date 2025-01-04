@@ -59,8 +59,7 @@ RobotVRM初号機ミナ(2024/11/19時点)
 
 ## ベース
 
-RobotVRMはオープンソースの、**pixiv**の[**pixiv/ChatVRM**](https://github.com/pixiv/ChatVRM)をベースにした[**ニケちゃん**](https://x.com/tegnike)の[**tegnike/aituber-kit** (MITライセンスの頃、2024/9/25以前)](https://github.com/tegnike/aituber-kit/tree/5c1be3dae7e38871839f37857e550b8f7387f718
-)をベースにして作成されています
+RobotVRMはオープンソースの、**pixiv**の[**pixiv/ChatVRM**](https://github.com/pixiv/ChatVRM)をベースにした[**ニケちゃん**](https://x.com/tegnike)の[**tegnike/aituber-kit** (MITライセンスの頃、2024/9/25以前)](https://github.com/tegnike/aituber-kit/tree/5c1be3dae7e38871839f37857e550b8f7387f718)をベースにして作成されています
 
 ## アプリの開発環境構築
 

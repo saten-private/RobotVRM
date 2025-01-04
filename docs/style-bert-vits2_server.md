@@ -17,9 +17,7 @@
    ```
    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
    ```
-1. [Style-Bert-VITS2のGitやPython使える人](https://github.com/litagin02/Style-Bert-VITS2?tab=readme-ov-file#git%E3%82%84python%E4%BD%BF%E3%81%88%E3%82%8B%E4%BA%BA)の手順を実施して環境を作成。`powershell -c "irm https://astral.sh/uv/install.ps1 | iex"`を実行した際はパスを通すように指示されるので指示通り下記のようにパスを通して続行してください
-   `     $env:Path = "C:\Users\XXXX\.cargo\bin;$env:Path"
- `
+1. [Style-Bert-VITS2のGitやPython使える人](https://github.com/litagin02/Style-Bert-VITS2?tab=readme-ov-file#git%E3%82%84python%E4%BD%BF%E3%81%88%E3%82%8B%E4%BA%BA)の手順を実施して環境を作成。`powershell -c "irm https://astral.sh/uv/install.ps1 | iex"`を実行した際はパスを通すように指示されるので指示通り`$env:Path = "C:\Users\XXXX\.cargo\bin;$env:Path"`のようにパスを通して続行してください
 1. 下記を実行すると自動的にブラウザが開くのでブラウザ上で音声合成ができることを確認してください
    - GPUを使用しない場合
      ```
