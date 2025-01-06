@@ -51,6 +51,7 @@ interface ModelProvider {
   gsviTtsBatchSize: number
   gsviTtsSpeechRate: number
   elevenlabsVoiceId: string
+  dmmSpeaker: string
 }
 
 interface Integrations {
@@ -195,6 +196,7 @@ const settingsStore = create<SettingsState>()(
           process.env.NEXT_PUBLIC_ROBOTVRM_GSVI_TTS_SPEECH_RATE || '1.0'
         ) || 1.0,
       elevenlabsVoiceId: '',
+      dmmSpeaker: process.env.NEXT_PUBLIC_ROBOTVRM_DMM_SPEAKER || '1',
 
       // Integrations
       difyUrl: '',
@@ -287,6 +289,7 @@ const settingsStore = create<SettingsState>()(
         gsviTtsBatchSize: state.gsviTtsBatchSize,
         gsviTtsSpeechRate: state.gsviTtsSpeechRate,
         elevenlabsVoiceId: state.elevenlabsVoiceId,
+        dmmSpeaker: state.dmmSpeaker,
         difyUrl: state.difyUrl,
         difyConversationId: state.difyConversationId,
         youtubeLiveId: state.youtubeLiveId,

@@ -30,6 +30,7 @@ type APIKey =
   | 'koeiromapKey'
   | 'youtubeApiKey'
   | 'elevenlabsApiKey'
+  | 'dmmApiKey'
 
 export const getAPIKey = async (key: APIKey): Promise<string> => {
   try {

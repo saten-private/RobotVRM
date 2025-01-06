@@ -7,6 +7,7 @@ import { Screenplay, Talk, TalkNoEmotion, createTalk } from './messages'
 import { synthesizeStyleBertVITS2Api } from './synthesizeStyleBertVITS2'
 import { synthesizeVoiceApi } from './synthesizeVoice'
 import { synthesizeVoiceElevenlabsApi } from './synthesizeVoiceElevenlabs'
+import { synthesizeVoiceDmmApi } from './synthesizeVoiceDmm'
 import { synthesizeVoiceGoogleApi } from './synthesizeVoiceGoogle'
 import { getAPIKey } from '../stores/secureStorage'
 
@@ -121,6 +122,12 @@ const createSpeakCharacter = () => {
           await getAPIKey('elevenlabsApiKey'),
           ss.elevenlabsVoiceId,
           ss.selectLanguage
+        ).catch(() => null)
+      } else if (ss.selectVoice == 'dmm') {
+        buffer = await fetchAudioDmm(
+          screenplay.talk,
+          ss.dmmSpeaker,
+          await getAPIKey('dmmApiKey')
         ).catch(() => null)
       }
       lastTime = Date.now()
@@ -268,6 +275,13 @@ const createSpeakCharacterCurrentEmotion = () => {
           await getAPIKey('elevenlabsApiKey'),
           ss.elevenlabsVoiceId,
           ss.selectLanguage,
+          signal
+        ).catch(() => null)
+      } else if (ss.selectVoice == 'dmm') {
+        buffer = await fetchAudioDmm(
+          talk,
+          ss.dmmSpeaker,
+          await getAPIKey('dmmApiKey'),
           signal
         ).catch(() => null)
       }
@@ -650,6 +664,12 @@ export const testVoice = async () => {
       true,
       ss.aivisSpeechStoreServerUrl
     ).catch(() => null)
+  } else if (ss.selectVoice == 'dmm') {
+    buffer = await fetchAudioDmm(
+      talk,
+      ss.dmmSpeaker,
+      await getAPIKey('dmmApiKey')
+    ).catch(() => null)
   }
   if (buffer) {
     const screenplay: Screenplay = {
@@ -693,6 +713,21 @@ export const fetchAudioVoiceGSVIApi = async (
   const blob = await response.blob()
   const buffer = await blob.arrayBuffer()
   return buffer
+}
+
+export const fetchAudioDmm = async (
+  talk: Talk,
+  speaker: string,
+  apiKey: string,
+  signal?: AbortSignal
+): Promise<ArrayBuffer> => {
+  const ttsVoice = await synthesizeVoiceDmmApi(
+    talk.message,
+    speaker,
+    apiKey,
+    signal
+  )
+  return ttsVoice.audio
 }
 
 export const fetchAudioElevenlabs = async (
