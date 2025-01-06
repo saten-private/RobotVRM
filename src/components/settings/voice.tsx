@@ -33,6 +33,7 @@ const Voice = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [koeiromapKey, setKoeiromapKey] = useState('')
   const [elevenlabsApiKey, setElevenlabsApiKey] = useState('')
+  const [dmmApiKey, setDmmApiKey] = useState('')
 
   const selectVoice = settingsStore((s) => s.selectVoice)
   const koeiroParam = settingsStore((s) => s.koeiroParam)
@@ -159,6 +160,16 @@ const Voice = () => {
     fetchAPIKeys()
   }, [])
 
+  useEffect(() => {
+    const fetchDmmApiKey = async () => {
+      const key = await getAPIKey('dmmApiKey')
+      setDmmApiKey(key)
+    }
+    if (selectVoice === 'dmm') {
+      fetchDmmApiKey()
+    }
+  }, [selectVoice])
+
   if (isLoading) {
     return <div>{t('Loading')}</div> // ローディング中のメッセージを表示
   }
@@ -187,6 +198,7 @@ const Voice = () => {
               <option value="stylebertvits2">{t('UsingStyleBertVITS2')}</option>
               {/* 検証できていないかつ検証予定でないため無効化<option value="gsvitts">{t('UsingGSVITTS')}</option> */}
               <option value="elevenlabs">{t('UsingElevenLabs')}</option>
+              <option value="dmm">{t('UsingDmmNijiVoice')}</option>
             </>
           ) : (
             <>
@@ -1034,6 +1046,51 @@ const Voice = () => {
                       })
                     }
                   />
+                </div>
+              </>
+            )
+          } else if (selectVoice === 'dmm') {
+            return (
+              <>
+                <div>
+                  {t('DmmNijiVoiceInfo')}
+                  <br />
+                  <Link
+                    url="https://docs.nijivoice.com/reference/getv1voiceactors"
+                    label="https://docs.nijivoice.com/reference/getv1voiceactors"
+                  />
+                </div>
+                <div className="mt-16 font-bold">{t('DmmNijiVoiceApiKey')}</div>
+                <div className="mt-8">
+                  <input
+                    className="text-ellipsis px-16 py-8 w-col-span-4 bg-surface1 hover:bg-surface1-hover rounded-8"
+                    type="text"
+                    placeholder="..."
+                    value={dmmApiKey}
+                    onChange={async (e) => {
+                      setDmmApiKey(e.target.value)
+                      await setAPIKey('dmmApiKey', e.target.value)
+                    }}
+                  />
+                </div>
+                <div className="mt-16 font-bold">{t('DmmNijiVoiceSpeakerId')}</div>
+                <div className="flex items-center">
+                  <select
+                    value={settingsStore((s) => s.dmmSpeaker)}
+                    onChange={(e) =>
+                      settingsStore.setState({
+                        dmmSpeaker: e.target.value,
+                      })
+                    }
+                    className="px-16 py-8 bg-surface1 hover:bg-surface1-hover rounded-8"
+                  >
+                    <option value="">{t('Select')}</option>
+                    <option value="1">キャラクター1</option>
+                    <option value="2">キャラクター2</option>
+                  </select>
+                  <TextButton onClick={() => testVoice()} className="ml-16">
+                    {t('TestVoice')}
+                  </TextButton>
                 </div>
               </>
             )
