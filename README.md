@@ -170,5 +170,5 @@ RobotVRMはオープンソースの、**pixiv**の[**pixiv/ChatVRM**](https://gi
 </h3>
 
 <p align="center">
-<!-- slime -->このレベルのスポンサーは現在いません<!-- slime -->
+<!-- slime --><a href="https://github.com/azuss-p"><img src="https:&#x2F;&#x2F;github.com&#x2F;azuss-p.png" width="45px" alt="azuss-p" /></a><!-- slime -->
 </p>
