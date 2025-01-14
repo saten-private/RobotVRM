@@ -140,7 +140,7 @@ The characters in this repository are basically **free of charge and can be used
 </p>
 
 <h3 align="center">
-<img src="./docs/sponsor_icon/auger.webp" height="51" style="vertical-align: middle"> <a href="https://github.com/sponsors/saten-private">Organ Sponsor US$50</a>
+<img src="./docs/sponsor_icon/auger.webp" height="51" style="vertical-align: middle"> <a href="https://github.com/sponsors/saten-private">Auger Sponsor US$50</a>
 </h3>
 
 <p align="center">
