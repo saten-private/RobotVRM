@@ -1,26 +1,26 @@
-# 家庭内LANのVOICEVOXサーバーの構築手順
+# Procedure for building a VOICEVOX server in a home LAN
 
-## 必要な機器
+## Required Equipment
 
-- 家庭内のLAN環境
-- Windows又はmacOSのPC、或いはLinuxサーバー
-  - Linuxサーバーでの検証はしていないのでWindows又はmacOSの手順を参考に実施してください
-  - Windowsの動作確認環境は Windows 11 Home
-  - macOSの動作確認環境は Appleシリコン macOS Sonoma
+- LAN environment in the home
+- Windows or macOS PC, or Linux server
+  - Please refer to the Windows or macOS procedure as it has not been tested on a Linux server.
+  - Windows operating environment is Windows 11 Home
+  - The confirmed operating environment for macOS is Apple silicon macOS Sonoma
 
-## 前提条件
+## Prerequisite.
 
-- 登場するコマンドはVSCodeやCursorエディタをインストールしてターミナルで実行しています
+- The commands that appear are run in a terminal with VSCode and Cursor editor installed
 
-## VOICEVOXサーバーを立てる
+## Set up a VOICEVOX server
 
-1. [VOICEVOXエンジンのダウンロード先](https://github.com/VOICEVOX/voicevox_engine?tab=readme-ov-file#%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89) のリンクから自分の環境にあったVOICEVOXエンジンをダウンロードしてください
-1. ダウンロードしたファイルを解凍します。
-   - 7zipで圧縮されているので7zipで解凍できる環境がない人は、7zipの解凍するためのツールをダウンロードして解凍しましょう
-     - 例) Windows [7zip](https://7-zip.org/download.html)
-     - 例) macOS [@ntkgcj](https://qiita.com/ntkgcj)さんの[7z ファイルを解凍する 【mac】](https://qiita.com/ntkgcj/items/afe4863c40680d72a755)を参考にさせて頂きました🙇
-1. 解凍したフォルダを任意の場所に配置します
-1. ターミナルで解凍したフォルダをカレントフォルダにして以下を動作確認のために実行します
+1. Download the appropriate VOICEVOX engine for your environment from the link [Where to download VOICEVOX engines](https://github.com/VOICEVOX/voicevox_engine/releases/latest).
+1. Unzip the downloaded file.
+   - It is compressed by 7zip, so if you do not have an environment that can decompress with 7zip, download a tool to decompress 7zip and decompress it.
+     - Example) Windows, [7zip](https://7-zip.org/download.html)
+     - Example) macOS, I have referred to [this page](https://apple.stackexchange.com/a/307975).
+1. Place the unzipped folder in the desired location
+1. In the terminal, make the unzipped folder the current folder and execute the following to check the operation.
    - Windows
    ```
    .\run.exe --host localhost
@@ -29,18 +29,18 @@
    ```
    ./run --host localhost
    ```
-1. http://localhost:50021 にアクセスしてVOICEVOXのサーバーが立ち上がっていることを確認できたら、ターミナルでCtrl + Cを押してVOICEVOXサーバーを終了します。
-1. ブラウザとRobotVRMのサイト以外からアクセスできるのはセキュリティ上あまり良くないので、RobotVRMアプリのVOICEVOX設定の説明の記載の内容に従って以下を実行してVOICEVOXサーバーをサイトはRobotVRMのサイトからのみのアクセスを許容します
+1. Once you have accessed http://localhost:50021 and have verified that the VOICEVOX server is up and running, exit the VOICEVOX server by pressing Ctrl + C in the terminal.
+1. It is not very good for security to be able to access the VOICEVOX server from other than the browser and the RobotVRM site, so you should follow the instructions in the RobotVRM app's VOICEVOX configuration instructions to allow the site to be accessed only from the RobotVRM site The site can only be accessed from the RobotVRM site.
    - Windows
    ```
-   .\run.exe --host localhost --allow_origin https://(RobotVRMアプリのVOICEVOXの設定に表示されているURL)
+   .\run.exe --host localhost --allow_origin https://(URL shown in VOICEVOX settings in RobotVRM app)
    ```
    - macOS
    ```
-   ./run --host localhost --allow_origin https://(RobotVRMアプリのVOICEVOXの設定に表示されているURL)
+   ./run --host localhost --allow_origin https://(URL shown in VOICEVOX settings in RobotVRM app)
    ```
 
-## オレオレ証明書でVOICEVOXサーバーに接続して動作確認
+## Connect to VOICEVOX server with self-signed certificate and check operation
 
-1. VOICEVOXサーバー( http://localhost:50021 )を[オレオレ証明書でのSSLの設定仕方](./self_signed_cert_ssl.md) でリバースプロキシしてRobotVRMアプリの入っているスマホデバイスよりアクセスできるようにします。
-1. RobotVRMアプリのVOICEVOXの設定で"VOICEVOXサーバーURL"に https://192.168.x.x (VOICEVOXサーバーのIPアドレス) を入力して"ボイスを視聴する"ボタンを押して音声が出れば動作確認完了です。
+1. Reverse proxy the VOICEVOX server ( http://localhost:50021 ) with [How to set up SSL with self-signed certificate](./self_signed_cert_ssl.md) so that it can be accessed from the smartphone device containing the RobotVRM app.
+1. Enter https://192.168.x.x (IP address of the VOICEVOX server) in the “VOICEVOX Server URL” field in the RobotVRM application's VOICEVOX settings, press the “Listen to Voice” button, and if the voice comes out, the operation check is complete.
