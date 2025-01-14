@@ -1,55 +1,55 @@
-# リリース仕方(整備中、現状最低限の記載)
+# How to release (under maintenance, minimal description at present)
 
-## サーバー本番環境
+## Server Production Environment
 
-1. 本番環境のサーバーを準備する
-1. nginxを設定する
-1. RobotVRMのソースコードを準備する
-1. `.env.local`の以下の値を設定する
-   - `NEXT_PUBLIC_ROBOTVRM_DOCS_URL`にアプリがGitHub上のドキュメントを参照するために、CloneしたリポジトリのGitHubのブランチのURLを入力します。このURLをルートとしてドキュメントを参照します
-     - リポジトリが非公開の場合はドキュメントとして参照している部分のみ公開しているリポジトリを別途用意するか、同様の参照しているパスに対してドキュメントを作成すれば良いと思います
-   - (推奨) `NEXT_PUBLIC_ROBOTVRM_EULA_URL`にEULAを記載したWebページのURLを設定可能です。設定するとEULAの同意を要求するチェックボックスがアプリ初回起動時に表示されます
-1. 以下のように`docker-compose.yml`を同じコンピューター内で被らないように`app_name`を変更し、ポート番号も変更する
+1. Prepare the server for the production environment
+1. Configure nginx
+1. Prepare RobotVRM source code
+1. Set the following values in `.env.local`
+   - In `NEXT_PUBLIC_ROBOTVRM_DOCS_URL`, enter the URL of the GitHub branch of the repository you cloned in order for the app to reference documents on GitHub. This URL will be used as the root to refer to the document
+     - If the repository is private, you can prepare a separate repository that only publishes the part of the document that refers to it as documentation, or you can create documentation for the same path that refers to it.
+   - (Recommended) The URL of the web page containing the EULA can be set in `NEXT_PUBLIC_ROBOTVRM_EULA_URL`. (If set, a checkbox requesting agreement to the EULA will be displayed when the application is launched for the first time.
+1. Change `app_name` and port number so that `docker-compose.yml` is not covered in the same computer as follows
    ```diff
     services:
-   -  app_name: # 同じコンピューターで複数のコンテナを管理する際はapp_nameを変更して異なる識別子を設定してください
-   +  first: # 同じコンピューターで複数のコンテナを管理する際はapp_nameを変更して異なる識別子を設定してください
+   -  app_name: # When managing multiple containers on the same computer, change app_name to set different identifiers
+   +  first: # When managing multiple containers on the same computer, change app_name to set different identifiers
         build: .
         ports:
-   -      - '3000:3000' # (ポート番号）:(コンテナ内のポート番号)なので(コンピューター内で起動するポート番号):3000を指定してもらば大丈夫です
-   +      - '53501:3000' # (ポート番号）:(コンテナ内のポート番号)なので(コンピューター内で起動するポート番号):3000を指定してもらば大丈夫です
+   -      - '3000:3000' # (port number): (port number in container), so you can specify (port number to start in computer):3000
+   +      - '53501:3000' # (port number): (port number in container), so you can specify (port number to start in computer):3000
         env_file:
           - .env
           - .env.local
    ```
-1. Dockerをビルドします
+1. Build Docker
    ```
    docker-compose build
    ```
-1. Dockerを立ち上げます
+1. Launch Docker
    ```
    docker-compose up -d
    ```
-   - 止める場合は以下を実行します
+   - To stop, do the following
      ```
      docker-compose down
      ```
-1. nginxのリバースプロキシで先ほどの指定したポート番号で立ち上がっているRobotVRMサーバーのlocalhostを設定します
+1. Set nginx reverse proxy to localhost of the RobotVRM server that is up on the port number you specified earlier
 
-## スマホアプリのリリースビルド
+## Release build of smartphone apps
 
-1. ローカルでRobotVRMの開発環境の`.env.local`の以下の値を設定する
-   - `ROBOTVRM_PRODUCTION_SERVER_URL`にスマホアプリがアクセスする本番環境のサーバーのURLを設定します
-   - (iOS)`ROBOTVRM_IOS_DEVELOPMENT_TEAM`で指定するTeamはApp Storeに公開する場合Apple Developer Programで契約したTeamである必要があります
-1. 以下を実行し本番環境を反映します
+1. Set the following values in `.env.local` of RobotVRM development environment locally
+   - Set `ROBOTVRM_PRODUCTION_SERVER_URL` to the URL of the server in the production environment that the smartphone app will access.
+   - (iOS) The Team specified in `ROBOTVRM_IOS_DEVELOPMENT_TEAM` must be an Apple Developer Program contracted Team when publishing to the App Store.
+1. Reflect the production environment by doing the following
    ```
    pnpm sync-production
    ```
-1. 後はAndroid StudioやXcodeで通常と同じようにリリースのビルドをして、リリース作業をすれば良いです
-   - AndroidもGoogle Play Storeに公開する際はGoogle Play Developerアカウントで契約する必要があります
+1. After that, you can build and work on the release as usual in Android Studio or Xcode.
+   - Android also requires a Google Play Developer account to publish to the Google Play Store
 
-## EULA設定時の動作確認
+## Confirmation of operation when EULA is set
 
-`NEXT_PUBLIC_ROBOTVRM_EULA_URL`を設定している場合は、本番環境のアプリをテストする際にアプリ初回起動時にポップアップにEULAのチェックボックスが表示され同意しないと先に進めないことを確認してください。
+If you have set `NEXT_PUBLIC_ROBOTVRM_EULA_URL`, please make sure that when you test the app in the production environment, a checkbox for the EULA will appear in a popup when the app is launched for the first time and you must agree to it before proceeding.
 
-- EULAの挙動は開発環境でも`NEXT_PUBLIC_ROBOTVRM_EULA_URL`を設定すれば確認できます
+- The behavior of the EULA can also be checked in the development environment by setting `NEXT_PUBLIC_ROBOTVRM_EULA_URL`.
