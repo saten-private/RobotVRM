@@ -1,64 +1,64 @@
-# RobotVRMアプリの開発環境構築仕方
+# How to build a development environment for RobotVRM applications
 
-## 必要なもの
+## What you need
 
-- Android又はiOSのスマホ(iOSはIonicのExtensionでデバッグができないので **Android推奨**)
-  - 必要な最小OS
-    - Androidは[こちら](../android/variables.gradle#L2)の`minSdkVersion`を参照
-    - iOSは[こちら](../ios/App/App.xcodeproj/project.pbxproj)の`IPHONEOS_DEPLOYMENT_TARGET`参照
-- 管理者権限のあるPC(サーバーとしても使います)
-  - iOSアプリを開発する場合macOSが必要です
-  - 一応下記環境で検証してあります
-    - macOS(Appleシリコン、macOS Sonoma)
+- Android or iOS smartphone(iOS cannot be debugged with Ionic's Extension, so **Android recommended**)
+  - Minimum OS required
+    - Android is [here](../android/variables.gradle#L2) for `minSdkVersion`
+    - iOS is [here]](../ios/App/App.xcodeproj/project.pbxproj) for `IPHONEOS_DEPLOYMENT_TARGET`
+- PC with administrator rights(also used as a server)
+  - macOS is required for iOS app development
+  - The following environment has been verified
+    - macOS (Apple Silicon, macOS Sonoma)
     - Windows(Windows 11 Home)
-  - 検証はしていないですがLinuxなどでも恐らく動かすことは可能
-- 家庭内LAN(開発環境構築のため)
+  - I haven't tested it, but it can probably be run on Linux, etc.
+- Home LAN (for building development environment)
 
-## 家庭内LAN上にサーバーを立てる
+## Set up a server on the home LAN
 
-RobotVRMの開発環境を構築するためのサーバーを家庭内LAN上に立てます(普段使用しているPCなどで大丈夫です)
+Set up a server on your LAN to build a development environment for RobotVRM (you can use any PC you normally use).
 
-### IPアドレス(IPv4)を固定
+### Fixed IP address (IPv4)
 
-家庭内LAN上でIPアドレスを固定します。DHCPの自動割当てのIPアドレスとバッティングし辛いようにIPアドレス(IPv4)の最後の番号は高めに設定しておくと良いかもしれません(例:192.168.X.199)
+Fix an IP address on the home LAN; it may be a good idea to set the last number of the IP address (IPv4) to a higher value to avoid conflict with the IP address automatically assigned by DHCP (e.g., 192.168.X.199).
 
-設定方法を下記を参照しました。
+See below for instructions on how to set it up.
 
-[macOS - MacでDHCPまたは手動IPアドレスを使用する](https://support.apple.com/ja-jp/guide/mac-help/mchlp2718/mac)
+[Use DHCP or a manual IP address on Mac](https://support.apple.com/guide/mac-help/use-dhcp-or-a-manual-ip-address-on-mac-mchlp2718/mac)
 
-[Windows - Windows 11のIPアドレス（IPv4）を固定に設定する手順](https://www.aterm.jp/support/qa/qa_external/00244/win11.html)
+[How to set static IP address in Windows](https://www.raceresult.com/en-us/support/kb?id=32296-How-to-set-static-IP-address-in-Windows)
 
-### エディタ(ターミナル)のインストール
+### Installing the Editor (Terminal)
 
-作者は現状は[Cursorエディタ](https://www.cursor.com/)を使用しています(ProプランでClaude 3.5 Sonnetを使ってガシガシ開発しています)
+The author is currently using [Cursor editor](https://www.cursor.com/) (I'm developing heavily with Claude 3.5 Sonnet on the Pro plan).
 
-※ VSCodeエディタでも開発はできると思います
+* I believe development can be done with the VSCode editor.
 
-### RobotVRMのリポジトリをクローン
+### Clone RobotVRM repository
 
-1. RobotVRMのリポジトリをCloneします(git cloneなどで)
-1. カレントディレクトリをRobotVRMのリポジトリに移動します
+1. Clone the RobotVRM repository (e.g. git clone)
+1. Change the current directory to the RobotVRM repository
    ```
    cd RobotVRM
    ```
 
-### .env.local準備
+### .env.local preparation
 
-1. 以下を実行して`.env`ファイルから`.env.local`を作成します
+1. Copy `.env.local` from the `.env` file by running the following
    ```
    cp .env .env.local
    ```
-1. `.env.local`の以下の値を設定します
-   - `ROBOTVRM_DEVELOPMENT_HOST`に固定したIPアドレス("X.X.X.X")を入力します
-   - `NEXT_PUBLIC_ROBOTVRM_DOCS_URL`にアプリがGitHub上のドキュメントを参照するために、CloneしたリポジトリのGitHubのブランチのURLを入力します。このURLをルートとしてドキュメントを参照します
-     - saten-privateがオーナーの場合の例) "https://github.com/saten-private/RobotVRM/tree/main"
-     - リポジトリが非公開の場合はドキュメントとして参照している部分のみ公開しているリポジトリを別途用意するか、同様の参照しているパスに対してドキュメントを作成すれば良いと思います
-     - アプリ内から説明を参照するドキュメントのリンク部分に過ぎないので、設定しなくてもアプリの動作は可能です
+1. Set the following values in `.env.local`
+   - Enter a fixed IP address (“X.X.X.X”) in `ROBOTVRM_DEVELOPMENT_HOST`
+   - In `NEXT_PUBLIC_ROBOTVRM_DOCS_URL`, enter the URL of the GitHub branch of the repository you cloned in order for the app to reference documents on GitHub. This URL will be used as the root to refer to the document
+     - Example if saten-private is the owner) “https://github.com/saten-private/RobotVRM/tree/main”
+     - If the repository is private, you can prepare a separate repository that only publishes the part of the document that refers to it as documentation, or you can create documentation for the same path that refers to it.
+     - It is just a link part of the document that refers to the description from within the app, so the app can work without setting it!
 
-### nodeの環境を準備
+### Prepare node environment
 
-1. [nodeのセットアップ仕方](./setup_node.md)の手順を実施
-1. (macOSの場合)利用しているシェルに応じて読み込みます。ターミナルのコマンドを入力するところの前に`%`が表示されている場合はzsh、`$`が表示される場合はbashです。
+1. Follow the steps in [How to setup node](./setup_node.md)
+1. (For macOS) Load according to the shell you are using. If you see `%` before where you enter the terminal command, it is zsh, and if you see `$`, it is bash.
    - zsh
      ```
      source ~/.zshrc
@@ -67,15 +67,15 @@ RobotVRMの開発環境を構築するためのサーバーを家庭内LAN上に
      ```
      source ~/.bashrc
      ```
-1. 以下で[こちらのnodeバージョン](../.node-version)であることを確認(RobotVRMをカレントディレクトリで実行してください)
+1. Below is the [node version here](../.node-version) (Run RobotVRM in the current directory)
    ```
    node -v
    ```
 
-### Gemの設定(macOSのみ)
+### Gem settings (macOS only)
 
-1. 利用しているシェルに応じて次の行を追記します。ターミナルのコマンドを入力するところの前に`%`が表示されている場合はzshなので`~/.zshrc`、`$`が表示される場合はbashなので`~/.bashrc`に追記してください、ファイルが無い場合は作成してください。以下はVimでの例
-   1. ファイルを開く、ファイルが無い場合空ファイルとして開きます。(Vimの使い方は[こちら](https://zenn.dev/masatotezuka/articles/vim_command_220225)参照)
+1. Add the following line according to the shell you are using. If you see `%` in front of the terminal where you enter commands, it is zsh, so add it to `~/.zshrc`. If you see `$`, it is bash, so add it to `~/.bashrc`. Here is an example in Vim
+   1. Open file, or open as a blank file if there is no file. (See [Getting started with Vim: The basics](https://opensource.com/article/19/3/getting-started-vim) for how to use Vim.)
       - zsh
         ```
         vim ~/.zshrc
@@ -84,14 +84,14 @@ RobotVRMの開発環境を構築するためのサーバーを家庭内LAN上に
         ```
         vim ~/.bashrc
         ```
-   1. 開いたVimエディタの最下部にカーソルを移動し`i`のキーを押すと入力モードになります
-   1. 下記を追記
+   1. Move the cursor to the bottom of the opened Vim editor and press the `i` key to enter the input mode
+   1. Add the following
       ```
       export GEM_HOME="$HOME/.gem"
       ```
-   1. `esc`のキーを押して入力モードを終了
-   1. `:wq`を入力してエンターを押すことで内容を保存し、元のターミナルに戻ります
-1. 以下を実行して上記ファイルを読み込みます
+   1. Exit input mode by pressing the `esc` key.
+   1. Type `:wq` and press enter to save the contents and return to the original terminal
+1. Load the above file by executing the following
    - zsh
      ```
      source ~/.zshrc
@@ -101,13 +101,13 @@ RobotVRMの開発環境を構築するためのサーバーを家庭内LAN上に
      source ~/.bashrc
      ```
 
-### pnpmのインストール
+### Installing pnpm
 
-1. [packege.json](../package.json)のpnpmのバージョンをインストール
+1. Install the version of pnpm in [packege.json](../package.json) pnpm version installed
    ```
-   npm install -g pnpm@(package.jsonに記載されているpnpmのバージョン)
+   npm install -g pnpm@(The version of pnpm in package.json)
    ```
-1. (macOSの場合)利用しているシェルに応じて読み込みます。ターミナルのコマンドを入力するところの前に`%`が表示されている場合はzsh、`$`が表示される場合はbashです。
+1. (For macOS) Load according to the shell you are using. If you see `%` before where you enter the terminal command, it is zsh, and if you see `$`, it is bash.
    - zsh
      ```
      source ~/.zshrc
@@ -117,34 +117,34 @@ RobotVRMの開発環境を構築するためのサーバーを家庭内LAN上に
      source ~/.bashrc
      ```
 
-### RobotVRMのセットアップ
+### RobotVRM setup
 
-1. (Windowsの場合)ターミナルを起動してからプロセスに権限を与えていない場合pnpmを実行する前に与えてください([参照](https://qiita.com/ponsuke0531/items/4629626a3e84bcd9398f))。pnpmを実行する場合は、ターミナルを起動する度に実行してください。
+1. (On Windows) If you have not given permission to the process after starting the terminal, do so before running pnpm ([see](https://stackoverflow.com/a/58458082)). If you run pnpm If you are going to run pnpm, run it every time you start the terminal.
    ```
    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
    ```
-1. 依存関係インストール
+1. Dependency Installation
    ```
    pnpm install
    ```
 
-### オレオレ証明書の作成
+### Creation of Self-Signed Certificate
 
-※ SSLの環境で開発しないと本番環境との齟齬が生じやすいためSSLの環境で開発をします
+※ Develop in an SSL environment because it is easy to cause discrepancies with the production environment if not developed in an SSL environment.
 
-[オレオレ証明書の作成](./create_self_signed_cert_ssl.md)の手順で固定したIPアドレスの証明書を作成し、作成された証明書を`localhost+2-key.pem`と`localhost+2.pem`という名前でRobotVRMの`certificates`フォルダ配下に置いてください
+Create a certificate for the IP address fixed in the procedure for [creating a self-signed certificate](./create_self_signed_cert_ssl.md), and place the created certificate under the `certificates` folder of RobotVRM with the names `localhost+2-key.pem` and `localhost+2.pem`.
 
-### 開発環境サーバーを立ち上げる
+### Set up a development environment server
 
 #### macOS
 
-以下を実行しRobotVRMサーバーを立てます ※管理者権限必要
+Set up a RobotVRM server by executing the following *Administrative privileges required
 
 ```
 sudo pnpm dev
 ```
 
-ストアと同じので実行したい場合は下記を実行(ストア版はサーバーの負担を割くため、機能削減しています)
+If you want to run the same as the store version, do the following (the store version has reduced functionality to save server load)
 
 ```
 sudo pnpm dev-store
@@ -152,37 +152,37 @@ sudo pnpm dev-store
 
 #### Windows
 
-1. 管理者権限でターミナルを起動
-   - Cursorエディタのターミナルを使用している場合はCursorエディタを管理者権限で起動すれば良いです
-1. 以下を実行しRobotVRMサーバーを立てます ※管理者権限必要
+1. Start the terminal with administrator privileges
+   - If you are using the Cursor editor terminal, just start the Cursor editor with administrator privileges
+1. Set up a RobotVRM server by executing the following *Administrative privileges required
    ```
    pnpm dev
    ```
-   ストアと同じので実行したい場合は下記を実行(ストア版はサーバーの負担を割くため、機能削減しています)
+   If you want to run the same as the store version, do the following (the store version has reduced functionality to save server load)
    ```
    pnpm dev-store
    ```
-1. サーバー起動中は1つのターミナルを占有するため、サーバーを立ち上げつつ他の作業をする場合はもう1つターミナルと起動してください
-   - Cursorエディタの場合はターミナルの右上に画面分割のアイコンを押して、画面を分割した状態でもう一つターミナルを起動すると作業しやすいです
+1. One terminal is occupied while the server is running, so if you want to work on other tasks while the server is running, please start another terminal and
+   - For the Cursor editor, it is easier to work by pressing the split screen icon in the upper right corner of the terminal and launching another terminal with a split screen
 
-## オレオレ証明書をスマホへインストールする
+## Install a self-signed certificate on your smartphone
 
-[オレオレ証明書のスマホへのインストール仕方](./install_signed_cert_ssl_to_smartphone.md)を参照
+See [how to install a self-signed certificate on your phone](./install_signed_cert_ssl_to_smartphone.md).
 
-## RobotVRMアプリのビルド・インストール
+## Build and install RobotVRM application
 
 ### Android
 
-#### Android Studioをインストール・セットアップ
+#### Install and setup Android Studio
 
-[Android Studio](https://developer.android.com/studio?hl=ja)をインストールして起動し、セットアップします。standardの設定で大丈夫です
+Install [Android Studio](https://developer.android.com/studio?hl=ja), launch it and set it up. The **standard** setting is fine.
 
-#### JAVA_HOMEのパスを通す
+#### Pass JAVA_HOME path
 
-##### macOSの場合
+##### For macOS
 
-1. 利用しているシェルに応じて次の行を追記します。ターミナルのコマンドを入力するところの前に`%`が表示されている場合はzshなので`~/.zshrc`、`$`が表示される場合はbashなので`~/.bashrc`に追記してください、ファイルが無い場合は作成してください。以下はVimでの例
-   1. ファイルを開く、ファイルが無い場合空ファイルとして開きます。(Vimの使い方は[こちら](https://zenn.dev/masatotezuka/articles/vim_command_220225)参照)
+1. Add the following line according to the shell you are using. If you see `%` in front of the terminal where you enter commands, it is zsh and you should add it to `~/.zshrc`, if you see `$`, it is bash and you should add it to `~/.bashrc`, if there is no file, create one. Here is an example in Vim
+   1. Open file, or open as a blank file if there is no file. (See [Getting started with Vim: The basics](https://opensource.com/article/19/3/getting-started-vim) for how to use Vim.)
       - zsh
         ```
         vim ~/.zshrc
@@ -191,14 +191,14 @@ sudo pnpm dev-store
         ```
         vim ~/.bashrc
         ```
-   1. 開いたVimエディタの最下部にカーソルを移動し`i`のキーを押すと入力モードになります
-   1. 下記を追記
+   1. Move the cursor to the bottom of the opened Vim editor and press the `i` key to enter the input mode
+   1. Add the following
       ```
       export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
       ```
-   1. `esc`のキーを押して入力モードを終了
-   1. `:wq`を入力してエンターを押すことで内容を保存し、元のターミナルに戻ります
-1. 以下を実行して上記ファイルを読み込みます
+   1. Exit input mode by pressing the `esc` key.
+   1. Type `:wq` and press enter to save the contents and return to the original terminal
+1. Load the above file by executing the following
    - zsh
      ```
      source ~/.zshrc
@@ -208,71 +208,73 @@ sudo pnpm dev-store
      source ~/.bashrc
      ```
 
-##### Windowsの場合
+##### For Windows
 
-[Buzzword Inc.](http://www.buzzword.co.jp/)さんの[PATHの設定及び環境変数JAVA_HOMEの設定](https://www.javadrive.jp/start/install/index4.html)を参考に`JAVA_HOME`の環境変数を設定させて頂きました。
+https://www.makeuseof.com/java-home-variable-windows-11/
 
-1. [Buzzword Inc.](http://www.buzzword.co.jp/)さんの[PATHの設定及び環境変数JAVA_HOMEの設定](https://www.javadrive.jp/start/install/index4.html)の手順で下記のようにAndroid Studio内のjbrのパスを`JAVA_HOME`の環境変数として設定します。(システム環境変数でなくユーザー環境変数でも良いです)
+I set the environment variable of `JAVA_HOME` by referring to [How to Set Up the JAVA_HOME Variable on Windows 11](https://www.makeuseof.com/java-home-variable-windows-11/) by [aman-kumar](https://www.makeuseof.com/author/aman-kumar/).
+
+1. Set the path of jbr in Android Studio as the environment variable `JAVA_HOME` as shown below in the procedure [How to Set Up the JAVA_HOME Variable on Windows 11](https://www.makeuseof.com/java-home-variable-windows-11/) by [aman-kumar](https://www.makeuseof.com/author/aman-kumar/). (It can be a user environment variable instead of a system environment variable.)
    ```
    C:\Program Files\Android\Android Studio\jbr
    ```
-1. 反映するためにターミナルを再起動する
+1. Restart the terminal to reflect
 
-#### プロジェクトを開く
+#### Open Project
 
-1. 以下を実行することでAndroidプロジェクトを開くことができます
+1. You can open an Android project by doing the following
    ```
    npx cap open android
    ```
-1. 信頼するかのポップアップが表示された場合は、"Trust Project"を選択してください
+1. If a Trust pop-up appears, select “Trust Project”.
 
-#### Androidデバイスで開発者向けオプション設定
+#### Set Developer options on Android devices
 
-[デバイスの開発者向けオプションを設定する](https://developer.android.com/studio/debug/dev-options?hl=ja)の手順でUSBデバッグを有効にするところまで実施
+Follow the steps in [Set Developer options for the device](https://developer.android.com/studio/debug/dev-options) to the point where USB debugging is enabled.
 
-#### Androidアプリのビルド・インストール
+#### Build and install Android apps
 
-- macOSの場合
-  1.  開発者向けオプション設定したAndroidデバイスをUSBでPCに接続
-  1.  (`webDir`を生成するために **一度** だけ直前に実行すれば良い)以下を実行しRobotVRMサーバーのビルドを一通り通します ※管理者権限必要
+- For macOS
+  1.  Android device configured with Developer options connected to PC via USB
+  1.  (You only need to run it **once** just before to create the `webDir`) Run the following to go through the RobotVRM server build *Administrator privileges required
       ```
       sudo pnpm build
       ```
-  1.  以下を実行
+  1.  Perform the following
       ```
       pnpm android
       ```
-  1.  認識されているAndroidデバイスを選択してビルド・インストール
-  1.  RobotVRMのアプリの画面が表示されればOKです
-- Windowsの場合
-  1.  開発者向けオプション設定したAndroidデバイスをUSBでPCに接続
-  1.  管理者権限でターミナルを起動
-      - Cursorエディタのターミナルを使用している場合はCursorエディタを管理者権限で起動すれば良いです
-  1.  ターミナルを起動してからプロセスに権限を与えていない場合pnpmを実行する前に与えてください([参照](https://qiita.com/ponsuke0531/items/4629626a3e84bcd9398f))。pnpmを実行する場合は、ターミナルを起動する度に実行してください。
+  1.  Select a recognized Android device to build and install
+  1.  If the RobotVRM app screen appears, you are good to go!
+- For Windows
+  1.  Android device configured with Developer options connected to PC via USB
+  1.  Start the terminal with administrator privileges
+      - If you are using the Cursor editor terminal, just start the Cursor editor with administrator privileges
+  1.  If you have not given permission to the process after starting the terminal, do so before running pnpm ([see](https://stackoverflow.com/a/58458082)). If you run pnpm If you are going to run pnpm, run it every time you start the terminal.
       ```
       Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
       ```
-  1.  (`webDir`を生成するために **一度** だけ直前に実行すれば良い)以下を実行しRobotVRMサーバーのビルドを一通り通します ※管理者権限必要
+  1.  (You only need to run it **once** just before to create the `webDir`) Run the following to go through the RobotVRM server build *Administrator privileges required
       ```
       pnpm build
       ```
-  1.  以下を実行
+  1.  Perform the following
       ```
       pnpm android
       ```
-  1.  認識されているAndroidデバイスを選択してビルド・インストール
-  1.  RobotVRMのアプリの画面が表示されればOKです
+  1.  Select a recognized Android device to build and install
+  1.  If the RobotVRM app screen appears, you are good to go!
 
-### iOS(macOSのみ)
+### iOS (macOS only)
 
-#### Xcodeインストール
+#### Xcode installation
 
-[Xcode](https://apps.apple.com/jp/app/xcode/id497799835?mt=12)をインストール
+Install [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
 
-#### rubyの環境を準備
+#### Prepare ruby environment
 
-1. [rubyのセットアップ仕方](./setup_ruby.md)の手順を実施
-1. 利用しているシェルに応じて読み込みます。ターミナルのコマンドを入力するところの前に`%`が表示されている場合はzsh、`$`が表示される場合はbashです。
+1. Follow the instructions in [How to setup ruby](./setup_ruby.md)
+1. Load according to the shell you are using. If you see `%` in front of where you enter commands in the terminal, it is zsh, and if you see `$`, it is bash.
    - zsh
      ```
      source ~/.zshrc
@@ -281,20 +283,20 @@ sudo pnpm dev-store
      ```
      source ~/.bashrc
      ```
-1. 以下で[こちらのrubyバージョン](../.ruby-version)であることを確認(RobotVRMをカレントディレクトリで実行してください)
+1. Check the following for [ruby version here](../.ruby-version) (Run RobotVRM in the current directory)
    ```
    ruby -v
    ```
 
-#### CocoaPodsのインストール
+#### Installing CocoaPods
 
-※ bundlerで管理するとWindowsでAndroidのビルドする際にrubyが不要なのにbundlerのインストールを求めれてしまったので、直接CocoaPodsをインストールする
+* If I manage with bundler, it asked me to install bundler even though ruby is not required to build Android on Windows, so I install CocoaPods directly.
 
-1. 以下を実行しCocoaPodsをインストール
+1. Run the following to install CocoaPods
    ```
    gem install cocoapods -v "1.16.2"
    ```
-1. 利用しているシェルに応じて読み込みます。ターミナルのコマンドを入力するところの前に`%`が表示されている場合はzsh、`$`が表示される場合はbashです。
+1. Load according to the shell you are using. If you see `%` in front of where you enter commands in the terminal, it is zsh, and if you see `$`, it is bash.
    - zsh
      ```
      source ~/.zshrc
@@ -303,104 +305,104 @@ sudo pnpm dev-store
      ```
      source ~/.bashrc
      ```
-1. 以下でインストールしたバージョンのCocoaPodsであることを確認
+1. Verify that you are using the version of CocoaPods installed below
    ```
    pod --version
    ```
 
-#### プロジェクトを開く
+#### Open Project
 
-下記を実行してXcodeプロジェクトを開く
+Open the Xcode project by executing the following
 
 ```
 npx cap open ios
 ```
 
-#### Apple IDでサインイン
+#### Sign in with your Apple ID
 
-Xcode > Settings > Accounts > 左下の"+"キーを押下 > "Apple ID"を選択して"Continue"押下し、Apple IDでサインインする
+Xcode > Settings > Accounts > Press the “+” key in the lower left corner > Select “Apple ID” and press “Continue” to sign in with your Apple ID.
 
-#### Team IDの設定
+#### Team ID Settings
 
-1. Xcodeの左のところからプロジェクト("App")を選択します
-1. 開いたプロジェクトのタブの中で"Signing & Capabilities"を選択します
-1. Teamのプルダウンから自分の使用したいTeamを選択します。ひとまずApple Developer Programに登録せずビルドをしたい場合は、Personal Teamのを選択してください
-1. Team IDの公開されるのはあまり良い方では無いので`.env.local`に記載を移します
-   1. 以下を実行して設定されたTeam ID(`DEVELOPMENT_TEAM`)の文字列を確認します(末尾の;は除いてください)
+1. Select the project (“App”) from the left part of Xcode
+1. Select “Signing & Capabilities” in the tabs of the opened project
+1. Select the team you want to use from the Team pull-down menu. If you want to build without enrolling in the Apple Developer Program, select Personal Team.
+1. Team ID's are not very good to be made public, so we move the description to `.env.local`.
+   1. Run the following to see the Team ID (`DEVELOPMENT_TEAM`) string that has been set (without the trailing ;)
       ```
       git diff
       ```
-   1. その文字列を`.env.local`の`ROBOTVRM_IOS_DEVELOPMENT_TEAM`にその文字列を設定します
-   1. Team IDがコミットされないように差分を消します
+   1. Set that string to `ROBOTVRM_IOS_DEVELOPMENT_TEAM` in `.env.local`
+   1. Erase the diff so that the Team ID is not committed
       ```
       git stash
       ```
 
-#### Bundle Identifierの変更
+#### Change Bundle Identifier
 
-プロジェクトのBundle Identifierは既にリポジトリ管理者が使用しているので、Bundle Identifierを自分のオリジナルものにします。
+Since the Bundle Identifier of the project is already used by the repository manager, make the Bundle Identifier your original one.
 
-1. Xcodeの左のところからプロジェクト("App")を選択します
-1. 開いたプロジェクトのタブの中で"Signing & Capabilities"を選択します
-1. "Bundle Identifier"をこちらのようなイメージ(com.(ユーザー名).(アプリ名))で任意のものに変更します。
+1. Select the project (“App”) from the left part of Xcode
+1. Select the project (“App”) from the left part of Xcode and select “Signing & Capabilities” in the tab of the opened project.
+1. Change the “Bundle Identifier” to something like this (com.(username). (app name)) to something arbitrary.
 
-#### iOSデバイスでデベロッパモードを有効にする
+#### Enable Developer Mode on iOS devices
 
-設定アプリ > プライバシーとセキュリティ > "デベロッパモード"をON にする
+Setting App > Privacy & Security > Turn on “Developer Mode“
 
-#### iOSデバイスの認識
+#### iOS device recognition
 
-1. 以下を実行しXcodeプロジェクトを同期させます
+1. Open the Xcode project by doing the following
    ```
    npx cap open ios
    ```
-1. Xcodeを開いた状態でiOSデバイスをPCに接続し認識させます
-1. Xcodeで対象のiOSデバイスを選択してCommand+Rのキーを押せば実機ビルド・インストールしようとする。その際、デバイスの登録を確認されるのでデバイスを登録する
-1. codesignのポップアップが表示された場合はMacのパスワードを入力して"常に許可"を選択してください
-1. 以下ポップアップが表示される場合は以下手順に従ってiOSデバイス上で信頼状態にしてください![信頼されていないユーザーのポップアップ](./xcode_not_trusted_apple_user.jpg)
-   1. 設定アプリ > 一般 > VPNとデバイス管理 > "Apple Development: XXXXX"を選択し詳細に遷移 > "Apple Development: XXXXX"を押下すると信頼する旨のポップアップが表示されるので"信頼"を押下
-   1. 再度XcodeでCommand+Rで実機ビルド・インストール
+1. With Xcode open, connect the iOS device to the PC for recognition.
+1. Select the target iOS device in Xcode and press Command+R to build and install the actual device. At that time, you will be asked to register the device.
+1. When the codesign popup appears, enter your Mac password and select “Always allow”.
+1. If you see the pop-up below, please follow the steps below to put the device into a trusted state on your iOS device![Untrusted user popups](./xcode_not_trusted_apple_user.jpg)
+   1. Setting App > General > VPN & Device Management > Select “Apple Development: XXXXX” and go to details > Click “Apple Development: XXXXX” to display a pop-up asking you to trust, then click “Trust”.
+   1. Command+R in Xcode again to build and install the actual device
 
-#### iOSアプリのビルド・インストール
+#### Build and install iOS apps
 
-以後は以下を実行することでターミナル上(Cursorエディタなど)からiOSアプリをビルド・インストールできます。
+Thereafter, you can build and install iOS apps from the terminal (e.g. Cursor editor) by executing the following
 
-1. 開発向けに設定したiOSデバイスをUSBでPCに接続
-1. (`webDir`を生成するために **一度** だけ直前に実行すれば良い)以下を実行しRobotVRMサーバーのビルドを一通り通します ※管理者権限必要
+1. Connect an iOS device configured for development to a PC via USB
+1. (You only need to run it **once** just before to create the `webDir`) Run the following to go through the RobotVRM server build *Administrator privileges required
    ```
    sudo pnpm build
    ```
-1. 以下を実行
+1. Perform the following
    ```
    pnpm ios
    ```
-1. 認識されているAndroidデバイスを選択してビルド・インストール
-1. RobotVRMのアプリの画面が表示されればOKです
+1. Select a recognized Android device to build and install
+1. If the RobotVRM app screen appears, you are good to go!
 
-## デバッグ方法(Androidのみ)
+## Debugging method (Android only)
 
-### IonicのExtensionのインストール
+### Installing Ionic Extension
 
-[IonicのExtension](https://marketplace.visualstudio.com/items?itemName=ionic.ionic)をCursorエディタ(又はVSCodeエディタ)にインストールしてください
+Install [Ionic's Extension](https://marketplace.visualstudio.com/items?itemName=ionic.ionic) into the Cursor editor (or VSCode editor).
 
 ### デバッグ手順
 
-1. [デバイスの開発者向けオプションを設定](https://developer.android.com/studio/debug/dev-options?hl=ja)してあるAndroidデバイスでUSBで接続して開発環境でインストールしたRobotVRMアプリを起動している状態にします
-1. 下記キャプチャのようにIonicのExtensionの Debug > (RobotVRMアプリのアプリケーションID) を選択するとデバッグコンソールでログが表示されるようになります。この状態でブレークポイントを設定して止めることもできます。
-   ![RobotVRMのデバッグの様子](./debug.jpg)
-   作者はデバッグでIonicのExtensionを頻繁に使うので、下記キャプチャのようにピン留めして上の方にドラッグアンドドロップして常にタブの前の方に表示して使いやすくしています。
-   ![ピン留めした様子](./ionic_pin.jpg)
+1. Connect the Android device that has the [Set device Developer options](https://developer.android.com/studio/debug/dev-options) via USB to the RobotVRM application installed in the development environment and start the application.
+1. Select Debug > (Application ID of RobotVRM app) in Ionic's Extension as shown in the capture below to see the log in the debug console. You can also set a breakpoint in this state to stop it.
+   ![Debugging RobotVRM](./debug.jpg)
+   The author uses Ionic's Extension frequently for debugging, so it is pinned and dragged and dropped at the top as shown in the capture below, so that it is always displayed at the front of the tab for ease of use.
+   ![Pinned appearance](./ionic_pin.jpg)
 
-## ドキュメント編集方法(Markdown)
+## Document Editing Methods (Markdown)
 
-ドキュメント(Markdown)を編集することもあると思いますので一応楽な編集方法も記載しておきます
+We also provide an easy way to edit documents (Markdown).
 
-1. Cursorエディタでドキュメント(\*.md)を開く
-1. 下記キャプチャのようにMarkdownのプレビューを表示する
-   ![Markdownのプレビュー](./markdown_preview.jpg)
-   プレビューのボタンが表示されない場合は[Markdown Preview Enhanced](https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced)をインストールすると良いかもしれません
-1. プレビュー見ながら編集する
+1. Open the document (\*.md) in the Cursor editor
+1. Display a preview of Markdown as shown in the following capture.
+   ![Preview Markdown](./markdown_preview.jpg)
+   If you do not see the preview button, you may want to install [Markdown Preview Enhanced](https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced) may be a good idea.
+1. Edit while watching the preview
 
-## リリース仕方(整備中)
+## How to release (under maintenance)
 
-[リリース仕方(整備中、現状最低限の記載)](./release.md)を参照
+See [how to release (under maintenance, minimal description of current status)](./release.md)
