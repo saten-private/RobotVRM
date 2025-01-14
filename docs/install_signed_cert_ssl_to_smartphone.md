@@ -1,30 +1,30 @@
-# オレオレ証明書のスマホへのインストール仕方
+# How to install a self-signed certificate on your phone
 
-## オレオレ証明書を作成したコンピューターからCAルート証明書を送る
+## Send CA root certificate from the computer that created the self-signed certificate
 
-1. ターミナルで以下を実行しCAルート証明書の場所を確認します ※ mkcertをインストール済みの想定です
+1. Check the location of the CA root certificate by running the following in a terminal * assuming mkcert is already installed
    ```
    mkcert -CAROOT
    ```
-1. ターミナルで以下を実行し、CAルート証明書をコピーし`.crt`の拡張子にします
+1. In a terminal, run the following to copy the CA root certificate to `.crt` extension
    ```
-   cd "(出力されたパス)"
-   ls # rootCA.pemがあることの確認
-   cp rootCA.pem rootCA_name.crt # nameの部分はコンピューター名などわかりやすいので良いです
+   cd "(Output Path)"
+   ls # Confirmation that rootCA.pem exists
+   cp rootCA.pem rootCA_name.crt # The “name” part is good because it is easy to understand the computer name, etc.
    ```
-1. 作成したcrtファイルをスマホデバイスにメールなどで送ります。
+1. The created crt file is sent to the smartphone device via email or other means.
 
-## スマホデバイスでcrtファイルをインストールする
+## Install the crt file on your mobile device
 
 ### iOS
 
-1. 受け取ったcrtファイルをダウンロードします。ブラウザからインストールする際はChromeなどでなく **Safari** 出ないと上手く行きません
-1. 設定アプリ > 一般 > VPNとデバイス管理 よりダウンロードしたルート証明書をインストールします (確認したのはiOS15)
-1. 設定アプリ > 一般 > 情報 > 証明書信頼設定 > インストールしたルート証明書を信頼状態にします (確認したのはiOS15)
-1. スマホのブラウザで https://192.168.X.X (SSLで接続したいサーバーのIPアドレス) にアクセスしてプライバシーの警告が表示されなければOKです。アクセスできなくても良いです。
+1. Download the crt file you received. When installing from a browser, you need to be in **Safari**, not Chrome, etc., or it won't work.
+1. Install the root certificate downloaded from Setting App > General > VPN & Device Management (confirmed for iOS15)
+1. Settings app > General > About > Certificate Trust Settings > Put the installed root certificate in a trusted state (checked iOS15)
+1. Access https://192.168.X.X (the IP address of the server you want to connect to via SSL) in your phone's browser and if you do not see a privacy warning, you are good to go. It is OK if you cannot access it.
 
 ### Android
 
-1. 受け取ったcrtファイルをダウンロードします。
-1. 設定アプリ > セキュリティとプライバシー > その他のセキュリティとプライバシー > 暗号化と認証情報 > 証明書のインストール > CA 証明書 > ダウンロードしたcrtファイルを選択してインストール (Android14のPixel 6aのケース)
-1. スマホのブラウザで https://192.168.X.X (SSLで接続したいサーバーのIPアドレス) にアクセスしてプライバシーの警告が表示されなければOKです。アクセスできなくても良いです。
+1. Download the crt file you received.
+1. Settings app > Security & privacy > More security and privacy > Encryption & credentials > Install a certificate > CA certificate > Select and install the downloaded crt file (case of Pixel 6a on Android 14)
+1. Access https://192.168.X.X (the IP address of the server you want to connect to via SSL) in your phone's browser and if you do not see a privacy warning, you are good to go. It is OK if you cannot access it.
