@@ -1,73 +1,72 @@
-# ロボットの作り方
+# How to build a robot
 
-## RobotVRMのアプリをスマホにインストール
+## Install RobotVRM app on your phone
 
-[RobotVRMアプリの開発環境構築仕方](./development.md)または[ストア(簡易お試し版)よりダウンロード](../README.md#簡易お試し用iosandroid)でスマホにRobotVRMのアプリをインストール
+Install RobotVRM application on your smartphone by clicking [How to build a development environment for RobotVRM applications](./development.md) or [Download from the store (simple trial version)](../README.md#for-simple-trial-ios-android).
 
-## ロボットカー準備
+## Robot car preparation
 
-ArduinoのロボットカーとHC-02のBluetoothデバイス準備。作者は[こちら](https://osoyoo.com/ja/2020/05/22/osoyoo-model-3-v2-0-robot-learning-kit/)の**5000円程**のOSOYOOのロボットカーを購入しました、HC-02もそちらに含まれていたBluetoothデバイスです。
+Arduino robot car and HC-02 Bluetooth device preparation. The author purchased an [OSOYOO robot car](https://osoyoo.com/2020/05/22/osoyoo-model-3-v2-0-robot-learning-kit/) for about **US$50**, and the HC-02 is a Bluetooth device that was included in the car.
 
-## ロボットカーの説明書に従い組み立てる
+## Assemble the robot car
 
-ロボットカーの説明書に従い組み立ててください
+Assemble the robot car according to the instructions.
 
-## (省略可能だが推奨)ロボットカーの動作確認
+## (Can be omitted but recommended) Confirmation of robot car operation
 
-ロボットカーの説明書に従いArduinoでサンプルコードをロボットカーにインストールして動作確認しておくと良いと思います。ロボットカーにHC-02を取り付けて行うBluetoothのサンプルコードも動作確認しておくと良いです。
+It is a good idea to install the sample code on the robot car with Arduino according to the instruction manual of the robot car and check its operation. It is also good to confirm the operation of the Bluetooth sample code performed by installing HC-02 on the robot car.
 
-## RobotVRMのArduinoのコードをロボットカーに書き込み
+## RobotVRM Arduino code written to robot cars
 
-[こちら](../Arduino)のRobotVRMフォルダをArduinoで開いてロボットカーに書き込んでください
+Please open [this RobotVRM folder](../Arduino) with Arduino and write to the robot car.
 
-※ `RobotVRM.ino`を直接ダウンロードしても良いですかArduinoで開く場合は、`RobotVRM/RobotVRM.ino`でRobotVRMフォルダが無いと開けませんので、`RobotVRM`フォルダを作成してその中に`RobotVRM.ino`を入れてください
+* Can I download `RobotVRM.ino` directly or if you want to open it in Arduino, please create `RobotVRM` folder and put `RobotVRM.ino` in it because `RobotVRM/RobotVRM.ino` cannot be opened without RobotVRM folder.
 
-## ロボットカーにスマホを固定できる場所を作る(固定できればなんでも良いです)
+## Create a place on the robot car where the phone can be fixed (anything that can be fixed is fine).
 
-スマホをロボットカーに固定できれば何でも良いのですが、作者の場合は[こちらのL字金具](https://watts-online.jp/products/17539?srsltid=AfmBOorxREF7DXRADdJxEtMRO_0XfOGa0fC-jbt4V3DFVtg1LPHPnbcg)を100円ショップ(ダイソー)で買ってロボットカーに付属しているテープで貼り付けて、READMEの動画の通り輪ゴムで留めているだけです。
+The phone is fixed to the robot car by attaching [the L-shaped bracket](https://watts-online.jp/products/17539?srsltid=AfmBOorxREF7DXRADdJxEtMRO_0XfOGa0fC-jbt4V3DFVtg1LPHPnbcg) to the robot car with the tape that comes with the robot car, and then fastening it with a rubber band as shown in the video.
+* Anything will do as long as it can be fixed.
 
-※ 固定できれば何でも良いと思います
+![Robot car with L-shaped fittings attached with tape](./robot_car_with_smartphone_fixture.jpg)
 
-![L字金具をテープで付けたロボットカー](./robot_car_with_smartphone_fixture.jpg)
+## (Optional but recommended) Extended or unlimited time to suspend the phone.
 
-## (省略可能だが推奨)スマホのサスペンドまでの時間を延長または無制限にしておく
+If the phone suspends while the robot is running, it will stop, so the time until the phone suspends should be extended or unlimited
 
-ロボットの動作中にスマホがサスペンドしてしまうと止まってしまうので、スマホのサスペンドするまでの時間を延長又は無制限にしておきます
+For Android, Settings app > Display > Screen timeout
 
-Androidの場合、設定アプリ > ディスプレイ > 画面消灯
+For iOS, Settings app > Display & Brightness > Auto-Lock
 
-iOSの場合、設定アプリ > 画面表示と明るさ > 自動ロック
+* If the robot will not be used for a long period of time, it is recommended to restore the original settings
 
-※ 長時間ロボットとして使用しない場合は元に設定に戻すことをお勧めします
+# How to move the robot
 
-# ロボットの動かし方
+## Connect to HC-02 via Bluetooth
 
-## BluetoothでHC-02と接続
+With the HC-02 parts connected to the robot car, turn on the power and press the robot icon button in the RobotVRM application to search for HC-02 devices in the vicinity, then select the HC-02 device displayed and connect it to the robot car via Bluetooth.
 
-ロボットカーにHC-02のパーツを接続した状態で電源を入れ、RobotVRMアプリのロボットアイコンのボタンを押すと、周辺のHC-02のデバイスを探すので表示されたHC-02のデバイスを選択してロボットカーとBluetooth接続します
+* Here is the video portion of the README
 
-※ ここからはREADMEの動画の部分です
+## Fix your phone to a robot car
 
-## ロボットカーにスマホを固定
+In the author's case, it is fixed with rubber bands as shown in the README video
 
-作者の場合はREADMEの動画のように輪ゴムで固定しています
+* Anything that can be fixed would be fine.
 
-※ 固定できればなんでも良いと思います
+## Turn on the camera
 
-## カメラをONにする
+Turn on the camera by pressing the camera icon button as shown in the README video.
 
-READMEの動画のようにカメラアイコンのボタンを押してカメラをONにします
+※ By default, the camera preview is displayed, but you can hide the preview as shown in the README video by going to the Settings icon button > Advanced Settings > “Hide the preview when camera is on” and turning it ON.
 
-※ デフォルトではカメラのプレビューが表示されますが、設定アイコンのボタン > 詳細設定 > "カメラON時にプレビューを非表示にする"をON にすればREADMEの動画のようにプレビューは非表示にできます。
+## Wait for the LLM to recognize its surroundings by camera
 
-## カメラによって周りをLLMが認識するのを待つ
+After turning on the camera, wait about 30 seconds as it takes a little time to throw the first request to the LLM. once the request starts being thrown to the LLM, the robot will move, talk, and change the expression of the VRM in response to the use of the Tool in the LLM.
 
-カメラをONにした後、最初のリクエストをLLMに投げるまで少し時間が掛かるので30秒程待ちます。LLMにリクエストが投げられ始めれば、LLMのToolの使用に応じてロボットが動いたり、話したり、VRMの表情を変えたりします。
+## Stop robot
 
-## 止める
+You can stop the behavior of the robot by turning off the camera in the RobotVRM application or by exiting the application
 
-RobotVRMアプリのカメラをOFFにするか、アプリを終了することでロボットの挙動を止めれます
+## (Other) The system prompts can be adjusted to slightly change the behavioral trends.
 
-## (その他)システムプロンプトを調整することで行動の傾向を少し変えれます
-
-設定アイコンのボタン > キャラクター設定（システムプロンプト） の内容を変えればRobotVRMの挙動を少し変えることもできます。
+You can also change RobotVRM's behavior slightly by changing the contents of the Settings icon button > Character Settings (System Prompt).
