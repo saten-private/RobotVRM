@@ -1,14 +1,14 @@
-# rubyのセットアップ仕方
+# How to set up ruby
 
-## macOSの場合
+## For macOS
 
-1. [HomeBrewのセットアップ仕方(macOSのみ)](./setup_brew.md)を実施していない人は実施してください
-1. rubyenvをインストール
+1. If you have not performed [How to setup HomeBrew (macOS only)](./setup_brew.md), please do so.
+1. Install rubyenv
    ```
    brew install rbenv
    ```
-1. 利用しているシェルに応じて次の1行を追記します。ターミナルのコマンドを入力するところの前に`%`が表示されている場合はzshなので`~/.zshrc`、`$`が表示される場合はbashなので`~/.bashrc`に追記してください、ファイルが無い場合は作成してください。以下はVimでの例
-   1. ファイルを開く、ファイルが無い場合空ファイルとして開きます。(Vimの使い方は[こちら](https://zenn.dev/masatotezuka/articles/vim_command_220225)参照)
+1. Add the following line according to the shell you are using. If you see `%` in front of the terminal where you enter the command, please add it to `~/.zshrc` for zsh, or `~/.bashrc` for bash if you see `$`, or create the file if it does not exist. Here is an example in Vim
+   1. Open file, or open as a blank file if there is no file. (See [Getting started with Vim: The basics](https://opensource.com/article/19/3/getting-started-vim) for how to use Vim.)
       - zsh
         ```
         vim ~/.zshrc
@@ -17,14 +17,14 @@
         ```
         vim ~/.bashrc
         ```
-   1. 開いたVimエディタの最下部にカーソルを移動し`i`のキーを押すと入力モードになります
-   1. 下記を追記
+   1. Move the cursor to the bottom of the opened Vim editor and press the `i` key to enter the input mode
+   1. Add the following
       ```
       eval "$(rbenv init -)"
       ```
-   1. `esc`のキーを押して入力モードを終了
-   1. `:wq`を入力してエンターを押すことで内容を保存し、元のターミナルに戻ります
-1. 以下を実行して上記ファイルを読み込みます
+   1. Exit input mode by pressing the `esc` key.
+   1. Type `:wq` and press enter to save the contents and return to the original terminal.
+1. Load the above file by executing the following
    - zsh
      ```
      source ~/.zshrc
@@ -33,21 +33,22 @@
      ```
      source ~/.bashrc
      ```
-1. 以下を実行してrbenvがインストールされていることを確認
+1. Make sure rbenv is installed by running
    ```
    rbenv --version
    ```
-1. [こちらのrubyバージョン](../.ruby-version)のrubyをインストール
+1. Install ruby of [ruby version here](../.ruby-version)
    ```
-   rbenv install (上記のバージョン)
+   rbenv install (Above version)
    ```
 
-## Windowsの場合
+## For Windows
 
-[こちらのrubyバージョン](../.ruby-version)のrubyを[tks_00](https://qiita.com/tks_00)さんの[「uru」を使って簡単に Ruby の複数のバージョン切り替えを実現する方法](https://qiita.com/tks_00/items/fc3a56e2f7c6cffbe2d7)を参考にインストールさせて頂きました。大まかな流れは下記です。
+I installed [this ruby version](../.ruby-version) with reference to 
+[Managing Multiple Ruby Versions with uru on Windows](https://www.neverletdown.net/2015/08/managing-multiple-ruby-versions-with-uru.html) by **Michael Keeling**. The general flow is as follows.
 
-1. `C:\Ruby`フォルダを作成する
-1. Devkitをインストールするため最新バージョンのrubyで良いので推奨されている`Ruby+Devkit X.X.X-X`のようなのを`C:\Ruby\rubyX.X.X`にインストールする
-1. [Archives](https://rubyinstaller.org/downloads/archives/)より[こちらのrubyバージョン](../.ruby-version)のrubyをダウンロードして解凍し`C:\Ruby\rubyX.X.X`に置く
-1. [tks_00](https://qiita.com/tks_00)さんの[「uru」を使って簡単に Ruby の複数のバージョン切り替えを実現する方法](https://qiita.com/tks_00/items/fc3a56e2f7c6cffbe2d7)でrubyのバージョン管理をできるようにする
-1. ターミナルを再起動し反映する
+1. Create a `C:\Ruby` folder.
+1. Install the recommended `Ruby+Devkit X.X.X-X` like `C:\Ruby\rubyX.X.X` as the latest version of ruby is fine to install Devkit.
+1. **Michael Keeling**'s [Managing Multiple Ruby Versions with uru on Windows](https://www.neverletdown.net/2015/08/managing-multiple-ruby-versions-with-uru.html) to enable ruby version management.
+1. Restart the terminal to reflect
+
