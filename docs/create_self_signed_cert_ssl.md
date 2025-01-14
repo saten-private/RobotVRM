@@ -1,6 +1,6 @@
-# オレオレ証明書の作成
+# Creating a self-signed certificate
 
-1. mkcertのインストール
+1. Installing mkcert
    - Windows
    ```
    winget install mkcert
@@ -9,11 +9,11 @@
    ```
    brew install mkcert
    ```
-1. ローカルCA（認証局）のインストール
+1. Installation of a local CA (Certificate Authority)
    ```
    mkcert -install
    ```
-1. IPアドレスを指定したサーバー証明書を作成し、任意の場所に配置してください
+1. Create a server certificate with an IP address and place it in any location
    ```
-   mkcert localhost 127.0.0.1 192.168.X.X(SSLで接続したいサーバーのIPアドレス)
+   mkcert localhost 127.0.0.1 192.168.X.X(IP address of the server you want to connect to with SSL)
    ```
