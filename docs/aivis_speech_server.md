@@ -1,26 +1,26 @@
-# 家庭内LANのAivisSpeechサーバーの構築手順
+# Procedure for building an AivisSpeech server on a home LAN
 
-## 必要な機器
+## Required Equipment
 
-- 家庭内のLAN環境
-- Windows又はmacOSのPC、或いはLinuxサーバー
-  - Linuxサーバーでの検証はしていないのでWindows又はmacOSの手順を参考に実施してください
-  - Windowsの動作確認環境は Windows 11 Home
-  - macOSの動作確認環境は Appleシリコン macOS Sonoma
+- LAN environment in the home
+- Windows or macOS PC, or Linux server
+  - Please refer to the procedure for Windows or macOS as we have not verified this on a Linux server.
+  - Windows operating environment is Windows 11 Home
+  - The confirmed operating environment for macOS is Apple silicon macOS Sonoma
 
 ## 前提条件
 
-- 登場するコマンドはVSCodeやCursorエディタをインストールしてターミナルで実行しています
+- The commands that appear are run in a terminal with VSCode and Cursor editor installed
 
-## AivisSpeechサーバーを立てる
+## Set up an AivisSpeech server
 
-1. [AivisSpeechエンジンのダウンロード先](https://github.com/Aivis-Project/AivisSpeech-Engine/releases) のリンクから自分の環境にあったAivisSpeechエンジンをダウンロードしてください
-1. ダウンロードしたファイルを解凍します。
-   - 7zipで圧縮されているので7zipで解凍できる環境がない人は、7zipの解凍するためのツールをダウンロードして解凍しましょう
-     - 例) Windows [7zip](https://7-zip.org/download.html)
-     - 例) macOS [@ntkgcj](https://qiita.com/ntkgcj)さんの[7z ファイルを解凍する 【mac】](https://qiita.com/ntkgcj/items/afe4863c40680d72a755)を参考にさせて頂きました🙇
-1. 解凍したフォルダを任意の場所に配置します
-1. ターミナルで解凍したフォルダをカレントフォルダにして以下を動作確認のために実行します
+1. Download the AivisSpeech engine for your environment from the link [Where to download the AivisSpeech engine](https://github.com/Aivis-Project/AivisSpeech-Engine/releases/latest).
+1. Unzip the downloaded file.
+   - It is compressed by 7zip, so if you do not have an environment that can decompress with 7zip, download a tool to decompress 7zip and decompress it.
+     - Example) Windows, [7zip](https://7-zip.org/download.html)
+     - Example) macOS, I have referred to [this page](https://apple.stackexchange.com/a/307975).
+1. Place the unzipped folder in the desired location.
+1. In the terminal, make the unzipped folder the current folder and execute the following to check the operation.
    - Windows
    ```
    .\run.exe --host localhost
@@ -29,18 +29,18 @@
    ```
    ./run --host localhost
    ```
-1. http://localhost:10101 にアクセスしてAivisSpeechのサーバーが立ち上がっていることを確認できたら、ターミナルでCtrl + Cを押してAivisSpeechサーバーを終了します。
-1. ブラウザとRobotVRMのサイト以外からアクセスできるのはセキュリティ上あまり良くないので、RobotVRMアプリのAivisSpeech設定の説明の記載の内容に従って以下を実行してAivisSpeechサーバーをサイトはRobotVRMのサイトからのみのアクセスを許容します
+1. Once you have accessed http://localhost:10101 and have verified that the AivisSpeech server is up and running, exit the AivisSpeech server by pressing Ctrl + C in the terminal.
+1. It is not very good for security to be able to access the AivisSpeech server from other than the browser and the RobotVRM site, so you should follow the instructions in the RobotVRM app's AivisSpeech configuration instructions to set up the AivisSpeech server so that the site is only accessible from the RobotVRM site RobotVRM site only.
    - Windows
    ```
-   .\run.exe --host localhost --allow_origin https://(RobotVRMアプリのAivisSpeechの設定に表示されているURL)
+   .\run.exe --host localhost --allow_origin https://(URL shown in the RobotVRM app's AivisSpeech settings)
    ```
    - macOS
    ```
-   ./run --host localhost --allow_origin https://(RobotVRMアプリのAivisSpeechの設定に表示されているURL)
+   ./run --host localhost --allow_origin https://(URL shown in the RobotVRM app's AivisSpeech settings)
    ```
 
-## オレオレ証明書でAivisSpeechサーバーに接続して動作確認
+## Connect to AivisSpeech server with self-signed certificate to verify operation
 
-1. AivisSpeechサーバー( http://localhost:10101 )を[オレオレ証明書でのSSLの設定仕方](./self_signed_cert_ssl.md) でリバースプロキシしてRobotVRMアプリの入っているスマホデバイスよりアクセスできるようにします。
-1. RobotVRMアプリのAivisSpeechの設定で"AivisSpeechサーバーURL"に https://192.168.x.x (AivisSpeechサーバーのIPアドレス) を入力して"ボイスを視聴する"ボタンを押して音声が出れば動作確認完了です。
+1. Reverse proxy the AivisSpeech server ( http://localhost:10101 ) with [How to set up SSL with self-signed certificate](./self_signed_cert_ssl.md) so that it can be accessed from a smartphone device with RobotVRM application.
+1. Enter https://192.168.x.x (IP address of the AivisSpeech server) in the “AivisSpeech server URL” field in the RobotVRM application's AivisSpeech settings, press the “Listen to voice” button, and if the voice comes out, the operation check is complete.
