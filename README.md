@@ -45,13 +45,10 @@ RobotVRM初号機ミナ(2024/11/19時点)
 - サーバー維持費のためにわずかに有料です(別途LLMのAPIが必要)
 - Geminiはストア版ではサポートしていません。OSSの方をご利用ください。
 
-### iOS
+### [iOSアプリ](https://apps.apple.com/app/id6737445996)
 
-【FIXME、iOSのストアのリンク】
+### [Androidアプリ](https://play.google.com/store/apps/details?id=com.robotvrm.first)
 
-### Android
-
-【FIXME、iOSのストアのリンク】
 
 ## コミュニティ
 
