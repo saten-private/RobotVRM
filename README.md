@@ -96,7 +96,7 @@ The characters in this repository are basically **free of charge and can be used
 </h3>
 
 <p align="center">
-<!-- dragon -->このレベルのスポンサーは現在いません<!-- dragon -->
+<!-- dragon -->There are currently no sponsors at this level.<!-- dragon -->
 </p>
 
 <h3 align="center">
@@ -104,7 +104,7 @@ The characters in this repository are basically **free of charge and can be used
 </h3>
 
 <p align="center">
-<!-- hero -->このレベルのスポンサーは現在いません<!-- hero -->
+<!-- hero -->There are currently no sponsors at this level.<!-- hero -->
 </p>
 
 <h3 align="center">
@@ -112,7 +112,7 @@ The characters in this repository are basically **free of charge and can be used
 </h3>
 
 <p align="center">
-<!-- devilking -->このレベルのスポンサーは現在いません<!-- devilking -->
+<!-- devilking -->There are currently no sponsors at this level.<!-- devilking -->
 </p>
 
 <h3 align="center">
@@ -120,7 +120,7 @@ The characters in this repository are basically **free of charge and can be used
 </h3>
 
 <p align="center">
-<!-- elf -->このレベルのスポンサーは現在いません<!-- elf -->
+<!-- elf -->There are currently no sponsors at this level.<!-- elf -->
 </p>
 
 <h3 align="center">
@@ -128,7 +128,7 @@ The characters in this repository are basically **free of charge and can be used
 </h3>
 
 <p align="center">
-<!-- demon -->このレベルのスポンサーは現在いません<!-- demon -->
+<!-- demon -->There are currently no sponsors at this level.<!-- demon -->
 </p>
 
 <h3 align="center">
@@ -136,7 +136,7 @@ The characters in this repository are basically **free of charge and can be used
 </h3>
 
 <p align="center">
-<!-- wizard -->このレベルのスポンサーは現在いません<!-- wizard -->
+<!-- wizard -->There are currently no sponsors at this level.<!-- wizard -->
 </p>
 
 <h3 align="center">
@@ -144,7 +144,7 @@ The characters in this repository are basically **free of charge and can be used
 </h3>
 
 <p align="center">
-<!-- auger -->このレベルのスポンサーは現在いません<!-- auger -->
+<!-- auger -->There are currently no sponsors at this level.<!-- auger -->
 </p>
 
 <h3 align="center">
@@ -152,7 +152,7 @@ The characters in this repository are basically **free of charge and can be used
 </h3>
 
 <p align="center">
-<!-- warrior -->このレベルのスポンサーは現在いません<!-- warrior -->
+<!-- warrior -->There are currently no sponsors at this level.<!-- warrior -->
 </p>
 
 <h3 align="center">
@@ -160,7 +160,7 @@ The characters in this repository are basically **free of charge and can be used
 </h3>
 
 <p align="center">
-<!-- wolf -->このレベルのスポンサーは現在いません<!-- wolf -->
+<!-- wolf -->There are currently no sponsors at this level.<!-- wolf -->
 </p>
 
 <h3 align="center">
