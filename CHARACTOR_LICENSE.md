@@ -1,51 +1,51 @@
-# 本リポジトリのキャラクター利用規約
+# Character Terms of Use for this Repository
 
-**※本リポジトリからフォークしたリポジトリのオリジナルキャラクターとaituber-kit,ChatVRMのものは除く**
+***Original characters from repositories forked from this repository and aituber-kit,ChatVRM are excluded.**
 
-この規約（以下「本規約」）は、本リポジトリに含まれるキャラクター(初号機ミナなど)（以下「本キャラクター」）の利用に関する条件を定めるものです。本キャラクターを利用するすべての方（以下「ユーザー」）は、本規約に同意したものとみなされます。
+These terms and conditions (“Terms and Conditions”) set forth the terms and conditions for the use of the characters (such as Mina the First) (“Characters”) contained in this Repository. All persons using the Characters (“Users”) are deemed to have agreed to these Terms and Conditions.
 
-## 1. 利用許諾
+## 1. license agreement
 
-本キャラクターは、以下の条件に従って自由に利用、改変、再配布することができます。
+This character may be freely used, modified, and redistributed in accordance with the following conditions
 
-- **個人および法人による商業・非商業問わず利用可能**  
-  本キャラクターを個人および法人が商業目的・非商業目的のいずれでも使用できます。
+- **Available for commercial and non-commercial use by individuals and corporations**  
+  This character may be used by individuals and corporations for both commercial and non-commercial purposes.
 
-- **改変・二次創作の許可**  
-  本キャラクターを改変、二次創作作品の作成および公開が可能です。
+- **Permission for modifications and secondary works**  
+  You may modify this character, create derivative works, and publish them.
 
-- **再配布の許可**  
-  本キャラクターおよび改変後の作品をインターネット上やその他の媒体で自由に配布できます。
+- **Redistribution Permission**  
+  You may freely distribute this character and the modified work on the Internet and in other media.
 
-- **クレジット表記不要**  
-  本キャラクターの利用に際して、クレジット表記を行う必要はありません。
+- **No credit required**  
+  No credit is required for the use of this character.
 
-## 2. 禁止事項
+## 2. Prohibitions
 
-以下の行為は禁止されています。これらに違反した場合、利用許諾が取り消されることがあります。
+The following actions are prohibited. Violation of any of the above may result in revocation of the license.
 
-- **著作権侵害**  
-  本キャラクターの著作権を侵害する行為。
+- **infringement of copyright**  
+  Infringing the copyright of this character.
 
-- **公序良俗に反する利用**  
-  公序良俗に反する目的や方法での利用。
+- **Use against public order and morals**  
+  Use for purposes or in a manner that is offensive to public order and morals.
 
-- **誹謗中傷や差別的利用**  
-  本キャラクターを用いて他者を誹謗中傷したり、差別的なコンテンツを作成・配布する行為。
+- **Slanderous or discriminatory use**  
+  Using this character to create or distribute content that defames or discriminates against others.
 
-- **法令違反**  
-  関連する法令に違反する行為。
+- **violation of the law**  
+  Violation of relevant laws and regulations.
 
-## 3. 免責事項
+## 3. Disclaimer
 
-本キャラクターの利用に関連して生じたいかなる損害についても、提供者は一切の責任を負いません。
+The provider shall not be liable for any damages whatsoever in connection with the use of this character.
 
-## 4. 規約の変更
+## 4. Change of Terms and Conditions
 
-本規約は予告なく変更されることがあります。最新の規約はこのリポジトリに記載しますので、定期的にご確認ください。
+These terms and conditions are subject to change without notice. Please check back periodically as the latest terms will be posted in this repository.
 
-## 5. お問い合わせ
+## 5. Contact Us
 
-本キャラクターの利用に関する質問や問い合わせは、以下の連絡先までご連絡ください。
+For questions or inquiries regarding the use of this character, please contact
 
-- **本リポジトリのオーナー**
+- **Owner of this repository**
