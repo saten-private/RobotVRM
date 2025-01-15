@@ -1,27 +1,28 @@
-# 貢献する
+# Contribute
 
-## 行動規範
+## Code of conduct
 
-まずはお手数ですが[行動規範](./CODE_OF_CONDUCT.md)をお読みください🙇
+Please take the time to read the [Code of Conduct](./CODE_OF_CONDUCT.md).
 
-## Issueの投稿
+## Post an Issue
 
-**現在メンテナンスリソースが限られており、Issueを投稿いただいても回答や修正に時間が掛かる可能性があります🙇**
+**Maintenance resources are currently limited, so it may take time to respond to or correct an Issue even if you submit it.**
 
-バグや不明な点がありましたら、GitHubリポジトリにIssueを投稿してください🙇
+If you find any bugs or unclear points, please submit an Issue to the GitHub repository.
 
-Issueを提出する際は、他の人が修正できるように、できるだけ以下の情報を提供して頂ければ幸いです🙇：
+When submitting an Issue, we would appreciate it if you could provide as much of the following information as possible so that others can correct it
 
-- 目標
-- 期待される結果
-- 実際の結果
-- 再現するための手順
-- 再現した環境
-- 問題箇所のコードサンプル
+- Goals
+- Expected Results
+- Actual Results
+- Steps to be taken to reproduce
+- Environment reproduced
+- Code sample of the problem area
 
-## プルリクエストの送信
+## Sending a pull request
 
-バグ修正やユニットテストの追加などの品質向上のプルリクエストを歓迎しています。
-本リポジトリは基本的にはフォークし独自のRobotVRMを作って頂くことを推奨していますので、本リポジトリの方針と異なった大きな機能追加や改修の場合は受け入れはできないことがあるかもしれませんがご容赦ください。(プルリクエストの作成者自身のリポジトリを作って頂いて独自のRobotVRM頂くことは全然構いません。但し、[ライセンス](./LICENSE)にあるようにRobotVRMを使用していることは明記してください)
+We welcome pull requests for bug fixes, additional unit tests, and other quality improvements.
+We encourage you to fork this repository and create your own RobotVRM, so please understand that we may not be able to accept major feature additions or modifications that are different from the policy of this repository.
+(It is perfectly acceptable for the author of the pull request to create his/her own repository and have his/her own RobotVRM. However, please specify that you are using RobotVRM as stated in the [LICENSE](./LICENSE)).
 
-現状CIでの品質チェックなどはできておらず、プルリクエストのフォーマットなども決まっていません🙇
+Currently, there are no quality checks in CI, and the format of pull requests has not been decided.
