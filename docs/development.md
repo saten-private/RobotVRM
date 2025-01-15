@@ -210,8 +210,6 @@ Install [Android Studio](https://developer.android.com/studio?hl=ja), launch it 
 
 ##### For Windows
 
-https://www.makeuseof.com/java-home-variable-windows-11/
-
 I set the environment variable of `JAVA_HOME` by referring to [How to Set Up the JAVA_HOME Variable on Windows 11](https://www.makeuseof.com/java-home-variable-windows-11/) by [aman-kumar](https://www.makeuseof.com/author/aman-kumar/).
 
 1. Set the path of jbr in Android Studio as the environment variable `JAVA_HOME` as shown below in the procedure [How to Set Up the JAVA_HOME Variable on Windows 11](https://www.makeuseof.com/java-home-variable-windows-11/) by [aman-kumar](https://www.makeuseof.com/author/aman-kumar/). (It can be a user environment variable instead of a system environment variable.)
