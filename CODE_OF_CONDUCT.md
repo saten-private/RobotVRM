@@ -1,19 +1,20 @@
-# ビジョン
+# Vision
 
-行動規範は本来ビジョンを記載する場所ではないですが、貢献者にはビジョンを意識して行動してほしいと思ったので冒頭に記載しておきます。
+The Code of Conduct is not originally the place to describe the vision, but I wanted the contributors to be aware of the vision and to act accordingly, so I have included it at the beginning.
 
-このプロジェクトは「ドラえもん」や「鉄腕アトム」のような **人々と暮らす良識のあるロボット** を作るためのプロジェクトです。
+This project is to create **sensible robots that live with people** like “Doraemon” and “Astro Boy”.
 
-# 行動規範
+# Code of conduct
 
-## 優しい言葉や丁寧な言葉を使いましょう
+## Use kind and polite language
 
-相手を無駄に傷つけないように優しい言葉や丁寧な言葉を使いましょう。
+Use kind and polite words to avoid needlessly hurting the other person.
 
-## 基本的にはリラックスして進めましょう
+## Basically, relax and let's proceed.
 
-作者自身がそうなのがありますが、あまり根を詰めてストレスの多い中でやってもあまり良いことはありません。リラックスしながら楽しく進めましょう。
+The author himself is one, but it is not a good idea to do so in a stressful situation with too much rooting around. Relax and enjoy the process.
 
-## 楽しみましょう
+## Let's have fun!
 
-このプロジェクトは醍醐味は、どんなのができるわからないというワクワクです。色々試行錯誤しながら楽しみながら進めましょう。
+The best part of this project is the thrill of not knowing what you will be able to create. Let's have fun while trying things out.
+
