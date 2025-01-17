@@ -100,7 +100,7 @@ The characters in this repository are basically **free of charge and can be used
 </p>
 
 <h3 align="center">
-<img src="./docs/sponsor_icon/hero.webp" height="51" style="vertical-align: middle"> <a href="https://github.com/sponsors/saten-private">Brave Sponsor US$10,000</a>
+<img src="./docs/sponsor_icon/hero.webp" height="51" style="vertical-align: middle"> <a href="https://github.com/sponsors/saten-private">Hero Sponsor US$10,000</a>
 </h3>
 
 <p align="center">
