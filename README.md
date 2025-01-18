@@ -1,19 +1,19 @@
 <div align="center">
-  <a href="https://youtube.com/shorts/BVPd8eU0gf4">
+  <a href="https://www.tiktok.com/@robotvrm/video/7461288972711415048">
     <img src="./docs/thumbnail/en/robot.jpeg" alt="US$50 → I made an LLM robot‼️Open source and available to the public" width="200">
-  </a><a href="https://youtube.com/shorts/fbLEaoinD2E">
+  </a><a href="https://www.tiktok.com/@robotvrm/video/7461294891302194450">
     <img src="./docs/thumbnail/en/camera.jpg" alt="Recognize and speak with a live camera‼️ Open source and available to the public" width="200">
-  </a><a href="https://youtube.com/shorts/LRUkaXbW1hQ">
+  </a><a href="https://www.tiktok.com/@robotvrm/video/7461295893195590919">
     <img src="./docs/thumbnail/en/chat.jpg" alt="You can chat with characters at ‼️ Open source and available to the public" width="200">
   </a>
 </div>
 
 <div align="center">
-  <a href="https://youtube.com/shorts/x3SXnwnI5rY">
+  <a href="https://www.tiktok.com/@robotvrm/video/7461147507955879186">
     <img src="./docs/thumbnail/ja/robot.jpeg" alt="約5000円でLLMロボット作った‼️オープンソースで公開中" width="200">
-  </a><a href="https://youtube.com/shorts/uyKlJHJ-Te0">
+  </a><a href="https://www.tiktok.com/@robotvrm/video/7461148485421747474">
     <img src="./docs/thumbnail/ja/camera.jpg" alt="ライブカメラで認識して話す‼️オープンソースで公開中" width="200">
-  </a><a href="https://youtube.com/shorts/eGhzwFWAiSk">
+  </a><a href="https://www.tiktok.com/@robotvrm/video/7461149021780872466">
     <img src="./docs/thumbnail/ja/chat.jpg" alt="キャラクターとチャットできる‼️オープンソースで公開中" width="200">
   </a>
 </div>
