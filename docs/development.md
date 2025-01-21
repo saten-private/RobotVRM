@@ -377,6 +377,14 @@ Thereafter, you can build and install iOS apps from the terminal (e.g. Cursor ed
 1. Select a recognized Android device to build and install
 1. If the RobotVRM app screen appears, you are good to go!
 
+## Restore IP address (IPv4)
+
+When accessing different networks, please restore the fixed IP address settings below, as we believe that fixed IP addresses will have a negative impact.
+
+[Use DHCP or a manual IP address on Mac](https://support.apple.com/guide/mac-help/use-dhcp-or-a-manual-ip-address-on-mac-mchlp2718/mac)
+
+[How to set static IP address in Windows](https://www.raceresult.com/en-us/support/kb?id=32296-How-to-set-static-IP-address-in-Windows)
+
 ## Debugging method (Android only)
 
 ### Installing Ionic Extension
