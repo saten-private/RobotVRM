@@ -43,8 +43,7 @@ Create a certificate by following the procedure for [creating a self-signed cert
    ```
    code /opt/homebrew/etc/nginx/nginx.conf
    ```
-1. 以下のような編集し保存します。
-
+1. Edit and save as follows
    ```
    events {}
    http {

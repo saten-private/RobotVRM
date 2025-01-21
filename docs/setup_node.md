@@ -23,7 +23,7 @@
       eval "$(nodenv init -)"
       ```
    1. Exit input mode by pressing the `esc` key.
-   1. Type `:wq` and press enter to save the contents and return to the original terminal
+   1. Type `:wq` and press enter to save the contents and return to the original terminal.
 1. Load the above file by executing the following
    - zsh
      ```
