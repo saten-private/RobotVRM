@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "audit-intall": "pnpm audit --fix && pnpm install",
+    "audit-install": "pnpm audit --fix && pnpm install",
     "dev": "next dev --experimental-https --experimental-https-key ./certificates/localhost+2-key.pem --experimental-https-cert ./certificates/localhost+2.pem",
     "dev-store": "cross-env NEXT_PUBLIC_ENV=store pnpm dev",
     "build": "next build",
