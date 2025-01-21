@@ -3,6 +3,8 @@ import settingsStore from '@/features/stores/settings'
 import i18next from 'i18next'
 import { CoreTool } from 'ai'
 import i18n from '@/lib/i18n'
+import { ZodObject, ZodString, ZodTypeAny, ZodEnum } from 'zod'
+import { ToolName } from '../tool/tool'
 
 function handleApiError(errorCode: string): string {
   const languageCode = settingsStore.getState().selectLanguage
@@ -64,7 +66,7 @@ export async function getVercelAIChatResponseServerStream(
   apiKey: string,
   aiService: string,
   model: string,
-  tools: Record<string, CoreTool<any, any>> | undefined,
+  tools: Record<ToolName, CoreTool<any, any>> | undefined,
   maxSteps: number | undefined,
   toolChoice: 'auto' | 'none' | 'required' | undefined
 ): Promise<ReadableStream<string>> {
@@ -135,12 +137,92 @@ export async function getVercelAIChatResponseServerStream(
                 console.log('decodedContent=', decodedContent)
                 if (tools) {
                   const { toolName, args } = decodedContent
+                  const toolTypeName = toolName as ToolName
                   console.log('toolName=', toolName)
                   console.log('arg=', args)
-                  if (tools[toolName]) {
-                    const coreTool = tools[toolName] as CoreTool<any, any>
-                    if (coreTool.execute) {
-                      coreTool.execute(args)
+                  if (tools[toolTypeName]) {
+                    switch (toolTypeName) {
+                      case 'speak':
+                        const speakTool = tools[toolTypeName] as CoreTool<
+                          ZodObject<
+                            {
+                              content: ZodString
+                            },
+                            'strip',
+                            ZodTypeAny,
+                            {
+                              content: string
+                            },
+                            {
+                              content: string
+                            }
+                          >,
+                          any
+                        > & {
+                          execute: (args: {
+                            content: string
+                          }) => PromiseLike<any>
+                        }
+                        if (speakTool.execute) {
+                          speakTool.execute(args)
+                        }
+                        break
+                      case 'expressing_emotion':
+                        const expressingEmotionTool = tools[
+                          toolTypeName
+                        ] as CoreTool<
+                          ZodObject<
+                            {
+                              emotion: ZodEnum<
+                                [string, string, string, string, string]
+                              >
+                            },
+                            'strip',
+                            ZodTypeAny,
+                            {
+                              emotion: string
+                            },
+                            {
+                              emotion: string
+                            }
+                          >,
+                          any
+                        > & {
+                          execute: (args: {
+                            emotion: string
+                          }) => PromiseLike<any>
+                        }
+                        if (expressingEmotionTool.execute) {
+                          expressingEmotionTool.execute(args)
+                        }
+                        break
+                      case 'movement':
+                        const movementTool = tools[toolTypeName] as CoreTool<
+                          ZodObject<
+                            {
+                              direction: ZodEnum<
+                                [string, string, string, string]
+                              >
+                            },
+                            'strip',
+                            ZodTypeAny,
+                            {
+                              direction: string
+                            },
+                            {
+                              direction: string
+                            }
+                          >,
+                          any
+                        > & {
+                          execute: (args: {
+                            direction: string
+                          }) => PromiseLike<any>
+                        }
+                        if (movementTool.execute) {
+                          movementTool.execute(args)
+                        }
+                        break
                     }
                   }
                 } else {
