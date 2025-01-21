@@ -125,7 +125,7 @@ The author is currently using [Cursor editor](https://www.cursor.com/) (I'm deve
    ```
 1. Dependency Installation
    ```
-   pnpm install
+   pnpm audit-install
    ```
 
 ### Creation of Self-Signed Certificate
