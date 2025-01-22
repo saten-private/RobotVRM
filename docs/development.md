@@ -173,6 +173,10 @@ See [how to install a self-signed certificate on your phone](./install_signed_ce
 
 ### Android
 
+#### (For macOS)Xcode installation
+
+For macOS, please install and start [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12) and **agree to the license**, etc. as Xcode is required to build even for Android development.
+
 #### Install and setup Android Studio
 
 Install [Android Studio](https://developer.android.com/studio?hl=ja), launch it and set it up. The **standard** setting is fine.
@@ -391,7 +395,7 @@ When accessing different networks, please restore the fixed IP address settings 
 
 Install [Ionic's Extension](https://marketplace.visualstudio.com/items?itemName=ionic.ionic) into the Cursor editor (or VSCode editor).
 
-### デバッグ手順
+### Debugging procedure
 
 1. Connect the Android device that has the [Set device Developer options](https://developer.android.com/studio/debug/dev-options) via USB to the RobotVRM application installed in the development environment and start the application.
 1. Select Debug > (Application ID of RobotVRM app) in Ionic's Extension as shown in the capture below to see the log in the debug console. You can also set a breakpoint in this state to stop it.
