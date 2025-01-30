@@ -16,6 +16,7 @@ import {
 import { readFileToBlob } from '@/utils/fileSystem'
 import { Directory } from '@capacitor/filesystem'
 import settingsStore from '@/features/stores/settings'
+
 // ネイティブ以外からアクセスされた場合はアクセス拒否
 export async function getServerSideProps(context: any) {
   if (!/RobotVRM/.test(context.req.headers['user-agent'])) {
@@ -35,6 +36,7 @@ export async function getServerSideProps(context: any) {
 const Home = () => {
   const [isInitialized, setIsInitialized] = useState(false)
   const bgUrl = homeStore((s) => `url(${buildUrl(s.backgroundImageUrl)})`)
+
   const initalizeSecureStorage = useCallback(async () => {
     try {
       const fileName = settingsStore.getState().savedBackgroundImageFileName
