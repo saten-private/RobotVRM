@@ -55,6 +55,7 @@
     "@pixiv/three-vrm": "^3.3.3",
     "@tailwindcss/line-clamp": "^0.4.4",
     "ai": "^3.4.33",
+    "appsflyer-capacitor-plugin": "^6.15.2",
     "axios": "^1.7.9",
     "canvas": "^2.11.2",
     "cross-env": "^7.0.3",
