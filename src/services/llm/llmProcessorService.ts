@@ -28,6 +28,12 @@ export const startLlmProcessor = (): (() => void) => {
 
       // キャプチャした画像をBase64形式で取得
       const captures = useCaptureStore.getState().captures // captureStoreから直接状態を取得
+
+      if (captures.length === 0) {
+        console.log('captures.length === 0')
+        return
+      }
+
       // キャプチャした画像をBase64形式で取得
       const imageData = captures.map((capture) => capture.data)
       // LLMは古い画像から新しい画像の順番で時系列を認識するようなため、取得したキューの順番を逆にする

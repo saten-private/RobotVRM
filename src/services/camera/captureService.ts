@@ -7,7 +7,6 @@ import { appEventEmitter } from '@/utils/eventEmitter'
 
 interface CaptureOptions {
   captureIntervalSeconds: number
-  llmIntervalSeconds: number
   maxCaptureSeconds: number // Changed from maxCaptures to maxCaptureSeconds
 }
 
@@ -24,7 +23,6 @@ const performCapture = async (addCapture: (data: string) => void) => {
 
 export const captureStart = async ({
   captureIntervalSeconds,
-  llmIntervalSeconds,
   maxCaptureSeconds,
 }: CaptureOptions): Promise<() => void> => {
   return new Promise(async (resolve) => {
@@ -34,22 +32,13 @@ export const captureStart = async ({
     const maxCaptures = Math.floor(maxCaptureSeconds / captureIntervalSeconds)
     setMaxCaptures(maxCaptures)
 
-    const llmTriggerCount = Math.floor(
-      llmIntervalSeconds / captureIntervalSeconds
-    )
-    let captureCount = 0
     let captureIntervalId: NodeJS.Timeout
 
     const captureAndProcessLLM = async () => {
       const captureSuccess = await performCapture(addCapture)
 
       if (captureSuccess) {
-        captureCount++
-
-        if (captureCount >= llmTriggerCount) {
-          appEventEmitter.emit('llmRequest')
-          captureCount = 0 // Reset the count after triggering LLM request
-        }
+        appEventEmitter.emit('llmRequest')
       }
     }
 
