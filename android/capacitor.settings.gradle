@@ -13,3 +13,6 @@ project(':capacitor-community-camera-preview').projectDir = new File('../node_mo
 
 include ':capacitor-filesystem'
 project(':capacitor-filesystem').projectDir = new File('../node_modules/.pnpm/@capacitor+filesystem@6.0.3_@capacitor+core@6.2.0/node_modules/@capacitor/filesystem/android')
+
+include ':appsflyer-capacitor-plugin'
+project(':appsflyer-capacitor-plugin').projectDir = new File('../node_modules/.pnpm/appsflyer-capacitor-plugin@6.15.2_@capacitor+core@6.2.0/node_modules/appsflyer-capacitor-plugin/android')

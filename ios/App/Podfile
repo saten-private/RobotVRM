@@ -15,6 +15,7 @@ def capacitor_pods
   pod 'CapacitorCommunityBluetoothLe', :path => '../../node_modules/.pnpm/@capacitor-community+bluetooth-le@6.1.0_@capacitor+core@6.2.0/node_modules/@capacitor-community/bluetooth-le'
   pod 'CapacitorCommunityCameraPreview', :path => '../../node_modules/.pnpm/@capacitor-community+camera-preview@6.0.1_@capacitor+core@6.2.0/node_modules/@capacitor-community/camera-preview'
   pod 'CapacitorFilesystem', :path => '../../node_modules/.pnpm/@capacitor+filesystem@6.0.3_@capacitor+core@6.2.0/node_modules/@capacitor/filesystem'
+  pod 'AppsflyerCapacitorPlugin', :path => '../../node_modules/.pnpm/appsflyer-capacitor-plugin@6.15.2_@capacitor+core@6.2.0/node_modules/appsflyer-capacitor-plugin'
 end
 
 target 'App' do
