@@ -45,7 +45,7 @@ For iOS, Settings app > Display & Brightness > Auto-Lock
 
 With the HC-02 parts connected to the robot car, turn on the power and press the robot icon button in the RobotVRM application to search for HC-02 devices in the vicinity, then select the HC-02 device displayed and connect it to the robot car via Bluetooth.
 
-* See README video from here
+* See README video
 
 ## Fix your phone to a robot car
 
