@@ -76,7 +76,7 @@ The characters in this repository are basically **free of charge and can be used
 日本ではスマホのLLMロボット化キットを組み立て受注販売中です。
 [How to Build a Robot](./docs/make_robot.md)のロボットカーの組み立てたやつの受注販売を行っています。こちらを購入することで容易にスマホをLLMロボットにすることを実現できます。
 
-### [LLMロボット化キット](https://shop.robotvrm.com/items/99407194)
+### [LLMロボット化キット(受注販売中)](https://shop.robotvrm.com/items/99407194)
 
 また、日本では無料アプリで「RobotVRM初号機ミナ」をアプリストアで配信しています。ロボットカーが無くてもカメラでの認識やチャットなどで使うこともできます。是非お試しください。
 サーバーの負荷を考慮して日本のみ配信しています。
