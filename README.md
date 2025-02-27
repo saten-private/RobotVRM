@@ -39,18 +39,6 @@ API rates at Claude 3 Haiku for videos are **“no more than US$5”** per hour.
 
 RobotVRM First Model Mina (as of 11/19/2024)
 
-## For simple trial (iOS, Android)
-
-If you have trouble setting up an environment, you can download the application from the store for a fee.
-
-- a paid app due to maintaining. (API required separately)
-- Gemini is not supported in the store version; please use the OSS version.
-
-### [iOS app](https://apps.apple.com/app/id6737445996)
-
-### [Android app](https://play.google.com/store/apps/details?id=com.robotvrm.first)
-
-
 ## Community
 
 We have a community called [**RobotVRM Community**(Discord)](https://discord.gg/UUUxwk6Xjf), so feel free to join. Even those who fork repositories are welcome to join (rather, that is the main focus). Let's exchange information together.
@@ -82,6 +70,20 @@ In the future, we will create a **list of RobotVRMs**. If you have forked it, pl
 ## Character Terms of Use for this Repository
 
 The characters in this repository are basically **free of charge and can be used for commercial purposes by both individuals and corporations** (for details, please refer to the [**Terms of Use of Characters in this Repository**](./CHARACTOR_LICENSE.md) for details)
+
+## 日本でのサービス(Services in Japan) by saten
+
+日本ではスマホをLLMのロボットにするキットを受注販売中です。
+[How to Build a Robot](./docs/make_robot.md)のロボットカーの組み立てたやつの受注販売を行っています。こちらを購入することで容易にスマホをLLMのロボットにすることを実現できます。
+
+### [スマホLLMロボット化キット(受注販売中)](https://shop.robotvrm.com/items/99407194)
+
+また、日本では無料アプリで「RobotVRM初号機ミナ」をアプリストアで配信しています。ロボットカーが無くてもカメラでの認識やチャットなどで使うこともできます。是非お試しください。
+サーバーの負荷を考慮して日本のみ配信しています。
+
+### [iOSアプリ(無料アプリ)](https://apps.apple.com/jp/app/robotvrm%E5%88%9D%E5%8F%B7%E6%A9%9F%E3%83%9F%E3%83%8A/id6737445996)
+
+### [Androidアプリ(無料アプリ)](https://play.google.com/store/apps/details?id=com.robotvrm.first)
 
 <h2 align="center">
 <a href="https://github.com/sponsors/saten-private">Sponsor</a>
