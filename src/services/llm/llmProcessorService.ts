@@ -3,7 +3,7 @@ import settingsStore from '@/features/stores/settings'
 import { useCaptureStore } from '@/features/stores/capture'
 import { getAIChatResponseStream } from '@/features/chat/aiChatFactory'
 import { AIService } from '@/features/constants/settings'
-import { Message } from '@/features/messages/messages'
+import { Action } from '@/features/messages/messages'
 import { appEventEmitter } from '@/utils/eventEmitter'
 import { isConnectedBle } from '@/services/bluetooth/bluetoothLeService'
 import {
@@ -41,7 +41,7 @@ export const startLlmProcessor = (): (() => void) => {
       const imageDataForLLM = imageData.reverse()
 
       // メッセージの作成
-      const messages: Message[] = [
+      const messages: Action[] = [
         {
           role: 'system',
           content: systemPrompt, // システムプロンプトは文字列

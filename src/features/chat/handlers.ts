@@ -2,7 +2,7 @@ import { getAIChatResponseStream } from '@/features/chat/aiChatFactory'
 import { AIService } from '@/features/constants/settings'
 import {
   textsToScreenplay,
-  Message,
+  Action,
   textsToTalkNoEmotions,
 } from '@/features/messages/messages'
 import {
@@ -29,7 +29,7 @@ import { getPrompt } from '@/features/stores/secureStorage'
 export const processReceivedMessage = async (
   receivedMessage: string,
   sentences: string[] = [],
-  aiTextLog: Message[] = [],
+  aiTextLog: Action[] = [],
   tag: string = '',
   isCodeBlock: boolean = false,
   codeBlockText: string = ''
@@ -141,8 +141,8 @@ export const processReceivedMessage = async (
  */
 // TODO: 上の関数とかなり処理が被るのでいずれまとめる
 export const processAIResponse = async (
-  currentChatLog: Message[],
-  messages: Message[]
+  currentChatLog: Action[],
+  messages: Action[]
 ) => {
   homeStore.setState({ chatProcessing: true })
   let stream
@@ -168,7 +168,7 @@ export const processAIResponse = async (
 
   const reader = stream.getReader()
   let receivedMessage = ''
-  let aiTextLog: Message[] = [] // 会話ログ欄で使用
+  let aiTextLog: Action[] = [] // 会話ログ欄で使用
   let tag = ''
   let isCodeBlock = false
   let codeBlockText = ''
@@ -343,7 +343,7 @@ export const processSpeakContent = async (content: string) => {
   const hs = homeStore.getState()
   const currentSlideMessages: string[] = []
   let receivedMessage = content
-  let aiTextLog: Message[] = [] // 会話ログ欄で使用
+  let aiTextLog: Action[] = [] // 会話ログ欄で使用
   let isCodeBlock = false
   let codeBlockText = ''
   const sentences = new Array<string>() // AssistantMessage欄で使用
@@ -472,7 +472,7 @@ export const handleSendChatFn =
       // WebSocketで送信する処理
       if (hs.ws?.readyState === WebSocket.OPEN) {
         // ユーザーの発言を追加して表示
-        const updateLog: Message[] = [
+        const updateLog: Action[] = [
           ...hs.chatLog,
           { role: 'user', content: newMessage },
         ]
@@ -531,7 +531,7 @@ export const handleSendChatFn =
 
       homeStore.setState({ chatProcessing: true })
       // ユーザーの発言を追加して表示
-      const messageLog: Message[] = [
+      const messageLog: Action[] = [
         ...hs.chatLog,
         {
           role: 'user',
@@ -565,7 +565,7 @@ export const handleSendChatFn =
       // 代わりの処理
       const processedMessageLog = messageLog
 
-      const messages: Message[] = [
+      const messages: Action[] = [
         {
           role: 'system',
           content: systemPrompt,
@@ -602,7 +602,7 @@ export const handleReceiveTextFromWsFn =
     homeStore.setState({ chatProcessing: true })
 
     if (role !== 'user') {
-      const updateLog: Message[] = [...hs.chatLog]
+      const updateLog: Action[] = [...hs.chatLog]
 
       if (state === 'start') {
         // startの場合は何もしない（textは空文字のため）

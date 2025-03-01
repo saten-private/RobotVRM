@@ -1,4 +1,4 @@
-import { Message } from '@/features/messages/messages'
+import { Action } from '@/features/messages/messages'
 import { getAIChatResponse } from '@/features/chat/aiChatFactory'
 import settingsStore from '@/features/stores/settings'
 import {
@@ -65,23 +65,23 @@ ${additionalGuidelines}
  * 指定された数の最新メッセージを取得し、文字列として返します。
  * ユーザーとアシスタントのメッセージのみを対象とします。
  *
- * @param {Message[]} messages - メッセージの配列
+ * @param {Action[]} messages - メッセージの配列
  * @param {number} numberOfMessages - 取得するメッセージの数
- * @returns {Message[]} - メッセージの配列
+ * @returns {Action[]} - メッセージの配列
  */
 const getLastMessages = (
-  messages: Message[],
+  messages: Action[],
   numberOfMessages: number
-): Message[] => {
+): Action[] => {
   const filteredMessages = messages
     .filter(({ role }) => role === 'user' || role === 'assistant')
     .slice(-numberOfMessages)
 
-  const returnMessages: Message[] = []
+  const returnMessages: Action[] = []
   let lastRole: string | null = null
   let combinedContent = ''
 
-  filteredMessages.forEach((message: Message, index: number) => {
+  filteredMessages.forEach((message: Action, index: number) => {
     if (message.role === lastRole) {
       combinedContent += '\n' + message.content
     } else {
@@ -125,12 +125,12 @@ const getLastMessages = (
 /**
  * ユーザーのコメントとYoutubeのコメントを受け取り、最適なコメントを返します。
  *
- * @param {Message[]} messages - メッセージの配列
+ * @param {Action[]} messages - メッセージの配列
  * @param {any[]} youtubeComments - Youtubeのコメントの配列
  * @returns {Promise<string>} - 最適なコメント
  */
 export const getBestComment = async (
-  messages: Message[],
+  messages: Action[],
   youtubeComments: any[]
 ): Promise<string> => {
   console.log('getBestComment')
@@ -178,13 +178,13 @@ ${lastTenMessages}
  * システムプロンプトを受け取り、休憩用のメッセージを返します。
  *
  * @param {string} systemPrompt - システムプロンプト
- * @param {Message[]} messages - メッセージの配列
- * @returns {Promise<Message[]>} - メッセージの配列
+ * @param {Action[]} messages - メッセージの配列
+ * @returns {Promise<Action[]>} - メッセージの配列
  */
 export const getMessagesForSleep = async (
   systemPrompt: string,
-  messages: Message[]
-): Promise<Message[]> => {
+  messages: Action[]
+): Promise<Action[]> => {
   console.log('getMessagesForSleep')
   const lastTenMessages = getLastMessages(messages, 10)
   const systemMessage = getCommonSystemMessage(
@@ -198,10 +198,10 @@ export const getMessagesForSleep = async (
 /**
  * メッセージを受け取り、最新の4つのメッセージを使用して別の話題を取得します。
  *
- * @param {Message[]} messages - メッセージの配列
+ * @param {Action[]} messages - メッセージの配列
  * @returns {Promise<string>} - 別の話題
  */
-export const getAnotherTopic = async (messages: Message[]): Promise<string> => {
+export const getAnotherTopic = async (messages: Action[]): Promise<string> => {
   console.log('getAnotherTopic')
   const lastTenMessages = getLastMessages(messages, 10)
   const queryMessages = [
@@ -230,15 +230,15 @@ export const getAnotherTopic = async (messages: Message[]): Promise<string> => {
  * メッセージを受け取り、新しい話題のためのメッセージを取得します。
  *
  * @param {string} systemPrompt - システムプロンプト
- * @param {Message[]} messages - メッセージの配列
+ * @param {Action[]} messages - メッセージの配列
  * @param {string} topic - 新しい話題
- * @returns {Promise<Message[]>} - メッセージの配列
+ * @returns {Promise<Action[]>} - メッセージの配列
  */
 export const getMessagesForNewTopic = async (
   systemPrompt: string,
-  messages: Message[],
+  messages: Action[],
   topic: string
-): Promise<Message[]> => {
+): Promise<Action[]> => {
   console.log('getMessagesForNewTopic')
   const lastTenMessages = getLastMessages(messages, 10)
   const systemMessage = getCommonSystemMessage(
@@ -252,11 +252,11 @@ export const getMessagesForNewTopic = async (
 /**
  * メッセージを受け取り、次の発言者を判断します。
  *
- * @param {Message[]} messages - メッセージの配列
+ * @param {Action[]} messages - メッセージの配列
  * @returns {Promise<boolean>} - 次の発言者
  */
 export const checkIfResponseContinuationIsRequired = async (
-  messages: Message[]
+  messages: Action[]
 ): Promise<boolean> => {
   console.log('checkIfResponseContinuationIsRequired')
   const lastTenMessages = getLastMessages(messages, 10)
@@ -347,13 +347,13 @@ B: 見てみたいな。送ってくれない？
  * システムプロンプトとメッセージを受け取り、継続のためのメッセージを取得します。
  *
  * @param {string} systemPrompt - システムプロンプト
- * @param {Message[]} messages - メッセージの配列
- * @returns {Promise<Message[]>} - メッセージの配列
+ * @param {Action[]} messages - メッセージの配列
+ * @returns {Promise<Action[]>} - メッセージの配列
  */
 export const getMessagesForContinuation = async (
   systemPrompt: string,
-  messages: Message[]
-): Promise<Message[]> => {
+  messages: Action[]
+): Promise<Action[]> => {
   console.log('getMessagesForContinuation')
   const lastTenMessages = getLastMessages(messages, 10)
   const systemMessage = getCommonSystemMessage(

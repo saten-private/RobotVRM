@@ -2,7 +2,7 @@ import { VRMExpression, VRMExpressionPresetName } from '@pixiv/three-vrm'
 import { KoeiroParam } from '../constants/koeiroParam'
 
 // ChatGPT API
-export type Message = {
+export type Action = {
   role: string // "assistant" | "system" | "user";
   content:
     | string

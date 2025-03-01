@@ -1,4 +1,4 @@
-import { Message } from '@/features/messages/messages'
+import { Action } from '@/features/messages/messages'
 import { AIService } from '@/features/constants/settings'
 import { getLocalLLMChatResponseStream } from './localLLMChat'
 import { getDifyChatResponseStream } from './difyChatClient'
@@ -13,7 +13,7 @@ import { getAPIKey } from '@/features/stores/secureStorage'
 
 export async function getAIChatResponseStream(
   service: AIService,
-  messages: Message[],
+  messages: Action[],
   tools: Record<string, CoreTool> | undefined = undefined,
   maxSteps: number | undefined = undefined,
   toolChoice: 'auto' | 'none' | 'required' | undefined = undefined
@@ -115,7 +115,7 @@ export async function getAIChatResponseStream(
 
 export async function getAIChatResponse(
   service: AIService,
-  messages: Message[],
+  messages: Action[],
   tools: Record<string, CoreTool> | undefined = undefined,
   maxSteps: number | undefined = undefined,
   toolChoice: 'auto' | 'none' | 'required' | undefined = undefined

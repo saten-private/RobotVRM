@@ -1,9 +1,9 @@
 import settingsStore from '@/features/stores/settings'
-import { Message } from '../messages/messages'
+import { Action } from '../messages/messages'
 import { getDifyChatResponseImplemention } from './difyChatClientImplementation'
 
 export async function getDifyChatResponseStream(
-  messages: Message[],
+  messages: Action[],
   apiKey: string,
   url: string,
   conversationId: string

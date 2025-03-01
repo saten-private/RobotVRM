@@ -1,4 +1,4 @@
-import { Message } from '../messages/messages'
+import { Action } from '../messages/messages'
 import settingsStore from '@/features/stores/settings'
 import i18next from 'i18next'
 import { getVercelAIChatResponseImplemention } from './vercelAIChatImplementation'
@@ -30,7 +30,7 @@ function handleApiError(errorCode: string): string {
 }
 
 export async function getVercelAIChatResponse(
-  messages: Message[],
+  messages: Action[],
   apiKey: string,
   aiService: string,
   model: string,
@@ -101,7 +101,7 @@ export async function getVercelAIChatResponse(
 }
 
 export async function getVercelAIChatResponseStream(
-  messages: Message[],
+  messages: Action[],
   apiKey: string,
   aiService: string,
   model: string,

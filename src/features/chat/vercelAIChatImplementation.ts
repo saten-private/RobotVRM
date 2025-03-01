@@ -1,8 +1,8 @@
-import { Message } from '@/features/messages/messages'
+import { Action } from '@/features/messages/messages'
 import { streamText, generateText, CoreMessage, CoreTool } from 'ai'
 
 export async function getVercelAIChatResponseImplemention(
-  messages: Message[],
+  messages: Action[],
   aiServiceInstance: any,
   aiService: string,
   model: string,
@@ -12,7 +12,7 @@ export async function getVercelAIChatResponseImplemention(
   toolChoice: 'auto' | 'none' | 'required' | undefined
 ) {
   const instance = aiServiceInstance()
-  const modifiedMessages: Message[] = modifyMessages(aiService, messages)
+  const modifiedMessages: Action[] = modifyMessages(aiService, messages)
   let modifiedModel = model
   if (aiService === 'azure') {
     modifiedModel =
@@ -77,7 +77,7 @@ export async function getVercelAIChatResponseImplemention(
   }
 }
 
-function modifyMessages(aiService: string, messages: Message[]): Message[] {
+function modifyMessages(aiService: string, messages: Action[]): Action[] {
   if (aiService === 'anthropic' || aiService === 'perplexity') {
     return modifyAnthropicMessages(messages)
   }
@@ -85,8 +85,8 @@ function modifyMessages(aiService: string, messages: Message[]): Message[] {
 }
 
 // Anthropicのメッセージを修正する
-function modifyAnthropicMessages(messages: Message[]): Message[] {
-  const systemMessage: Message | undefined = messages.find(
+function modifyAnthropicMessages(messages: Action[]): Action[] {
+  const systemMessage: Action | undefined = messages.find(
     (message) => message.role === 'system'
   )
   let userMessages = messages
@@ -99,15 +99,15 @@ function modifyAnthropicMessages(messages: Message[]): Message[] {
     userMessages.shift()
   }
 
-  const result: Message[] = systemMessage
+  const result: Action[] = systemMessage
     ? [systemMessage, ...userMessages]
     : userMessages
   return result
 }
 
 // 同じroleのメッセージを結合する
-function consolidateMessages(messages: Message[]) {
-  const consolidated: Message[] = []
+function consolidateMessages(messages: Action[]) {
+  const consolidated: Action[] = []
   let lastRole: string | null = null
   let combinedContent:
     | string

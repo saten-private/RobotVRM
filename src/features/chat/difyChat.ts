@@ -1,5 +1,5 @@
 import settingsStore from '@/features/stores/settings'
-import { Message } from '../messages/messages'
+import { Action } from '../messages/messages'
 import i18next from 'i18next'
 
 function handleApiError(errorCode: string): string {
@@ -9,7 +9,7 @@ function handleApiError(errorCode: string): string {
 }
 
 export async function getDifyChatResponseMiddlewareStream(
-  messages: Message[],
+  messages: Action[],
   apiKey: string,
   url: string,
   conversationId: string

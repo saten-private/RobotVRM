@@ -1,4 +1,4 @@
-import { Message } from '@/features/messages/messages'
+import { Action } from '@/features/messages/messages'
 import settingsStore from '@/features/stores/settings'
 import {
   getBestComment,
@@ -93,7 +93,7 @@ const retrieveLiveComments = async (
   return comments
 }
 
-const preProcessAIResponse = async (messages: Message[]) => {
+const preProcessAIResponse = async (messages: Action[]) => {
   const hs = homeStore.getState()
   await processAIResponse(hs.chatLog, messages)
 }

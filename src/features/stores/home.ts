@@ -1,11 +1,11 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-import { Message } from '@/features/messages/messages'
+import { Action } from '@/features/messages/messages'
 import { Viewer } from '../vrmViewer/viewer'
 export interface PersistedState {
   userOnboarded: boolean
-  chatLog: Message[]
+  chatLog: Action[]
   acceptedEula: boolean
   initialLaunchCompleted: boolean
   doNotShowBluetoothPopup: boolean
@@ -75,7 +75,7 @@ const homeStore = create<HomeState>()(
         initialLaunchCompleted,
         doNotShowBluetoothPopup,
       }) => ({
-        chatLog: chatLog.map((message: Message) => ({
+        chatLog: chatLog.map((message: Action) => ({
           ...message,
           content:
             typeof message.content === 'string'
