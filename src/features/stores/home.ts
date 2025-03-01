@@ -3,14 +3,12 @@ import { persist } from 'zustand/middleware'
 
 import { Message } from '@/features/messages/messages'
 import { Viewer } from '../vrmViewer/viewer'
-import { ActionLog } from '../tool/actionLog'
 export interface PersistedState {
   userOnboarded: boolean
   chatLog: Message[]
   acceptedEula: boolean
   initialLaunchCompleted: boolean
   doNotShowBluetoothPopup: boolean
-  actionLog: ActionLog[]
 }
 
 export interface TransientState {
@@ -42,7 +40,6 @@ const homeStore = create<HomeState>()(
       acceptedEula: false,
       initialLaunchCompleted: false,
       doNotShowBluetoothPopup: false,
-      actionLog: [],
 
       // transient states
       validateApiKey: true,
@@ -77,7 +74,6 @@ const homeStore = create<HomeState>()(
         acceptedEula,
         initialLaunchCompleted,
         doNotShowBluetoothPopup,
-        actionLog,
       }) => ({
         chatLog: chatLog.map((message: Message) => ({
           ...message,
@@ -91,7 +87,6 @@ const homeStore = create<HomeState>()(
         acceptedEula,
         initialLaunchCompleted,
         doNotShowBluetoothPopup,
-        actionLog,
       }),
     }
   )
