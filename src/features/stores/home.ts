@@ -5,7 +5,7 @@ import { Action } from '@/features/messages/messages'
 import { Viewer } from '../vrmViewer/viewer'
 export interface PersistedState {
   userOnboarded: boolean
-  chatLog: Action[]
+  actionLog: Action[]
   acceptedEula: boolean
   initialLaunchCompleted: boolean
   doNotShowBluetoothPopup: boolean
@@ -36,7 +36,7 @@ const homeStore = create<HomeState>()(
     (set, get) => ({
       // persisted states
       userOnboarded: false,
-      chatLog: [],
+      actionLog: [],
       acceptedEula: false,
       initialLaunchCompleted: false,
       doNotShowBluetoothPopup: false,
@@ -70,20 +70,12 @@ const homeStore = create<HomeState>()(
     {
       name: 'robotvrm-home',
       partialize: ({
-        chatLog,
+        actionLog: actionLog,
         acceptedEula,
         initialLaunchCompleted,
         doNotShowBluetoothPopup,
       }) => ({
-        chatLog: chatLog.map((message: Action) => ({
-          ...message,
-          content:
-            typeof message.content === 'string'
-              ? message.content
-              : message.content
-                  .map((item) => ('text' in item ? item.text : ''))
-                  .join('\n'),
-        })),
+        actionLog: actionLog,
         acceptedEula,
         initialLaunchCompleted,
         doNotShowBluetoothPopup,

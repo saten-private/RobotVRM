@@ -327,7 +327,7 @@ export const processAIResponse = async (
   aiTextLog = aiTextLog.filter((item) => item.content !== '')
 
   homeStore.setState({
-    chatLog: [...currentChatLog, ...aiTextLog],
+    actionLog: [...currentChatLog, ...aiTextLog],
     chatProcessing: false,
   })
 }
@@ -473,11 +473,11 @@ export const handleSendChatFn =
       if (hs.ws?.readyState === WebSocket.OPEN) {
         // ユーザーの発言を追加して表示
         const updateLog: Action[] = [
-          ...hs.chatLog,
+          ...hs.actionLog,
           { role: 'user', content: newMessage },
         ]
         homeStore.setState({
-          chatLog: updateLog,
+          actionLog: updateLog,
         })
 
         // WebSocket送信
@@ -532,7 +532,7 @@ export const handleSendChatFn =
       homeStore.setState({ chatProcessing: true })
       // ユーザーの発言を追加して表示
       const messageLog: Action[] = [
-        ...hs.chatLog,
+        ...hs.actionLog,
         {
           role: 'user',
           content: hs.modalImage
@@ -546,7 +546,7 @@ export const handleSendChatFn =
       if (hs.modalImage) {
         homeStore.setState({ modalImage: '' })
       }
-      homeStore.setState({ chatLog: messageLog })
+      homeStore.setState({ actionLog: messageLog })
 
       // TODO: AIに送信するメッセージの加工、処理がひどいので要修正
       // 画像は直近のものしか送らない
@@ -602,7 +602,7 @@ export const handleReceiveTextFromWsFn =
     homeStore.setState({ chatProcessing: true })
 
     if (role !== 'user') {
-      const updateLog: Action[] = [...hs.chatLog]
+      const updateLog: Action[] = [...hs.actionLog]
 
       if (state === 'start') {
         // startの場合は何もしない（textは空文字のため）
@@ -631,7 +631,7 @@ export const handleReceiveTextFromWsFn =
             aiTalks[0],
             () => {
               homeStore.setState({
-                chatLog: updateLog,
+                actionLog: updateLog,
                 assistantMessage: (() => {
                   const content = updateLog[updateLog.length - 1].content
                   return typeof content === 'string' ? content : ''
@@ -647,7 +647,7 @@ export const handleReceiveTextFromWsFn =
         }
       } else {
         homeStore.setState({
-          chatLog: updateLog,
+          actionLog: updateLog,
         })
       }
 

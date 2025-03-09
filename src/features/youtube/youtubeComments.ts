@@ -95,7 +95,7 @@ const retrieveLiveComments = async (
 
 const preProcessAIResponse = async (messages: Action[]) => {
   const hs = homeStore.getState()
-  await processAIResponse(hs.chatLog, messages)
+  await processAIResponse(hs.actionLog, messages)
 }
 
 export const fetchAndProcessComments = async (
@@ -118,11 +118,11 @@ export const fetchAndProcessComments = async (
         ss.conversationContinuityMode
       ) {
         const isContinuationNeeded =
-          await checkIfResponseContinuationIsRequired(hs.chatLog)
+          await checkIfResponseContinuationIsRequired(hs.actionLog)
         if (isContinuationNeeded) {
           const continuationMessage = await getMessagesForContinuation(
             await getPrompt('systemPrompt'),
-            hs.chatLog
+            hs.actionLog
           )
           preProcessAIResponse(continuationMessage)
           settingsStore.setState({
@@ -150,7 +150,7 @@ export const fetchAndProcessComments = async (
         settingsStore.setState({ youtubeSleepMode: false })
         let selectedComment = ''
         if (ss.conversationContinuityMode) {
-          selectedComment = await getBestComment(hs.chatLog, youtubeComments)
+          selectedComment = await getBestComment(hs.actionLog, youtubeComments)
         } else {
           selectedComment =
             youtubeComments[Math.floor(Math.random() * youtubeComments.length)]
@@ -169,16 +169,16 @@ export const fetchAndProcessComments = async (
             // 会話の続きを生成
             const continuationMessage = await getMessagesForContinuation(
               await getPrompt('systemPrompt'),
-              hs.chatLog
+              hs.actionLog
             )
             preProcessAIResponse(continuationMessage)
           } else if (noCommentCount === 3) {
             // 新しいトピックを生成
-            const anotherTopic = await getAnotherTopic(hs.chatLog)
+            const anotherTopic = await getAnotherTopic(hs.actionLog)
             console.log('anotherTopic:', anotherTopic)
             const newTopicMessage = await getMessagesForNewTopic(
               await getPrompt('systemPrompt'),
-              hs.chatLog,
+              hs.actionLog,
               anotherTopic
             )
             preProcessAIResponse(newTopicMessage)
@@ -186,7 +186,7 @@ export const fetchAndProcessComments = async (
             // スリープモードにする
             const messagesForSleep = await getMessagesForSleep(
               await getPrompt('systemPrompt'),
-              hs.chatLog
+              hs.actionLog
             )
             preProcessAIResponse(messagesForSleep)
             settingsStore.setState({ youtubeSleepMode: true })

@@ -1,8 +1,6 @@
 import { captureImage } from '@/components/webcam'
-import {
-  useCaptureStore,
-  getCaptureStoreState,
-} from '@/features/stores/capture'
+import homeStore from '@/features/stores/home'
+import { Action } from '@/features/tool/action'
 import { appEventEmitter } from '@/utils/eventEmitter'
 
 interface CaptureOptions {
@@ -22,17 +20,21 @@ const performCapture = async (addCapture: (data: string) => void) => {
 }
 
 export const captureStart = async ({
-  captureIntervalSeconds,
-  maxCaptureSeconds,
+  captureIntervalSeconds
 }: CaptureOptions): Promise<() => void> => {
   return new Promise(async (resolve) => {
-    const { addCapture, setMaxCaptures } = useCaptureStore.getState()
-
-    // Calculate maxCaptures based on maxCaptureSeconds and captureIntervalSeconds
-    const maxCaptures = Math.floor(maxCaptureSeconds / captureIntervalSeconds)
-    setMaxCaptures(maxCaptures)
-
     let captureIntervalId: NodeJS.Timeout
+
+    const addCapture = (data: string) => {
+      const captureAction: Action = {
+        role: 'user',
+        content: [{ type: 'image', image: data }],
+      }
+
+      homeStore.setState((state) => ({
+        actionLog: [...state.actionLog, captureAction],
+      }))
+    }
 
     const captureAndProcessLLM = async () => {
       const captureSuccess = await performCapture(addCapture)
@@ -60,12 +62,4 @@ export const captureStart = async ({
       clearInterval(captureIntervalId)
     })
   })
-}
-
-export const getCaptureStore = () => {
-  const { captures, maxCaptures } = getCaptureStoreState()
-  return {
-    captures: [...captures],
-    maxCaptures,
-  }
 }

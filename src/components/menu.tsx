@@ -29,7 +29,7 @@ export const Menu = () => {
   const webSocketMode = settingsStore((s) => s.webSocketMode)
   const slideMode = settingsStore((s) => s.slideMode)
   const slideVisible = menuStore((s) => s.slideVisible)
-  const chatLog = homeStore((s) => s.chatLog)
+  const chatLog = homeStore((s) => s.actionLog)
   const assistantMessage = homeStore((s) => s.assistantMessage)
   const showWebcam = menuStore((s) => s.showWebcam)
   const showControlPanel = settingsStore((s) => s.showControlPanel)

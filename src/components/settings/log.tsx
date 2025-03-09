@@ -6,7 +6,7 @@ import settingsStore from '@/features/stores/settings'
 import { TextButton } from '../textButton'
 
 const Log = () => {
-  const chatLog = homeStore((s) => s.chatLog)
+  const chatLog = homeStore((s) => s.actionLog)
   const selectAIService = settingsStore((s) => s.selectAIService)
 
   const { t } = useTranslation()
@@ -24,7 +24,7 @@ const Log = () => {
         </div>
         <TextButton
           onClick={() => {
-            homeStore.setState({ chatLog: [] })
+            homeStore.setState({ actionLog: [] })
             settingsStore.setState({ difyConversationId: '' })
           }}
         >
@@ -76,9 +76,9 @@ export default Log
 const handleChangeChatLog = (targetIndex: number, text: string) => {
   const hs = homeStore.getState()
 
-  const newChatLog = hs.chatLog.map((m, i) => {
+  const newChatLog = hs.actionLog.map((m, i) => {
     return i === targetIndex ? { role: m.role, content: text } : m
   })
 
-  homeStore.setState({ chatLog: newChatLog })
+  homeStore.setState({ actionLog: newChatLog })
 }

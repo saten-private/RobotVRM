@@ -8,7 +8,7 @@ export const ChatLog = () => {
   const chatScrollRef = useRef<HTMLDivElement>(null)
 
   const characterName = settingsStore((s) => s.characterName)
-  const messages = homeStore((s) => s.chatLog)
+  const messages = homeStore((s) => s.actionLog)
 
   useEffect(() => {
     chatScrollRef.current?.scrollIntoView({
