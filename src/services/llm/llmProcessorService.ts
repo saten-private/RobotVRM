@@ -1,9 +1,11 @@
 import homeStore from '@/features/stores/home'
 import settingsStore from '@/features/stores/settings'
-import { useCaptureStore } from '@/features/stores/capture'
-import { getAIChatResponseStream } from '@/features/chat/aiChatFactory'
+import {
+  getAIChatResponseStream,
+  getAIChatResponse,
+} from '@/features/chat/aiChatFactory'
 import { AIService } from '@/features/constants/settings'
-import { Action } from '@/features/messages/messages'
+import { Action } from '@/features/tool/action'
 import { appEventEmitter } from '@/utils/eventEmitter'
 import { isConnectedBle } from '@/services/bluetooth/bluetoothLeService'
 import {
@@ -15,71 +17,42 @@ import {
 } from '@/features/tool/tool'
 import { processSpeakContent } from '@/features/chat/handlers'
 import { sendDataBle } from '@/services/bluetooth/bluetoothLeService'
-import { getPrompt } from '@/features/stores/secureStorage'
+import { getPrompt, setPrompt } from '@/features/stores/secureStorage'
 import i18n from '@/lib/i18n'
 
 export const startLlmProcessor = (): (() => void) => {
   let hasSpokeInCurrentRequest = false
+  let systemPrompt = ''
 
-  const processLlmRequest = async () => {
+  const processActionRequest = async (systemPrompt: string) => {
     try {
       const ss = settingsStore.getState()
-      let systemPrompt = await getPrompt('systemPrompt')
 
-      // キャプチャした画像をBase64形式で取得
-      const captures = useCaptureStore.getState().captures // captureStoreから直接状態を取得
+      // Retrieve actions from homeStore
+      const hs = homeStore.getState()
+      const actionLog = hs.actionLog || []
 
-      if (captures.length === 0) {
-        console.log('captures.length === 0')
-        return
-      }
-
-      // キャプチャした画像をBase64形式で取得
-      const imageData = captures.map((capture) => capture.data)
-      // LLMは古い画像から新しい画像の順番で時系列を認識するようなため、取得したキューの順番を逆にする
-      // 参考:https://cookbook.openai.com/examples/gpt4o/introduction_to_gpt4o#video-processing
-      const imageDataForLLM = imageData.reverse()
+      const pastBackgroundPrompt = `# Past Background
+${systemPrompt}`
 
       // メッセージの作成
       const messages: Action[] = [
         {
-          role: 'system',
-          content: systemPrompt, // システムプロンプトは文字列
-        },
-        {
           role: 'user',
           content: [
-            ...imageDataForLLM.map((image: string) => ({
-              type: 'image' as const,
-              image: image,
-            })),
+            {
+              type: 'text',
+              text: pastBackgroundPrompt,
+            },
           ],
         },
+        // Add remaining actions from homeStore actionLog
+        ...actionLog,
       ]
 
-      // 耳の実装はRobotVRM-Firstでは行わない、別シリーズで実装する
-      // const messages: Message[] = [
-      //   {
-      //     role: 'system',
-      //     content: systemPrompt, // システムプロンプトは文字列
-      //   },
-      //   {
-      //     // 耳の実装はRobotVRM-Firstでは行わない、別シリーズで実装する
-      //     // {
-      //     //   type: 'text',
-      //     //   text: '以下の画像を分析し、状況を説明してください。',
-      //     // } as const,
-      //     role: 'user',
-      //     content: [
-      //       ...imageDataForLLM.map((image: string) => ({
-      //         type: 'image' as const,
-      //         image: image,
-      //       })),
-      //     ],
-      //   },
-      // ]
+      console.log('message count=', messages.length)
 
-      console.log('image count=', messages[1].content.length)
+      const language = i18n.language as Language
 
       const speakTool = createSpeakTool((args) => {
         const { content } = args
@@ -89,15 +62,40 @@ export const startLlmProcessor = (): (() => void) => {
           hasSpokeInCurrentRequest
         )
         if (!hasSpokeInCurrentRequest) {
+          const result = `${toolPrompt(language).Speak}
+\`\`\`
+${content}
+\`\`\``
+          const action: Action = {
+            role: 'user',
+            content: [{ type: 'text', text: result }],
+          }
+
+          homeStore.setState((state) => ({
+            actionLog: [...state.actionLog, action],
+          }))
           processSpeakContent(content)
           hasSpokeInCurrentRequest = true
           return { result: 'success' }
         }
-      }, i18n.language as Language)
+      }, language)
 
       const expressingEmotionTool = createExpressingEmotionTool((args) => {
         const { emotion } = args
         console.log('execute expressing_emotion emotion=', emotion)
+
+        const result = `${toolPrompt(language).ExpressingEmotion}
+\`\`\`
+${emotion}
+\`\`\``
+        const action: Action = {
+          role: 'user',
+          content: [{ type: 'text', text: result }],
+        }
+        homeStore.setState((state) => ({
+          actionLog: [...state.actionLog, action],
+        }))
+
         const hs = homeStore.getState()
         switch (emotion) {
           case toolPrompt(i18n.language as Language).Emotion.Normal:
@@ -117,11 +115,24 @@ export const startLlmProcessor = (): (() => void) => {
             break
         }
         return { result: 'success' }
-      }, i18n.language as Language)
+      }, language)
 
       const movementTool = createMovementTool(async (args) => {
         const { direction } = args
         console.log('execute movement direction=', direction)
+
+        const result = `${toolPrompt(language).Movement}
+        \`\`\`
+        ${direction}
+        \`\`\``
+        const action: Action = {
+          role: 'user',
+          content: [{ type: 'text', text: result }],
+        }
+        homeStore.setState((state) => ({
+          actionLog: [...state.actionLog, action],
+        }))
+
         try {
           switch (direction) {
             case toolPrompt(i18n.language as Language).Direction.Forward:
@@ -142,7 +153,7 @@ export const startLlmProcessor = (): (() => void) => {
           console.error('Error sending data', error)
           return { result: 'error', error: error }
         }
-      }, i18n.language as Language)
+      }, language)
 
       let tools
       if (isConnectedBle()) {
@@ -182,6 +193,24 @@ export const startLlmProcessor = (): (() => void) => {
         console.error(e)
         stream = null
       }
+      if (stream == null) {
+        console.log('stream is null')
+        return
+      }
+      const reader = stream.getReader()
+      try {
+        while (true) {
+          const { done, value } = await reader.read()
+          console.log('llmProcessorService response=', value)
+          if (done) break
+        }
+      } catch (e) {
+        console.error(e)
+      } finally {
+        reader.releaseLock()
+        stream = null
+      }
+      processMemoryRequest(systemPrompt)
     } catch (error) {
       console.error('Error processing LLM request:', error)
       // エラー処理（例：エラー状態の設定、エラーイベントの発火など）
@@ -189,9 +218,67 @@ export const startLlmProcessor = (): (() => void) => {
     }
   }
 
-  // イベントリスナーを登録し、クリーンアップ関数を取得
-  const unsubscribe = appEventEmitter.on('llmRequest', processLlmRequest)
+  const processMemoryRequest = async (systemPrompt: string) => {
+    console.log('processMemoryRequest')
 
-  // クリーンアップ関数を返す
-  return unsubscribe
+    const ss = settingsStore.getState()
+    const pastBackgroundPrompt = `# Past Background
+${systemPrompt}`
+
+    const hs = homeStore.getState()
+    const actionLog = hs.actionLog || []
+
+    // メッセージの作成
+    const messages: Action[] = [
+      {
+        role: 'user',
+        content: [
+          {
+            type: 'text',
+            text: 'You are a robot. You have performed the following actions in the following past background. The attached image shows your point of view at that time. Please create a new background of this robot within 100K tokens.',
+          },
+        ],
+      },
+      {
+        role: 'user',
+        content: [
+          {
+            type: 'text',
+            text: pastBackgroundPrompt,
+          },
+        ],
+      },
+      ...actionLog,
+    ]
+
+    try {
+      const response = await getAIChatResponse(
+        ss.selectAIService as AIService,
+        messages
+      )
+      console.log('systemPrompt=', response.text)
+      setPrompt('systemPrompt', response.text)
+      processActionRequest(response.text)
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  // Define function to initialize and start processing
+  const initialize = async () => {
+    systemPrompt = await getPrompt('systemPrompt')
+    // Now register event listener with the loaded prompt
+    processActionRequest(systemPrompt)
+
+    // const unsubscribe = appEventEmitter.on('llmRequest', () => 
+    //   processActionRequest(systemPrompt)
+    // )
+    // return unsubscribe
+  }
+
+  // Start initialization
+  initialize()
+
+  // Return cleanup function
+  return () => {} // Empty function to satisfy the return type
 }

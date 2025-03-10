@@ -37,15 +37,13 @@ export const captureStart = async ({
     }
 
     const captureAndProcessLLM = async () => {
-      const captureSuccess = await performCapture(addCapture)
-
-      if (captureSuccess) {
-        appEventEmitter.emit('llmRequest')
-      }
+      await performCapture(addCapture)
     }
 
     // Perform initial capture immediately
     await performCapture(addCapture)
+
+    appEventEmitter.emit('llmRequest')
 
     // Set up interval for repeated captures
     console.log(
