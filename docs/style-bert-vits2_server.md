@@ -17,8 +17,8 @@
    ```
    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
    ```
-1. Create an environment by following the steps in [Style-Bert-VITS2 for Git and Python users](https://github.com/litagin02/Style-Bert-VITS2?tab=readme-ov-file#git%E3%82%84python%E4%BD%BF%E3%81%88%E3%82%8B%E4%BA%BA). 
-When you run `powershell -c "irm https://astral.sh/uv/install.ps1 | iex"`, you will be asked to pass through the path as instructed `$env:Path = "C:\Users\XXXX\.cargo\bin;$env:Path"`. Please continue by passing the path as follows.
+1. Create an environment by following the steps in [Style-Bert-VITS2 for Git and Python users](https://github.com/litagin02/Style-Bert-VITS2?tab=readme-ov-file#git%E3%82%84python%E4%BD%BF%E3%81%88%E3%82%8B%E4%BA%BA).
+   When you run `powershell -c "irm https://astral.sh/uv/install.ps1 | iex"`, you will be asked to pass through the path as instructed `$env:Path = "C:\Users\XXXX\.cargo\bin;$env:Path"`. Please continue by passing the path as follows.
 1. Confirm that voice synthesis is available in the browser by executing the following, which will automatically open the browser.
    - Without GPU
      ```

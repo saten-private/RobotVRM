@@ -46,4 +46,4 @@
 
 I installed [this node version](../.node-version) based on [ahandsel](https://dev.to/ahandsel)'s [Guide on Installing Node.js & npm {macOS & Windows}](https://dev.to/kintonedevprogram/guide-on-installing-nodejs-npm-macos-windows-16ii).
 
-* Note that after installing nvm-windows, the nvm command cannot be used without restarting the terminal.
+- Note that after installing nvm-windows, the nvm command cannot be used without restarting the terminal.

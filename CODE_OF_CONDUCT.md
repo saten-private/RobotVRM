@@ -17,4 +17,3 @@ The author himself is one, but it is not a good idea to do so in a stressful sit
 ## Let's have fun!
 
 The best part of this project is the thrill of not knowing what you will be able to create. Let's have fun while trying things out.
-

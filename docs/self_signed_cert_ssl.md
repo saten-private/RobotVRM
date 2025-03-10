@@ -39,11 +39,12 @@ Create a certificate by following the procedure for [creating a self-signed cert
    ```
    code .\conf\nginx.conf
    ```
-   - macOS * This is an example for an Apple silicon Mac; the path would be different for an Intel silicon Mac.
+   - macOS \* This is an example for an Apple silicon Mac; the path would be different for an Intel silicon Mac.
    ```
    code /opt/homebrew/etc/nginx/nginx.conf
    ```
 1. Edit and save as follows
+
    ```
    events {}
    http {

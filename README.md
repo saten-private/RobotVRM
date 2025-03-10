@@ -18,7 +18,6 @@
   </a>
 </div>
 
-
 # RobotVRM
 
 Project to develop LLM robots (smart phone robots) that can be created at low cost **live with people** .

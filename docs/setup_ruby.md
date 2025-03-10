@@ -44,11 +44,10 @@
 
 ## For Windows
 
-I installed [this ruby version](../.ruby-version) with reference to 
+I installed [this ruby version](../.ruby-version) with reference to
 [Managing Multiple Ruby Versions with uru on Windows](https://www.neverletdown.net/2015/08/managing-multiple-ruby-versions-with-uru.html) by **Michael Keeling**. The general flow is as follows.
 
 1. Create a `C:\Ruby` folder.
 1. Install the recommended `Ruby+Devkit X.X.X-X` like `C:\Ruby\rubyX.X.X` as the latest version of ruby is fine to install Devkit.
 1. **Michael Keeling**'s [Managing Multiple Ruby Versions with uru on Windows](https://www.neverletdown.net/2015/08/managing-multiple-ruby-versions-with-uru.html) to enable ruby version management.
 1. Restart the terminal to reflect
-

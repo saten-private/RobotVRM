@@ -20,7 +20,7 @@ const performCapture = async (addCapture: (data: string) => void) => {
 }
 
 export const captureStart = async ({
-  captureIntervalSeconds
+  captureIntervalSeconds,
 }: CaptureOptions): Promise<() => void> => {
   return new Promise(async (resolve) => {
     let captureIntervalId: NodeJS.Timeout

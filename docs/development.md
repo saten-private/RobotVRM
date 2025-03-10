@@ -32,7 +32,7 @@ See below for instructions on how to set it up.
 
 The author is currently using [Cursor editor](https://www.cursor.com/) (I'm developing heavily with Claude 3.5 Sonnet on the Pro plan).
 
-* I believe development can be done with the VSCode editor.
+- I believe development can be done with the VSCode editor.
 
 ### Clone RobotVRM repository
 
@@ -138,7 +138,7 @@ Create a certificate for the IP address fixed in the procedure for [creating a s
 
 #### macOS
 
-Set up a RobotVRM server by executing the following *Administrative privileges required
+Set up a RobotVRM server by executing the following \*Administrative privileges required
 
 ```
 sudo pnpm dev
@@ -154,7 +154,7 @@ sudo pnpm dev-store
 
 1. Start the terminal with administrator privileges
    - If you are using the Cursor editor terminal, just start the Cursor editor with administrator privileges
-1. Set up a RobotVRM server by executing the following *Administrative privileges required
+1. Set up a RobotVRM server by executing the following \*Administrative privileges required
    ```
    pnpm dev
    ```
@@ -238,7 +238,7 @@ Follow the steps in [Set Developer options for the device](https://developer.and
 
 - For macOS
   1.  Android device configured with Developer options connected to PC via USB
-  1.  (You only need to run it **once** just before to create the `webDir`) Run the following to go through the RobotVRM server build *Administrator privileges required
+  1.  (You only need to run it **once** just before to create the `webDir`) Run the following to go through the RobotVRM server build \*Administrator privileges required
       ```
       sudo pnpm build
       ```
@@ -256,7 +256,7 @@ Follow the steps in [Set Developer options for the device](https://developer.and
       ```
       Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
       ```
-  1.  (You only need to run it **once** just before to create the `webDir`) Run the following to go through the RobotVRM server build *Administrator privileges required
+  1.  (You only need to run it **once** just before to create the `webDir`) Run the following to go through the RobotVRM server build \*Administrator privileges required
       ```
       pnpm build
       ```
@@ -292,7 +292,7 @@ Install [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
 
 #### Installing CocoaPods
 
-* If I manage with bundler, it asked me to install bundler even though ruby is not required to build Android on Windows, so I install CocoaPods directly.
+- If I manage with bundler, it asked me to install bundler even though ruby is not required to build Android on Windows, so I install CocoaPods directly.
 
 1. Run the following to install CocoaPods
    ```
@@ -370,7 +370,7 @@ Setting App > Privacy & Security > Turn on “Developer Mode“
 Thereafter, you can build and install iOS apps from the terminal (e.g. Cursor editor) by executing the following
 
 1. Connect an iOS device configured for development to a PC via USB
-1. (You only need to run it **once** just before to create the `webDir`) Run the following to go through the RobotVRM server build *Administrator privileges required
+1. (You only need to run it **once** just before to create the `webDir`) Run the following to go through the RobotVRM server build \*Administrator privileges required
    ```
    sudo pnpm build
    ```

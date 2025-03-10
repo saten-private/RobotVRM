@@ -1,6 +1,6 @@
 # Character Terms of Use for this Repository
 
-***Original characters from repositories forked from this repository and aituber-kit,ChatVRM are excluded.**
+**\*Original characters from repositories forked from this repository and aituber-kit,ChatVRM are excluded.**
 
 These terms and conditions (“Terms and Conditions”) set forth the terms and conditions for the use of the characters (such as Mina the First) (“Characters”) contained in this Repository. All persons using the Characters (“Users”) are deemed to have agreed to these Terms and Conditions.
 

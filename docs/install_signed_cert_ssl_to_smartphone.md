@@ -2,7 +2,7 @@
 
 ## Send CA root certificate from the computer that created the self-signed certificate
 
-1. Check the location of the CA root certificate by running the following in a terminal * assuming mkcert is already installed
+1. Check the location of the CA root certificate by running the following in a terminal \* assuming mkcert is already installed
    ```
    mkcert -CAROOT
    ```

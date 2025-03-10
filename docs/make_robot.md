@@ -20,12 +20,13 @@ It is a good idea to install the sample code on the robot car with Arduino accor
 
 Please open [this RobotVRM folder](../Arduino) with Arduino and write to the robot car.
 
-* Can I download `RobotVRM.ino` directly or if you want to open it in Arduino, please create `RobotVRM` folder and put `RobotVRM.ino` in it because `RobotVRM/RobotVRM.ino` cannot be opened without RobotVRM folder.
+- Can I download `RobotVRM.ino` directly or if you want to open it in Arduino, please create `RobotVRM` folder and put `RobotVRM.ino` in it because `RobotVRM/RobotVRM.ino` cannot be opened without RobotVRM folder.
 
 ## Create a place on the robot car where the phone can be fixed (anything that can be fixed is fine).
 
 The phone is fixed to the robot car by attaching [the L-shaped bracket](https://watts-online.jp/products/17539?srsltid=AfmBOorxREF7DXRADdJxEtMRO_0XfOGa0fC-jbt4V3DFVtg1LPHPnbcg) to the robot car with the tape that comes with the robot car, and then fastening it with a rubber band as shown in the video.
-* Anything will do as long as it can be fixed.
+
+- Anything will do as long as it can be fixed.
 
 ![Robot car with L-shaped fittings attached with tape](./robot_car_with_smartphone_fixture.jpg)
 
@@ -37,7 +38,7 @@ For Android, Settings app > Display > Screen timeout
 
 For iOS, Settings app > Display & Brightness > Auto-Lock
 
-* If the robot will not be used for a long period of time, it is recommended to restore the original settings
+- If the robot will not be used for a long period of time, it is recommended to restore the original settings
 
 # How to move the robot
 
@@ -45,13 +46,13 @@ For iOS, Settings app > Display & Brightness > Auto-Lock
 
 With the HC-02 parts connected to the robot car, turn on the power and press the robot icon button in the RobotVRM application to search for HC-02 devices in the vicinity, then select the HC-02 device displayed and connect it to the robot car via Bluetooth.
 
-* See README video
+- See README video
 
 ## Fix your phone to a robot car
 
 In the author's case, it is fixed with rubber bands as shown in the README video
 
-* Anything that can be fixed would be fine.
+- Anything that can be fixed would be fine.
 
 ## Turn on the camera
 

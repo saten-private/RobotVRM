@@ -270,7 +270,7 @@ ${systemPrompt}`
     // Now register event listener with the loaded prompt
     processActionRequest(systemPrompt)
 
-    // const unsubscribe = appEventEmitter.on('llmRequest', () => 
+    // const unsubscribe = appEventEmitter.on('llmRequest', () =>
     //   processActionRequest(systemPrompt)
     // )
     // return unsubscribe
