@@ -122,9 +122,9 @@ ${emotion}
         console.log('execute movement direction=', direction)
 
         const result = `${toolPrompt(language).Movement}
-        \`\`\`
-        ${direction}
-        \`\`\``
+\`\`\`
+${direction}
+\`\`\``
         const action: Action = {
           role: 'user',
           content: [{ type: 'text', text: result }],
@@ -266,14 +266,11 @@ ${systemPrompt}`
 
   // Define function to initialize and start processing
   const initialize = async () => {
-    systemPrompt = await getPrompt('systemPrompt')
-    // Now register event listener with the loaded prompt
-    processActionRequest(systemPrompt)
-
-    // const unsubscribe = appEventEmitter.on('llmRequest', () =>
-    //   processActionRequest(systemPrompt)
-    // )
-    // return unsubscribe
+    const unsubscribe = appEventEmitter.on('llmRequest', async () => {
+      systemPrompt = await getPrompt('systemPrompt')
+      processActionRequest(systemPrompt)
+    })
+    return unsubscribe
   }
 
   // Start initialization
