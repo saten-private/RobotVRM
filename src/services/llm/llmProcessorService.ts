@@ -257,9 +257,16 @@ ${systemPrompt}`
 
       const pastBackgroundTool = createPastBackgroundTool((args) => {
         const { content } = args
-        const truncatedContent = truncateToMaxTokens(content, ss.selectAIService as AIService, 3500)
+        const truncatedContent = truncateToMaxTokens(
+          content,
+          ss.selectAIService as AIService,
+          3500
+        )
 
-        console.log('execute pastBackground truncatedContent=', truncatedContent)
+        console.log(
+          'execute pastBackground truncatedContent=',
+          truncatedContent
+        )
 
         setPrompt('systemPrompt', truncatedContent)
         // clear actionLog
@@ -312,7 +319,12 @@ ${systemPrompt}`
           count++
           console.log('processMemoryRequest count=', count)
           if (count > 10) {
-            throw new Error('processMemoryRequest max error count=' + count + ' response.text=' + response.text)
+            throw new Error(
+              'processMemoryRequest max error count=' +
+                count +
+                ' response.text=' +
+                response.text
+            )
           }
         }
       }

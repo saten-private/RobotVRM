@@ -1,4 +1,4 @@
-import { encoding_for_model } from "tiktoken"
+import { encoding_for_model } from 'tiktoken'
 
 /**
  * テキストが指定されたトークン数を超える場合に切り詰めます
