@@ -1,11 +1,10 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-import { Action } from '@/features/messages/messages'
+import { Action } from '@/features/tool/action'
 import { Viewer } from '../vrmViewer/viewer'
 export interface PersistedState {
   userOnboarded: boolean
-  actionLog: Action[]
   acceptedEula: boolean
   initialLaunchCompleted: boolean
   doNotShowBluetoothPopup: boolean
@@ -14,6 +13,7 @@ export interface PersistedState {
 export interface TransientState {
   validateApiKey: boolean
   viewer: Viewer
+  actionLog: Action[]
   assistantMessage: string
   slideMessages: string[]
   chatProcessing: boolean
@@ -36,7 +36,6 @@ const homeStore = create<HomeState>()(
     (set, get) => ({
       // persisted states
       userOnboarded: false,
-      actionLog: [],
       acceptedEula: false,
       initialLaunchCompleted: false,
       doNotShowBluetoothPopup: false,
@@ -44,6 +43,7 @@ const homeStore = create<HomeState>()(
       // transient states
       validateApiKey: true,
       viewer: new Viewer(),
+      actionLog: [],
       assistantMessage: '',
       slideMessages: [],
       chatProcessing: false,
@@ -70,12 +70,10 @@ const homeStore = create<HomeState>()(
     {
       name: 'robotvrm-home',
       partialize: ({
-        actionLog: actionLog,
         acceptedEula,
         initialLaunchCompleted,
         doNotShowBluetoothPopup,
       }) => ({
-        actionLog: actionLog,
         acceptedEula,
         initialLaunchCompleted,
         doNotShowBluetoothPopup,

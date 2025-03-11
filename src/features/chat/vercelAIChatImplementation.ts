@@ -1,4 +1,4 @@
-import { Action } from '@/features/messages/messages'
+import { Action } from '@/features/tool/action'
 import { streamText, generateText, CoreMessage, CoreTool } from 'ai'
 
 export async function getVercelAIChatResponseImplemention(
@@ -12,7 +12,7 @@ export async function getVercelAIChatResponseImplemention(
   toolChoice: 'auto' | 'none' | 'required' | undefined
 ) {
   const instance = aiServiceInstance()
-  const modifiedMessages: Action[] = modifyMessages(aiService, messages)
+  const modifiedMessages: Action[] = messages //modifyMessages(aiService, messages)
   let modifiedModel = model
   if (aiService === 'azure') {
     modifiedModel =

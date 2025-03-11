@@ -172,3 +172,16 @@ export const createMovementTool = (
     }),
     execute: async (args) => processMovement(args),
   })
+
+export const createPastBackgroundTool = (
+  processSpeakContent: (args: any) => any,
+  language: Language
+) =>
+  tool({
+    description: "Output Past Background",
+    parameters: z.object({
+      content: z.string().describe("Past Background"),
+    }),
+    execute: async (args) => processSpeakContent(args),
+  })
+

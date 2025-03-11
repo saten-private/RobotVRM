@@ -14,6 +14,7 @@ import {
   createSpeakTool,
   createExpressingEmotionTool,
   createMovementTool,
+  createPastBackgroundTool,
 } from '@/features/tool/tool'
 import { processSpeakContent } from '@/features/chat/handlers'
 import { sendDataBle } from '@/services/bluetooth/bluetoothLeService'
@@ -84,36 +85,46 @@ ${content}
         const { emotion } = args
         console.log('execute expressing_emotion emotion=', emotion)
 
-        const result = `${toolPrompt(language).ExpressingEmotion}
-\`\`\`
-${emotion}
-\`\`\``
-        const action: Action = {
-          role: 'user',
-          content: [{ type: 'text', text: result }],
-        }
-        homeStore.setState((state) => ({
-          actionLog: [...state.actionLog, action],
-        }))
+        let isEmotioned = false
 
         const hs = homeStore.getState()
         switch (emotion) {
           case toolPrompt(i18n.language as Language).Emotion.Normal:
             hs.viewer.model?.expression('neutral')
+            isEmotioned = true
             break
           case toolPrompt(i18n.language as Language).Emotion.Joy:
             hs.viewer.model?.expression('happy')
+            isEmotioned = true
             break
           case toolPrompt(i18n.language as Language).Emotion.Anger:
             hs.viewer.model?.expression('angry')
+            isEmotioned = true
             break
           case toolPrompt(i18n.language as Language).Emotion.Sadness:
             hs.viewer.model?.expression('sad')
+            isEmotioned = true
             break
           case toolPrompt(i18n.language as Language).Emotion.Calmness:
             hs.viewer.model?.expression('relaxed')
+            isEmotioned = true
             break
         }
+
+        if (!isEmotioned) {
+          const result = `${toolPrompt(language).ExpressingEmotion}
+\`\`\`
+${emotion}
+\`\`\``
+          const action: Action = {
+            role: 'user',
+            content: [{ type: 'text', text: result }],
+          }
+          homeStore.setState((state) => ({
+            actionLog: [...state.actionLog, action],
+          }))
+        }
+
         return { result: 'success' }
       }, language)
 
@@ -121,33 +132,42 @@ ${emotion}
         const { direction } = args
         console.log('execute movement direction=', direction)
 
-        const result = `${toolPrompt(language).Movement}
-\`\`\`
-${direction}
-\`\`\``
-        const action: Action = {
-          role: 'user',
-          content: [{ type: 'text', text: result }],
-        }
-        homeStore.setState((state) => ({
-          actionLog: [...state.actionLog, action],
-        }))
-
         try {
+          let isMoved = false
+
           switch (direction) {
             case toolPrompt(i18n.language as Language).Direction.Forward:
               await sendDataBle('M')
+              isMoved = true
               break
             case toolPrompt(i18n.language as Language).Direction.Left:
               await sendDataBle('L')
+              isMoved = true
               break
             case toolPrompt(i18n.language as Language).Direction.Right:
               await sendDataBle('R')
+              isMoved = true
               break
             case toolPrompt(i18n.language as Language).Direction.Back:
               await sendDataBle('B')
+              isMoved = true
               break
           }
+
+          if (!isMoved) {
+            const result = `${toolPrompt(language).Movement}
+\`\`\`
+${direction}
+\`\`\``
+            const action: Action = {
+              role: 'user',
+              content: [{ type: 'text', text: result }],
+            }
+            homeStore.setState((state) => ({
+              actionLog: [...state.actionLog, action],
+            }))
+          }
+
           return { result: 'success' }
         } catch (error) {
           console.error('Error sending data', error)
@@ -212,6 +232,7 @@ ${direction}
       }
       processMemoryRequest(systemPrompt)
     } catch (error) {
+      processActionRequest(systemPrompt)
       console.error('Error processing LLM request:', error)
       // エラー処理（例：エラー状態の設定、エラーイベントの発火など）
       // 例: handleLlmError(error)
@@ -219,48 +240,82 @@ ${direction}
   }
 
   const processMemoryRequest = async (systemPrompt: string) => {
-    console.log('processMemoryRequest')
+    try {
+      console.log('processMemoryRequest')
 
-    const ss = settingsStore.getState()
-    const pastBackgroundPrompt = `# Past Background
+      let endProcess = false
+
+      const ss = settingsStore.getState()
+      const pastBackgroundPrompt = `# Past Background
 ${systemPrompt}`
 
-    const hs = homeStore.getState()
-    const actionLog = hs.actionLog || []
+      const language = i18n.language as Language
 
-    // メッセージの作成
-    const messages: Action[] = [
-      {
-        role: 'user',
-        content: [
-          {
-            type: 'text',
-            text: 'You are a robot. You have performed the following actions in the following past background. The attached image shows your point of view at that time. Please create a new background of this robot within 100K tokens.',
-          },
-        ],
-      },
-      {
-        role: 'user',
-        content: [
-          {
-            type: 'text',
-            text: pastBackgroundPrompt,
-          },
-        ],
-      },
-      ...actionLog,
-    ]
+      const hs = homeStore.getState()
+      const actionLog = hs.actionLog || []
 
-    try {
-      const response = await getAIChatResponse(
-        ss.selectAIService as AIService,
-        messages
-      )
-      console.log('systemPrompt=', response.text)
-      setPrompt('systemPrompt', response.text)
-      processActionRequest(response.text)
+      const pastBackgroundTool = createPastBackgroundTool((args) => {
+        const { content } = args
+        console.log('execute pastBackground content=', content)
+
+        setPrompt('systemPrompt', content)
+        // clear actionLog
+        homeStore.setState((state) => ({
+          actionLog: [],
+        }))
+        endProcess = true
+        processActionRequest(content)
+        return { result: 'success' }
+      }, language)
+
+      const tools = {
+        past_background: pastBackgroundTool,
+      }
+
+      // メッセージの作成
+      const messages: Action[] = [
+        {
+          role: 'user',
+          content: [
+            {
+              type: 'text',
+              text: `You are a human being. From the following past background conditions, you have taken the following actions. The attached image is the viewpoint at the time of the action. Please update this human's past background to the new background from the following newly viewed perspective and actions taken. The updated background should be represented by a maximum of 3500 tokens.`,
+            },
+          ],
+        },
+        {
+          role: 'user',
+          content: [
+            {
+              type: 'text',
+              text: pastBackgroundPrompt,
+            },
+          ],
+        },
+        ...actionLog,
+      ]
+
+      let count = 0
+      while (!endProcess) {
+        const response = await getAIChatResponse(
+          ss.selectAIService as AIService,
+          messages,
+          tools,
+          1,
+          'required'
+        )
+        console.log('processMemoryRequest response.text=', response.text)
+        if (!endProcess) {
+          count++
+          console.log('processMemoryRequest count=', count)
+          if (count > 10) {
+            throw new Error('processMemoryRequest max error count=' + count + ' response.text=' + response.text)
+          }
+        }
+      }
     } catch (e) {
-      console.error(e)
+      console.error('processMemoryRequest error=', e)
+      processMemoryRequest(systemPrompt)
     }
   }
 
