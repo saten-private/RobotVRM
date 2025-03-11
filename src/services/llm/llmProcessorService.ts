@@ -20,6 +20,7 @@ import { processSpeakContent } from '@/features/chat/handlers'
 import { sendDataBle } from '@/services/bluetooth/bluetoothLeService'
 import { getPrompt, setPrompt } from '@/features/stores/secureStorage'
 import i18n from '@/lib/i18n'
+import { truncateToMaxTokens } from '@/utils/maxToken'
 
 export const startLlmProcessor = (): (() => void) => {
   let hasSpokeInCurrentRequest = false
@@ -256,15 +257,17 @@ ${systemPrompt}`
 
       const pastBackgroundTool = createPastBackgroundTool((args) => {
         const { content } = args
-        console.log('execute pastBackground content=', content)
+        const truncatedContent = truncateToMaxTokens(content, ss.selectAIService as AIService, 3500)
 
-        setPrompt('systemPrompt', content)
+        console.log('execute pastBackground truncatedContent=', truncatedContent)
+
+        setPrompt('systemPrompt', truncatedContent)
         // clear actionLog
         homeStore.setState((state) => ({
           actionLog: [],
         }))
         endProcess = true
-        processActionRequest(content)
+        processActionRequest(truncatedContent)
         return { result: 'success' }
       }, language)
 
