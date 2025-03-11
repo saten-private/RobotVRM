@@ -1,4 +1,6 @@
-import { encoding_for_model } from 'tiktoken'
+// WASM 初期化用
+import { Tiktoken } from 'tiktoken/lite/init'
+import cl100k_base from "tiktoken/encoders/cl100k_base.json"
 
 /**
  * テキストが指定されたトークン数を超える場合に切り詰めます
@@ -13,8 +15,11 @@ export function truncateToMaxTokens(
   maxTokens: number
 ): string {
   try {
-    // モデルに応じたエンコーディングを取得
-    const encoding = encoding_for_model('gpt-4o')
+    const encoding = new Tiktoken(
+        cl100k_base.bpe_ranks,
+        cl100k_base.special_tokens,
+        cl100k_base.pat_str
+      );
     // テキストをトークンに変換
     const tokens = encoding.encode(text)
     // Claude-3の場合は20%余分に切り詰める
