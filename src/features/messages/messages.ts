@@ -2,13 +2,6 @@ import { VRMExpression, VRMExpressionPresetName } from '@pixiv/three-vrm'
 import { KoeiroParam } from '../constants/koeiroParam'
 
 // ChatGPT API
-export type Action = {
-  role: string // "assistant" | "system" | "user";
-  content:
-    | string
-    | ({ type: 'text'; text: string } | { type: 'image'; image: string })[] // マルチモーダル拡張
-}
-
 const talkStyles = [
   'talk',
   'happy',
