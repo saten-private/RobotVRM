@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Action } from '../messages/messages'
+import { Action } from '@/features/tool/action'
 
 export async function getLocalLLMChatResponseStream(
   messages: Action[],

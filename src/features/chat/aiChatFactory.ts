@@ -1,4 +1,4 @@
-import { Action } from '@/features/messages/messages'
+import { Action } from '@/features/tool/action'
 import { AIService } from '@/features/constants/settings'
 import { getLocalLLMChatResponseStream } from './localLLMChat'
 import { getDifyChatResponseStream } from './difyChatClient'

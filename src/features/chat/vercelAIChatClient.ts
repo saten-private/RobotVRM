@@ -1,4 +1,4 @@
-import { Action } from '../messages/messages'
+import { Action } from '@/features/tool/action'
 import settingsStore from '@/features/stores/settings'
 import i18next from 'i18next'
 import { getVercelAIChatResponseImplemention } from './vercelAIChatImplementation'

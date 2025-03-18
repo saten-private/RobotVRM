@@ -86,47 +86,52 @@ ${content}
         const { emotion } = args
         console.log('execute expressing_emotion emotion=', emotion)
 
-        let isEmotioned = false
+        try {
+          let isEmotioned = false
 
-        const hs = homeStore.getState()
-        switch (emotion) {
-          case toolPrompt(i18n.language as Language).Emotion.Normal:
-            hs.viewer.model?.expression('neutral')
-            isEmotioned = true
-            break
-          case toolPrompt(i18n.language as Language).Emotion.Joy:
-            hs.viewer.model?.expression('happy')
-            isEmotioned = true
-            break
-          case toolPrompt(i18n.language as Language).Emotion.Anger:
-            hs.viewer.model?.expression('angry')
-            isEmotioned = true
-            break
-          case toolPrompt(i18n.language as Language).Emotion.Sadness:
-            hs.viewer.model?.expression('sad')
-            isEmotioned = true
-            break
-          case toolPrompt(i18n.language as Language).Emotion.Calmness:
-            hs.viewer.model?.expression('relaxed')
-            isEmotioned = true
-            break
-        }
-
-        if (!isEmotioned) {
-          const result = `${toolPrompt(language).ExpressingEmotion}
-\`\`\`
-${emotion}
-\`\`\``
-          const action: Action = {
-            role: 'user',
-            content: [{ type: 'text', text: result }],
+          const hs = homeStore.getState()
+          switch (emotion) {
+            case toolPrompt(i18n.language as Language).Emotion.Normal:
+              hs.viewer.model?.expression('neutral')
+              isEmotioned = true
+              break
+            case toolPrompt(i18n.language as Language).Emotion.Joy:
+              hs.viewer.model?.expression('happy')
+              isEmotioned = true
+              break
+            case toolPrompt(i18n.language as Language).Emotion.Anger:
+              hs.viewer.model?.expression('angry')
+              isEmotioned = true
+              break
+            case toolPrompt(i18n.language as Language).Emotion.Sadness:
+              hs.viewer.model?.expression('sad')
+              isEmotioned = true
+              break
+            case toolPrompt(i18n.language as Language).Emotion.Calmness:
+              hs.viewer.model?.expression('relaxed')
+              isEmotioned = true
+              break
           }
-          homeStore.setState((state) => ({
-            actionLog: [...state.actionLog, action],
-          }))
-        }
 
-        return { result: 'success' }
+          if (!isEmotioned) {
+            const result = `${toolPrompt(language).ExpressingEmotion}
+  \`\`\`
+  ${emotion}
+  \`\`\``
+            const action: Action = {
+              role: 'user',
+              content: [{ type: 'text', text: result }],
+            }
+            homeStore.setState((state) => ({
+              actionLog: [...state.actionLog, action],
+            }))
+          }
+
+          return { result: 'success' }
+        } catch (error) {
+          console.error('Error expressing emotion', error)
+          return { result: 'error', error: error }
+        }
       }, language)
 
       const movementTool = createMovementTool(async (args) => {

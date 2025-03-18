@@ -23,7 +23,7 @@ export const Webcam = () => {
       await CameraPreviewService.start(cameraPreviewOptions)
       console.log('initializeCamera cameraPreviewService.start done')
       const complete = captureStart({
-        captureIntervalSeconds: 5,
+        captureIntervalSeconds: 0.5,
         maxCaptureSeconds: 60,
       })
       // eslint-disable-next-line react-hooks/exhaustive-deps

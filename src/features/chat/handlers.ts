@@ -1,8 +1,8 @@
 import { getAIChatResponseStream } from '@/features/chat/aiChatFactory'
 import { AIService } from '@/features/constants/settings'
+import { Action } from '@/features/tool/action'
 import {
   textsToScreenplay,
-  Action,
   textsToTalkNoEmotions,
 } from '@/features/messages/messages'
 import {
