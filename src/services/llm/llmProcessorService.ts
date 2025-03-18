@@ -23,6 +23,7 @@ import i18n from '@/lib/i18n'
 import { truncateToMaxTokens } from '@/utils/maxToken'
 
 export const startLlmProcessor = (): (() => void) => {
+  let isProcessing = false
   let hasSpokeInCurrentRequest = false
   let systemPrompt = ''
 
@@ -341,16 +342,17 @@ ${systemPrompt}`
 
   // Define function to initialize and start processing
   const initialize = async () => {
-    const unsubscribe = appEventEmitter.on('llmRequest', async () => {
-      systemPrompt = await getPrompt('systemPrompt')
-      processActionRequest(systemPrompt)
-    })
-    return unsubscribe
+    if (isProcessing) {
+      return
+    }
+    isProcessing = true
+    systemPrompt = await getPrompt('systemPrompt')
+    processActionRequest(systemPrompt)
   }
 
-  // Start initialization
-  initialize()
+  // イベントリスナーを登録し、クリーンアップ関数を取得
+  const unsubscribe = appEventEmitter.on('llmRequest', initialize)
 
-  // Return cleanup function
-  return () => {} // Empty function to satisfy the return type
+  // クリーンアップ関数を返す
+  return unsubscribe
 }
