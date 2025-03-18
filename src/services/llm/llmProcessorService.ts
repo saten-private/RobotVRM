@@ -112,6 +112,9 @@ ${content}
               hs.viewer.model?.expression('relaxed')
               isEmotioned = true
               break
+            default:
+              console.log('Invalid emotion:', emotion)
+              break
           }
 
           if (!isEmotioned) {
@@ -158,6 +161,9 @@ ${content}
             case toolPrompt(i18n.language as Language).Direction.Back:
               await sendDataBle('B')
               isMoved = true
+              break
+            default:
+              console.log('Invalid direction:', direction)
               break
           }
 
