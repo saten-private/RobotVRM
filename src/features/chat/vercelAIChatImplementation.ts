@@ -1,5 +1,12 @@
 import { Action } from '@/features/tool/action'
-import { streamText, generateText, CoreMessage, CoreTool, NoSuchToolError, InvalidToolArgumentsError } from 'ai'
+import {
+  streamText,
+  generateText,
+  CoreMessage,
+  CoreTool,
+  NoSuchToolError,
+  InvalidToolArgumentsError,
+} from 'ai'
 
 export async function getVercelAIChatResponseImplemention(
   messages: Action[],

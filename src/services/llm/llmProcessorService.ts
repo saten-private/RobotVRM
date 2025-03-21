@@ -228,6 +228,7 @@ ${direction}
       }
       if (stream == null) {
         console.log('stream is null')
+        processActionRequest(systemPrompt)
         return
       }
       const reader = stream.getReader()

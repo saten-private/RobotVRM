@@ -1,6 +1,12 @@
 import { NextRequest } from 'next/server'
 import { getVercelAIChatResponseImplemention } from '@/features/chat/vercelAIChatImplementation'
-import { CoreTool, StreamTextResult, GenerateTextResult } from 'ai'
+import {
+  CoreTool,
+  StreamTextResult,
+  GenerateTextResult,
+  NoSuchToolError,
+  InvalidToolArgumentsError,
+} from 'ai'
 import {
   Language,
   ToolName,
@@ -251,18 +257,25 @@ export default async function handler(req: NextRequest) {
       }
     }
   } catch (error: any) {
-    console.error('Error in AI API call:', error)
-    console.error('errorCode=', error.cause.errorCode)
-
-    return new Response(
-      JSON.stringify({
-        error: error.message,
-        errorCode: error.cause.errorCode,
-      }),
-      {
-        status: error.cause.status,
-        headers: { 'Content-Type': 'application/json' },
-      }
-    )
+    if (NoSuchToolError.isInstance(error)) {
+      // handle the no such tool error
+      console.log('NoSuchToolError=', error)
+    } else if (InvalidToolArgumentsError.isInstance(error)) {
+      // handle the invalid tool arguments error
+      console.log('InvalidToolArgumentsError=', error)
+    } else {
+      console.error('Error in AI API call:', error)
+      console.error('errorCode=', error.cause.errorCode)
+      return new Response(
+        JSON.stringify({
+          error: error.message,
+          errorCode: error.cause.errorCode,
+        }),
+        {
+          status: error.cause.status,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      )
+    }
   }
 }

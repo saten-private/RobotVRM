@@ -2,7 +2,12 @@ import { Action } from '@/features/tool/action'
 import settingsStore from '@/features/stores/settings'
 import i18next from 'i18next'
 import { getVercelAIChatResponseImplemention } from './vercelAIChatImplementation'
-import { CoreTool, StreamTextResult } from 'ai'
+import {
+  CoreTool,
+  StreamTextResult,
+  NoSuchToolError,
+  InvalidToolArgumentsError,
+} from 'ai'
 import { createOpenAI } from '@ai-sdk/openai'
 import { createOpenRouter } from '@openrouter/ai-sdk-provider'
 import { createAnthropic } from '@ai-sdk/anthropic'
@@ -95,8 +100,16 @@ export async function getVercelAIChatResponse(
     )
     return { text: text }
   } catch (error: any) {
-    console.error(`Error fetching ${aiService} API response:`, error)
-    return { text: handleApiError(error.cause.errorCode) }
+    if (NoSuchToolError.isInstance(error)) {
+      // handle the no such tool error
+      console.log('NoSuchToolError=', error)
+    } else if (InvalidToolArgumentsError.isInstance(error)) {
+      // handle the invalid tool arguments error
+      console.log('InvalidToolArgumentsError=', error)
+    } else {
+      console.error(`Error fetching ${aiService} API response:`, error)
+      return { text: handleApiError(error.cause.errorCode) }
+    }
   }
 }
 
@@ -179,9 +192,17 @@ export async function getVercelAIChatResponseStream(
           controller.enqueue(value)
         }
       } catch (error: any) {
-        console.error('getVercelAIChatResponseStream error', error)
-        const errorMessage = handleApiError(error.cause.errorCode)
-        controller.enqueue(errorMessage)
+        if (NoSuchToolError.isInstance(error)) {
+          // handle the no such tool error
+          console.log('NoSuchToolError=', error)
+        } else if (InvalidToolArgumentsError.isInstance(error)) {
+          // handle the invalid tool arguments error
+          console.log('InvalidToolArgumentsError=', error)
+        } else {
+          console.error('getVercelAIChatResponseStream error', error)
+          const errorMessage = handleApiError(error.cause.errorCode)
+          controller.enqueue(errorMessage)
+        }
       } finally {
         controller.close()
       }
