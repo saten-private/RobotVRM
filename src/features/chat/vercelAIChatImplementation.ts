@@ -1,5 +1,5 @@
 import { Action } from '@/features/tool/action'
-import { streamText, generateText, CoreMessage, CoreTool } from 'ai'
+import { streamText, generateText, CoreMessage, CoreTool, NoSuchToolError, InvalidToolArgumentsError } from 'ai'
 
 export async function getVercelAIChatResponseImplemention(
   messages: Action[],
@@ -42,9 +42,17 @@ export async function getVercelAIChatResponseImplemention(
       return result
     } catch (error: any) {
       console.error('Error in streamText:', error)
-      throw new Error(error.message, {
-        cause: { errorCode: 'AIAPIError', status: 500 },
-      })
+      if (NoSuchToolError.isInstance(error)) {
+        // handle the no such tool error
+        console.log('NoSuchToolError=', error)
+      } else if (InvalidToolArgumentsError.isInstance(error)) {
+        // handle the invalid tool arguments error
+        console.log('InvalidToolArgumentsError=', error)
+      } else {
+        throw new Error(error.message, {
+          cause: { errorCode: 'AIAPIError', status: 500 },
+        })
+      }
     }
   } else {
     try {
@@ -69,7 +77,13 @@ export async function getVercelAIChatResponseImplemention(
 
       return result
     } catch (error: any) {
-      console.error('Error in generateText:', error)
+      console.error('Error in streamText:', error)
+      if (NoSuchToolError.isInstance(error)) {
+        // handle the no such tool error
+        console.log('NoSuchToolError=', error)
+      } else if (InvalidToolArgumentsError.isInstance(error)) {
+        // handle the invalid tool arguments error
+        console.log('InvalidToolArgumentsError=', error)
       throw new Error(error.message, {
         cause: { errorCode: 'AIAPIError', status: 500 },
       })
