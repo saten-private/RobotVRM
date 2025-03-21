@@ -84,9 +84,11 @@ export async function getVercelAIChatResponseImplemention(
       } else if (InvalidToolArgumentsError.isInstance(error)) {
         // handle the invalid tool arguments error
         console.log('InvalidToolArgumentsError=', error)
-      throw new Error(error.message, {
-        cause: { errorCode: 'AIAPIError', status: 500 },
-      })
+      } else {
+        throw new Error(error.message, {
+          cause: { errorCode: 'AIAPIError', status: 500 },
+        })
+      }
     }
   }
 }
