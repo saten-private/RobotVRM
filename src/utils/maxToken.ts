@@ -1,6 +1,6 @@
 // WASM 初期化用
-import { Tiktoken } from 'tiktoken/lite/init'
-import cl100k_base from 'tiktoken/encoders/cl100k_base.json'
+import { Tiktoken } from 'js-tiktoken/lite'
+import o200k_base from 'js-tiktoken/ranks/o200k_base'
 
 /**
  * テキストが指定されたトークン数を超える場合に切り詰めます
@@ -9,17 +9,13 @@ import cl100k_base from 'tiktoken/encoders/cl100k_base.json'
  * @param maxTokens 最大トークン数
  * @returns 必要に応じて切り詰められたテキスト
  */
-export function truncateToMaxTokens(
+export async function truncateToMaxTokens(
   text: string,
   model: string,
   maxTokens: number
-): string {
+): Promise<string> {
   try {
-    const encoding = new Tiktoken(
-      cl100k_base.bpe_ranks,
-      cl100k_base.special_tokens,
-      cl100k_base.pat_str
-    )
+    const encoding = new Tiktoken(o200k_base)
     // テキストをトークンに変換
     const tokens = encoding.encode(text)
     // Claude-3の場合は20%余分に切り詰める
@@ -30,8 +26,7 @@ export function truncateToMaxTokens(
     const truncatedTokens = tokens.slice(0, adjustedMaxTokens)
     // トークンをテキストに戻す
     const decoder = new TextDecoder()
-    const result = decoder.decode(encoding.decode(truncatedTokens))
-    encoding.free() // メモリリーク防止
+    const result = encoding.decode(truncatedTokens)
     return result
   } catch (error) {
     console.error('Error truncating text:', error)

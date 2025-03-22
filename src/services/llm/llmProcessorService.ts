@@ -254,99 +254,103 @@ ${direction}
   }
 
   const processMemoryRequest = async (systemPrompt: string) => {
-    try {
-      console.log('processMemoryRequest')
+    console.log('processMemoryRequest')
 
-      let endProcess = false
+    let endProcess = false
 
-      const ss = settingsStore.getState()
-      const pastBackgroundPrompt = `# Past Background
+    const ss = settingsStore.getState()
+    const pastBackgroundPrompt = `# Past Background
 ${systemPrompt}`
 
-      const language = i18n.language as Language
+    const language = i18n.language as Language
 
-      const hs = homeStore.getState()
-      const actionLog = hs.actionLog || []
+    const hs = homeStore.getState()
+    const actionLog = hs.actionLog || []
 
-      const pastBackgroundTool = createPastBackgroundTool((args) => {
-        const { content } = args
-        const truncatedContent = truncateToMaxTokens(
-          content,
-          ss.selectAIService as AIService,
-          3500
-        )
+    const pastBackgroundTool = createPastBackgroundTool(async (args) => {
+      const { content } = args
+      const truncatedContent = await truncateToMaxTokens(
+        content,
+        ss.selectAIService as AIService,
+        3500
+      )
 
-        console.log(
-          'execute pastBackground truncatedContent=',
-          truncatedContent
-        )
+      console.log('execute pastBackground truncatedContent=', truncatedContent)
 
-        setPrompt('systemPrompt', truncatedContent)
-        // clear actionLog
-        homeStore.setState((state) => ({
-          actionLog: [],
-        }))
-        endProcess = true
-        processActionRequest(truncatedContent)
-        return { result: 'success' }
-      }, language)
+      setPrompt('systemPrompt', truncatedContent)
+      // clear actionLog
+      homeStore.setState((state) => ({
+        actionLog: [],
+      }))
+      endProcess = true
+      processActionRequest(truncatedContent)
+      return { result: 'success' }
+    }, language)
 
-      const tools = {
-        past_background: pastBackgroundTool,
-      }
+    const tools = {
+      past_background: pastBackgroundTool,
+    }
 
-      // メッセージの作成
-      const messages: Action[] = [
-        {
-          role: 'user',
-          content: [
-            {
-              type: 'text',
-              text: pastBackgroundPrompt,
-            },
-          ],
-        },
-        ...actionLog,
-        {
-          role: 'user',
-          content: [
-            {
-              type: 'text',
-              text: `You are a human being. You took the above action from the above past background state. The attached image is the viewpoint at the time of the action. Please be sure to output this human's past background updated with a new background from the above newly viewed perspective and action taken. The updated background should be represented by a maximum of 3500 tokens. Even if it is difficult to output, please output a new background that is absolutely updated in some way.`,
-            },
-          ],
-        },
-      ]
+    // メッセージの作成
+    const messages: Action[] = [
+      {
+        role: 'user',
+        content: [
+          {
+            type: 'text',
+            text: pastBackgroundPrompt,
+          },
+        ],
+      },
+      ...actionLog,
+      {
+        role: 'user',
+        content: [
+          {
+            type: 'text',
+            text: `You are a human being. You took the above action from the above past background state. The attached image is the viewpoint at the time of the action. Please be sure to output this human's past background updated with a new background from the above newly viewed perspective and action taken. The updated background should be represented by a maximum of 3500 tokens. Even if it is difficult to output, please output a new background that is absolutely updated in some way.`,
+          },
+        ],
+      },
+    ]
 
-      let count = 0
-      while (!endProcess) {
-        const response = await getAIChatResponse(
+    let count = 0
+    while (!endProcess) {
+      let stream
+      try {
+        stream = await getAIChatResponseStream(
           ss.selectAIService as AIService,
           messages,
           tools,
           1,
           'required'
         )
-        // FIXME：あとで削除
-        endProcess = true
-        // FIXME：あとで削除
-        console.log('processMemoryRequest response.text=', response.text)
-        if (!endProcess) {
-          count++
-          console.log('processMemoryRequest count=', count)
-          if (count > 10) {
-            throw new Error(
-              'processMemoryRequest max error count=' +
-                count +
-                ' response.text=' +
-                response.text
-            )
+      } catch (e) {
+        console.error(e)
+        stream = null
+      }
+      if (stream != null) {
+        const reader = stream.getReader()
+        try {
+          while (true) {
+            const { done, value } = await reader.read()
+            console.log('llmProcessorService response=', value)
+            if (done) break
           }
+        } catch (e) {
+          console.error(e)
+        } finally {
+          reader.releaseLock()
+          stream = null
         }
       }
-    } catch (e) {
-      console.error('processMemoryRequest error=', e)
-      processMemoryRequest(systemPrompt)
+      if (!endProcess) {
+        count++
+        console.log('processMemoryRequest count=', count)
+        if (count > 10) {
+          throw new Error('processMemoryRequest max error count=' + count)
+        }
+      }
     }
   }
 
