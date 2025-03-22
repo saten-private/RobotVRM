@@ -302,20 +302,20 @@ ${systemPrompt}`
           content: [
             {
               type: 'text',
-              text: `You are a human being. From the following past background conditions, you have taken the following actions. The attached image is the viewpoint at the time of the action. Please update this human's past background to the new background from the following newly viewed perspective and actions taken. The updated background should be represented by a maximum of 3500 tokens.`,
-            },
-          ],
-        },
-        {
-          role: 'user',
-          content: [
-            {
-              type: 'text',
               text: pastBackgroundPrompt,
             },
           ],
         },
         ...actionLog,
+        {
+          role: 'user',
+          content: [
+            {
+              type: 'text',
+              text: `You are a human being. You took the above action from the above past background state. The attached image is the viewpoint at the time of the action. Please be sure to output this human's past background updated with a new background from the above newly viewed perspective and action taken. The updated background should be represented by a maximum of 3500 tokens. Even if it is difficult to output, please output a new background that is absolutely updated in some way.`,
+            },
+          ],
+        },
       ]
 
       let count = 0
@@ -327,6 +327,9 @@ ${systemPrompt}`
           1,
           'required'
         )
+        // FIXME：あとで削除
+        endProcess = true
+        // FIXME：あとで削除
         console.log('processMemoryRequest response.text=', response.text)
         if (!endProcess) {
           count++

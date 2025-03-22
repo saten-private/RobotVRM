@@ -178,9 +178,9 @@ export const createPastBackgroundTool = (
   language: Language
 ) =>
   tool({
-    description: 'Output Past Background',
+    description: 'Output Updated Background',
     parameters: z.object({
-      content: z.string().describe('Past Background'),
+      content: z.string().describe('Updated Background'),
     }),
     execute: async (args) => processSpeakContent(args),
   })

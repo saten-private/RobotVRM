@@ -174,8 +174,6 @@ export async function POST(req: Request) {
       }
     }
   } catch (error: any) {
-    console.error('Error in AI API call:', error)
-    console.error('errorCode=', error.cause.errorCode)
     if (NoSuchToolError.isInstance(error)) {
       // handle the no such tool error
       console.log('NoSuchToolError=', error)
@@ -183,6 +181,8 @@ export async function POST(req: Request) {
       // handle the invalid tool arguments error
       console.log('InvalidToolArgumentsError=', error)
     } else {
+      console.error('Error in AI API call:', error)
+      console.error('errorCode=', error.cause.errorCode)
       return new Response(
         JSON.stringify({
           error: error.message,

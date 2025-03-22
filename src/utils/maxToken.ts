@@ -1,6 +1,6 @@
 // WASM 初期化用
 import { Tiktoken } from 'tiktoken/lite/init'
-import cl100k_base from "tiktoken/encoders/cl100k_base.json"
+import cl100k_base from 'tiktoken/encoders/cl100k_base.json'
 
 /**
  * テキストが指定されたトークン数を超える場合に切り詰めます
@@ -16,10 +16,10 @@ export function truncateToMaxTokens(
 ): string {
   try {
     const encoding = new Tiktoken(
-        cl100k_base.bpe_ranks,
-        cl100k_base.special_tokens,
-        cl100k_base.pat_str
-      );
+      cl100k_base.bpe_ranks,
+      cl100k_base.special_tokens,
+      cl100k_base.pat_str
+    )
     // テキストをトークンに変換
     const tokens = encoding.encode(text)
     // Claude-3の場合は20%余分に切り詰める
