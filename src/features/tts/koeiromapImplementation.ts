@@ -51,19 +51,16 @@ export async function koeiromapFreeV1(
 
   console.log('body', body)
 
-  const koeiroRes = await fetch(
-    'https://api.rinna.co.jp/koeiromap/v1.0/infer',
-    {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json',
-        'Cache-Control': 'no-cache',
-        'Ocp-Apim-Subscription-Key': apiKey,
-      },
-      signal, // Add this line
-    }
-  )
+  const koeiroRes = await fetch('https://api.rinna.co.jp/koemotion/infer', {
+    method: 'POST',
+    body: JSON.stringify(body),
+    headers: {
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-cache',
+      'Ocp-Apim-Subscription-Key': apiKey,
+    },
+    signal, // Add this line
+  })
 
   const data = (await koeiroRes.json()) as any
 
