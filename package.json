@@ -54,6 +54,7 @@
     "@openrouter/ai-sdk-provider": "^0.4.5",
     "@pixiv/three-vrm": "^3.3.6",
     "@tailwindcss/line-clamp": "^0.4.4",
+    "@tailwindcss/postcss": "^4.0.17",
     "ai": "^4.2.8",
     "axios": "^1.8.4",
     "canvas": "^3.1.0",
