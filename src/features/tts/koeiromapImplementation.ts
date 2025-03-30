@@ -52,7 +52,7 @@ export async function koeiromapFreeV1(
   console.log('body', body)
 
   const koeiroRes = await fetch(
-    'https://api.rinna.co.jp/koeiromap/v1.0/infer',
+    'https://api.rinna.co.jp/koemotion/infer',
     {
       method: 'POST',
       body: JSON.stringify(body),
