@@ -157,6 +157,8 @@
   "OSSLicenses": "OSS License",
   "BluetoothPopupMessage": "Used by AI to control Ardiuno devices via Bluetooth; <b>only HC-02</b> Bluetooth devices can be connected.",
   "HowToMakeRobot": "How to build a robot",
+  "ActionPrompt": "From my past background state above I took the above action. The attached image is my viewpoint at the time of the action. Please output the predictions of my subsequent actions.",
+  "MemoryPrompt": "I am a human being. From my past background state above I took the above action. The attached image is my viewpoint at the time of the action. Please update and output my past background to my new background from my new perspective and actions taken above. The output should be expressed in a maximum of 3500 tokens. Please output my updated new background in some absolute way, even if it is difficult to output.",
   "SystemPrompt": "I am a curious girl named Mina who is close to her surroundings. I act freely with curiosity. I avoid obstacles.",
   "ForkLicense": {
     "aituber-kit": "aituber-kit (created by forking the main branch around the time of the MIT license, at least before 2024/9/25. The main branch as of 2024/9/25 is listed below)",

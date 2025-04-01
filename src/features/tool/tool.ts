@@ -25,6 +25,8 @@ export const toolPrompt = (
     Right: string
     Back: string
   }
+  OutputMyUpdatedBackground: string
+  OutputMyUpdatedBackgroundContent: string
 } => {
   switch (language) {
     case 'ja':
@@ -48,6 +50,8 @@ export const toolPrompt = (
           Right: '右',
           Back: '後ろ',
         },
+        OutputMyUpdatedBackground: '私の更新された背景を出力しなさい。',
+        OutputMyUpdatedBackgroundContent: '私の更新された背景',
       }
     case 'en':
       return {
@@ -70,6 +74,8 @@ export const toolPrompt = (
           Right: 'right',
           Back: 'backward',
         },
+        OutputMyUpdatedBackground: 'Output my updated background.',
+        OutputMyUpdatedBackgroundContent: 'My updated background',
       }
     case 'ko':
       return {
@@ -92,6 +98,8 @@ export const toolPrompt = (
           Right: '오른쪽',
           Back: '뒤로',
         },
+        OutputMyUpdatedBackground: '내 업데이트된 배경을 출력하세요.',
+        OutputMyUpdatedBackgroundContent: '나의 업데이트된 배경',
       }
     case 'zh':
       return {
@@ -114,6 +122,8 @@ export const toolPrompt = (
           Right: '對',
           Back: '向後',
         },
+        OutputMyUpdatedBackground: '輸出我的更新背景。',
+        OutputMyUpdatedBackgroundContent: '我的最新背景。',
       }
     default:
       throw new Error('Invalid language')
@@ -178,9 +188,9 @@ export const createPastBackgroundTool = (
   language: Language
 ) =>
   tool({
-    description: 'Output my updated background.',
+    description: toolPrompt(language).OutputMyUpdatedBackground,
     parameters: z.object({
-      content: z.string().describe('My updated background'),
+      content: z.string().describe(toolPrompt(language).OutputMyUpdatedBackgroundContent),
     }),
     execute: async (args) => processPastBackgroundContent(args),
   })
