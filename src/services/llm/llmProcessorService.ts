@@ -35,7 +35,7 @@ export const startLlmProcessor = (): (() => void) => {
       const hs = homeStore.getState()
       const actionLog = hs.actionLog || []
 
-      const pastBackgroundPrompt = `# Past Background
+      const pastBackgroundPrompt = `# My Past Background
 ${systemPrompt}`
 
       // メッセージの作成
@@ -51,7 +51,16 @@ ${systemPrompt}`
         },
         // Add remaining actions from homeStore actionLog
         ...actionLog,
-      ]
+        {
+          role: 'user',
+          content: [
+            {
+              type: 'text',
+              text: `From my past background state above I took the above action. The attached image is my viewpoint at the time of the action. Please output the predictions of my subsequent actions.`,
+            },
+          ],
+        },
+        ]
 
       console.log('message count=', messages.length)
 
@@ -308,7 +317,7 @@ ${systemPrompt}`
         content: [
           {
             type: 'text',
-            text: `You are a human being. You took the above action from the above past background state. The attached image is the viewpoint at the time of the action. Please be sure to output this human's past background updated with a new background from the above newly viewed perspective and action taken. The updated background should be represented by a maximum of 3500 tokens. Even if it is difficult to output, please output a new background that is absolutely updated in some way.`,
+            text: `I am a human being. From my past background state above I took the above action. The attached image is my viewpoint at the time of the action. Please update and output my past background to my new background from my new perspective and actions taken above. The output should be expressed in a maximum of 3500 tokens. Please output my updated new background in some absolute way, even if it is difficult to output.`,
           },
         ],
       },

@@ -158,7 +158,7 @@
   "OSSLicenses": "OSSライセンス",
   "BluetoothPopupMessage": "AIがBluetoothでArdiunoデバイスを操作するために利用します。<b>HC-02</b>のBluetoothデバイスのみ接続可能です。",
   "HowToMakeRobot": "ロボットの作り方",
-  "SystemPrompt": "あなたは親しい友達で好奇心旺盛なミナという女の子です。好奇心を持って自由に行動してください。障害物は避けてください",
+  "SystemPrompt": "私は周りと親しい好奇心旺盛なミナという女の子です。好奇心を持って自由に行動します。障害物は避けます。",
   "ForkLicense": {
     "aituber-kit": "aituber-kit(MITライセンスの頃、少なくても2024/9/25以前のmainブランチをフォークして作成。以下には2024/9/25時点のmainブランチを記載しておく)",
     "aituber-kitPath": "aituber-kitをフォーク",
