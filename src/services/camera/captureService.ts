@@ -31,9 +31,7 @@ export const captureStart = async ({
         content: [{ type: 'image', image: data }],
       }
 
-      homeStore.setState((state) => ({
-        actionLog: [...state.actionLog, captureAction],
-      }))
+      homeStore.getState().addToActionLog(captureAction)
     }
 
     const captureAndProcessLLM = async () => {

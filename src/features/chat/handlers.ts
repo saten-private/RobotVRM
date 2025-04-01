@@ -284,50 +284,15 @@ export const processAIResponse = async (
     reader.releaseLock()
   }
 
-  // [RobotVRM]Messageのcontentの方を変えたのでここの処理はひとまずコメントアウトする
-  // 直前のroleとじゃらば、contentを結合し、空のcontentを除外する
-  // let lastImageUrl = ''
-  // aiTextLog = aiTextLog
-  //   .reduce((acc: Message[], item: Message) => {
-  //     if (
-  //       typeof item.content != 'string' &&
-  //       item.content[0] &&
-  //       item.content[1]
-  //     ) {
-  //       lastImageUrl = item.content[1].image
-  //     }
-
-  //     const lastItem = acc[acc.length - 1]
-  //     if (lastItem && lastItem.role === item.role) {
-  //       if (typeof item.content != 'string') {
-  //         lastItem.content += ' ' + item.content[0].text
-  //       } else {
-  //         lastItem.content += ' ' + item.content
-  //       }
-  //     } else {
-  //       const text =
-  //         typeof item.content != 'string' ? item.content[0].text : item.content
-  //       if (lastImageUrl != '') {
-  //         acc.push({
-  //           ...item,
-  //           content: [
-  //             { type: 'text', text: text.trim() },
-  //             { type: 'image', image: lastImageUrl },
-  //           ],
-  //         })
-  //         lastImageUrl = ''
-  //       } else {
-  //         acc.push({ ...item, content: text.trim() })
-  //       }
-  //     }
-  //     return acc
-  //   }, [])
-  //   .filter((item) => item.content !== '')
   // ひとまず代わりの処理
   aiTextLog = aiTextLog.filter((item) => item.content !== '')
 
+  const newActionLog = [...currentChatLog]
+  aiTextLog.forEach(action => {
+    hs.addToActionLog(action)
+  })
+  
   homeStore.setState({
-    actionLog: [...currentChatLog, ...aiTextLog],
     chatProcessing: false,
   })
 }
@@ -472,13 +437,7 @@ export const handleSendChatFn =
       // WebSocketで送信する処理
       if (hs.ws?.readyState === WebSocket.OPEN) {
         // ユーザーの発言を追加して表示
-        const updateLog: Action[] = [
-          ...hs.actionLog,
-          { role: 'user', content: newMessage },
-        ]
-        homeStore.setState({
-          actionLog: updateLog,
-        })
+        hs.addToActionLog({ role: 'user', content: newMessage })
 
         // WebSocket送信
         hs.ws.send(JSON.stringify({ content: newMessage, type: 'chat' }))
@@ -531,22 +490,21 @@ export const handleSendChatFn =
 
       homeStore.setState({ chatProcessing: true })
       // ユーザーの発言を追加して表示
-      const messageLog: Action[] = [
-        ...hs.actionLog,
-        {
-          role: 'user',
-          content: hs.modalImage
-            ? [
-                { type: 'text', text: newMessage },
-                { type: 'image', image: hs.modalImage },
-              ]
-            : newMessage,
-        },
-      ]
+      const newUserAction: Action = {
+        role: 'user',
+        content: hs.modalImage
+          ? [
+              { type: 'text', text: newMessage },
+              { type: 'image', image: hs.modalImage },
+            ]
+          : newMessage,
+      }
+      
       if (hs.modalImage) {
         homeStore.setState({ modalImage: '' })
       }
-      homeStore.setState({ actionLog: messageLog })
+      
+      hs.addToActionLog(newUserAction)
 
       // TODO: AIに送信するメッセージの加工、処理がひどいので要修正
       // 画像は直近のものしか送らない
@@ -563,7 +521,7 @@ export const handleSendChatFn =
       //         : message.content,
       // }))
       // 代わりの処理
-      const processedMessageLog = messageLog
+      const processedMessageLog = [newUserAction]
 
       const messages: Action[] = [
         {
@@ -574,7 +532,7 @@ export const handleSendChatFn =
       ]
 
       try {
-        await processAIResponse(messageLog, messages)
+        await processAIResponse([newUserAction], messages)
       } catch (e) {
         console.error(e)
       }
@@ -627,11 +585,13 @@ export const handleReceiveTextFromWsFn =
           const aiTalks = textsToScreenplay([aiText], ss.koeiroParam)
 
           // 文ごとに音声を生成 & 再生、返答を表示
+          const hs = homeStore.getState();
+          const updateLogWithLimit = updateLog.slice(-hs.maxActionLogSize);
           speakCharacter(
             aiTalks[0],
             () => {
               homeStore.setState({
-                actionLog: updateLog,
+                actionLog: updateLogWithLimit,
                 assistantMessage: (() => {
                   const content = updateLog[updateLog.length - 1].content
                   return typeof content === 'string' ? content : ''
@@ -646,8 +606,10 @@ export const handleReceiveTextFromWsFn =
           console.error('Error in speakCharacter:', e)
         }
       } else {
+        const hs = homeStore.getState();
+        const updateLogWithLimit = updateLog.slice(-hs.maxActionLogSize);
         homeStore.setState({
-          actionLog: updateLog,
+          actionLog: updateLogWithLimit,
         })
       }
 

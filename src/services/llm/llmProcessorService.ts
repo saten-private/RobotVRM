@@ -83,9 +83,7 @@ ${content}
             content: [{ type: 'text', text: result }],
           }
 
-          homeStore.setState((state) => ({
-            actionLog: [...state.actionLog, action],
-          }))
+          homeStore.getState().addToActionLog(action)
           processSpeakContent(content)
           hasSpokeInCurrentRequest = true
           return { result: 'success' }
@@ -135,9 +133,7 @@ ${content}
               role: 'user',
               content: [{ type: 'text', text: result }],
             }
-            homeStore.setState((state) => ({
-              actionLog: [...state.actionLog, action],
-            }))
+            homeStore.getState().addToActionLog(action)
           }
 
           return { result: 'success' }
@@ -185,9 +181,7 @@ ${direction}
               role: 'user',
               content: [{ type: 'text', text: result }],
             }
-            homeStore.setState((state) => ({
-              actionLog: [...state.actionLog, action],
-            }))
+            homeStore.getState().addToActionLog(action)
           }
 
           return { result: 'success' }

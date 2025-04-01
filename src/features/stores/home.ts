@@ -14,6 +14,8 @@ export interface TransientState {
   validateApiKey: boolean
   viewer: Viewer
   actionLog: Action[]
+  maxActionLogSize: number
+  addToActionLog: (action: Action) => void
   assistantMessage: string
   slideMessages: string[]
   chatProcessing: boolean
@@ -44,6 +46,16 @@ const homeStore = create<HomeState>()(
       validateApiKey: true,
       viewer: new Viewer(),
       actionLog: [],
+      maxActionLogSize: 60,
+      addToActionLog: (action: Action) => {
+        set((state) => {
+          const newActionLog = [...state.actionLog, action]
+          if (newActionLog.length > state.maxActionLogSize) {
+            return { actionLog: newActionLog.slice(-state.maxActionLogSize) }
+          }
+          return { actionLog: newActionLog }
+        })
+      },
       assistantMessage: '',
       slideMessages: [],
       chatProcessing: false,

@@ -80,5 +80,5 @@ const handleChangeChatLog = (targetIndex: number, text: string) => {
     return i === targetIndex ? { role: m.role, content: text } : m
   })
 
-  homeStore.setState({ actionLog: newChatLog })
+  homeStore.setState({ actionLog: newChatLog.slice(-hs.maxActionLogSize) })
 }
