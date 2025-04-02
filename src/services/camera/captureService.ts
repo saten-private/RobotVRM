@@ -5,7 +5,6 @@ import { appEventEmitter } from '@/utils/eventEmitter'
 
 interface CaptureOptions {
   captureIntervalSeconds: number
-  maxCaptureSeconds: number // Changed from maxCaptures to maxCaptureSeconds
 }
 
 const performCapture = async (addCapture: (data: string) => void) => {
