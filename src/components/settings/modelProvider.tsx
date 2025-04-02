@@ -54,7 +54,7 @@ const ModelProvider = () => {
   const defaultModels = {
     openai: 'gpt-4o',
     openrouter: 'openai/o1',
-    anthropic: 'claude-3-haiku-20240307',
+    anthropic: 'claude-3-7-sonnet-latest',
     google: 'gemini-1.5-pro-latest',
     googleVertexAI: 'gemini-1.5-pro-002',
     azure: '',
@@ -415,6 +415,12 @@ const ModelProvider = () => {
                   }
                   onChange={handleAnthropicModelChange}
                 >
+                  <option value="claude-3-7-sonnet-latest">
+                    claude-3-7-sonnet-latest
+                  </option>
+                  <option value="claude-3-7-sonnet-20250219">
+                    claude-3-7-sonnet-20250219
+                  </option>
                   <option value="claude-3-haiku-20240307">
                     claude-3-haiku-20240307
                   </option>
