@@ -41,7 +41,8 @@ export async function getVercelAIChatResponse(
   model: string,
   tools: Record<string, CoreTool> | undefined,
   maxSteps: number | undefined,
-  toolChoice: 'auto' | 'none' | 'required' | undefined
+  toolChoice: 'auto' | 'none' | 'required' | undefined,
+  temperature: number | undefined
 ) {
   try {
     let aiApiKey = apiKey
@@ -96,7 +97,8 @@ export async function getVercelAIChatResponse(
       false,
       tools,
       maxSteps,
-      toolChoice
+      toolChoice,
+      temperature,
     )
     return { text: text }
   } catch (error: any) {
@@ -120,7 +122,8 @@ export async function getVercelAIChatResponseStream(
   model: string,
   tools: Record<string, CoreTool> | undefined,
   maxSteps: number | undefined,
-  toolChoice: 'auto' | 'none' | 'required' | undefined
+  toolChoice: 'auto' | 'none' | 'required' | undefined,
+  temperature: number | undefined
 ): Promise<ReadableStream<string>> {
   return new ReadableStream({
     async start(controller) {
@@ -177,7 +180,8 @@ export async function getVercelAIChatResponseStream(
           true,
           tools,
           maxSteps,
-          toolChoice
+          toolChoice,
+          temperature,
         )
 
         if (!result) {

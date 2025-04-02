@@ -41,6 +41,7 @@ export async function POST(req: Request) {
     maxSteps,
     toolChoice,
     language,
+    temperature,
   } = await req.json()
 
   try {
@@ -124,7 +125,8 @@ export async function POST(req: Request) {
         true,
         newTools,
         maxSteps,
-        toolChoice
+        toolChoice,
+        temperature
       )
 
       // Ensure the promise is handled without blocking the response
@@ -155,7 +157,8 @@ export async function POST(req: Request) {
         stream,
         undefined,
         maxSteps,
-        toolChoice
+        toolChoice,
+        temperature,
       )
 
       if (stream) {

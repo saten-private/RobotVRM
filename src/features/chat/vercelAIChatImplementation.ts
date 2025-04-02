@@ -16,7 +16,8 @@ export async function getVercelAIChatResponseImplemention(
   stream: boolean,
   tools: Record<string, CoreTool> | undefined,
   maxSteps: number | undefined,
-  toolChoice: 'auto' | 'none' | 'required' | undefined
+  toolChoice: 'auto' | 'none' | 'required' | undefined,
+  temperature: number | undefined
 ) {
   const instance = aiServiceInstance()
   const modifiedMessages: Action[] = messages //modifyMessages(aiService, messages)
@@ -45,6 +46,7 @@ export async function getVercelAIChatResponseImplemention(
         headers: {
           'anthropic-dangerous-direct-browser-access': 'true', // Anthropicのブラウザからの直接アクセスを許可 https://simonwillison.net/2024/Aug/23/anthropic-dangerous-direct-browser-access/
         },
+        temperature: temperature,
       })
       return result
     } catch (error: any) {
@@ -80,6 +82,7 @@ export async function getVercelAIChatResponseImplemention(
         headers: {
           'anthropic-dangerous-direct-browser-access': 'true', // Anthropicのブラウザからの直接アクセスを許可 https://simonwillison.net/2024/Aug/23/anthropic-dangerous-direct-browser-access/
         },
+        temperature: temperature,
       })
 
       return result

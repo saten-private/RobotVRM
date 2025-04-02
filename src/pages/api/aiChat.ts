@@ -97,6 +97,7 @@ export default async function handler(req: NextRequest) {
     maxSteps,
     toolChoice,
     language,
+    temperature,
   } = await req.json()
 
   try {
@@ -207,7 +208,8 @@ export default async function handler(req: NextRequest) {
         true,
         newTools,
         maxSteps,
-        toolChoice
+        toolChoice,
+        temperature,
       )
 
       // Ensure the promise is handled without blocking the response
@@ -238,7 +240,8 @@ export default async function handler(req: NextRequest) {
         stream,
         undefined,
         maxSteps,
-        toolChoice
+        toolChoice,
+        temperature,
       )
 
       if (stream) {

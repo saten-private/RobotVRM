@@ -223,7 +223,7 @@ ${direction}
           messages,
           tools,
           5,
-          'required'
+          'required',
         )
       } catch (e) {
         console.error(e)
@@ -327,7 +327,8 @@ ${systemPrompt}`
           messages,
           tools,
           1,
-          'required'
+          'required',
+          1,
         )
       } catch (e) {
         console.error(e)

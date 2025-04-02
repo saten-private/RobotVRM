@@ -1,4 +1,4 @@
-import { Action } from '../messages/messages'
+import { Action } from '@/features/tool/action'
 import settingsStore from '@/features/stores/settings'
 import i18next from 'i18next'
 import { CoreTool } from 'ai'
@@ -20,7 +20,8 @@ export async function getVercelAIChatResponseServer(
   model: string,
   tools: Record<string, CoreTool<any, any>> | undefined,
   maxSteps: number | undefined,
-  toolChoice: 'auto' | 'none' | 'required' | undefined
+  toolChoice: 'auto' | 'none' | 'required' | undefined,
+  temperature: number | undefined
 ) {
   try {
     const response = await fetch(
@@ -40,6 +41,7 @@ export async function getVercelAIChatResponseServer(
           maxSteps,
           toolChoice,
           language: i18n.language,
+          temperature,
         }),
       }
     )
@@ -68,7 +70,8 @@ export async function getVercelAIChatResponseServerStream(
   model: string,
   tools: Record<ToolName, CoreTool<any, any>> | undefined,
   maxSteps: number | undefined,
-  toolChoice: 'auto' | 'none' | 'required' | undefined
+  toolChoice: 'auto' | 'none' | 'required' | undefined,
+  temperature: number | undefined
 ): Promise<ReadableStream<string>> {
   const response = await fetch(
     isMiddleware ? '/api/aiChat' : '/api/aiChatServer',
@@ -87,6 +90,7 @@ export async function getVercelAIChatResponseServerStream(
         maxSteps,
         toolChoice,
         language: i18n.language,
+        temperature,
       }),
     }
   )

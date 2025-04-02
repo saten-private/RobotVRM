@@ -16,7 +16,8 @@ export async function getAIChatResponseStream(
   messages: Action[],
   tools: Record<string, CoreTool> | undefined = undefined,
   maxSteps: number | undefined = undefined,
-  toolChoice: 'auto' | 'none' | 'required' | undefined = undefined
+  toolChoice: 'auto' | 'none' | 'required' | undefined = undefined,
+  temperature: number | undefined = undefined
 ): Promise<ReadableStream<string> | null> {
   const NEXT_PUBLIC_ROBOTVRM_USE_SERVER =
     process.env.NEXT_PUBLIC_ROBOTVRM_USE_SERVER === 'true'
@@ -43,7 +44,8 @@ export async function getAIChatResponseStream(
           ss.selectAIModel,
           tools,
           maxSteps,
-          toolChoice
+          toolChoice,
+          temperature,
         )
       } else {
         console.log('use client')
@@ -56,7 +58,8 @@ export async function getAIChatResponseStream(
           ss.selectAIModel,
           tools,
           maxSteps,
-          toolChoice
+          toolChoice,
+          temperature
         )
       }
     case 'openrouter':
@@ -72,7 +75,8 @@ export async function getAIChatResponseStream(
         ss.selectAIModel,
         tools,
         maxSteps,
-        toolChoice
+        toolChoice,
+        temperature
       )
     case 'googleVertexAI':
       console.log('use server')
@@ -84,7 +88,8 @@ export async function getAIChatResponseStream(
         ss.selectAIModel,
         tools,
         maxSteps,
-        toolChoice
+        toolChoice,
+        temperature
       )
     case 'localLlm':
       return getLocalLLMChatResponseStream(
@@ -118,7 +123,8 @@ export async function getAIChatResponse(
   messages: Action[],
   tools: Record<string, CoreTool> | undefined = undefined,
   maxSteps: number | undefined = undefined,
-  toolChoice: 'auto' | 'none' | 'required' | undefined = undefined
+  toolChoice: 'auto' | 'none' | 'required' | undefined = undefined,
+  temperature: number | undefined = undefined
 ): Promise<{ text: any }> {
   const NEXT_PUBLIC_ROBOTVRM_USE_SERVER =
     process.env.NEXT_PUBLIC_ROBOTVRM_USE_SERVER === 'true'
@@ -145,7 +151,8 @@ export async function getAIChatResponse(
           ss.selectAIModel,
           tools,
           maxSteps,
-          toolChoice
+          toolChoice,
+          temperature
         )
       } else {
         console.log('use client')
@@ -158,7 +165,8 @@ export async function getAIChatResponse(
           ss.selectAIModel,
           tools,
           maxSteps,
-          toolChoice
+          toolChoice,
+          temperature
         )
       }
     case 'openrouter':
@@ -174,7 +182,8 @@ export async function getAIChatResponse(
         ss.selectAIModel,
         tools,
         maxSteps,
-        toolChoice
+        toolChoice,
+        temperature
       )
     case 'googleVertexAI':
       return getVercelAIChatResponseServer(
@@ -185,7 +194,8 @@ export async function getAIChatResponse(
         ss.selectAIModel,
         tools,
         maxSteps,
-        toolChoice
+        toolChoice,
+        temperature
       )
     default:
       throw new Error(`Unsupported AI service: ${service}`)
