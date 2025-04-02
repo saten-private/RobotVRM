@@ -27,7 +27,7 @@ const SlideConvert: React.FC<SlideConvertProps> = ({ onFolderUpdate }) => {
         setModel('gpt-4o')
         break
       case 'openrouter':
-        setModel('openai/o1')
+        setModel('openai/o1-pro')
         break
       case 'anthropic':
         setModel('claude-3-5-sonnet-20240620')
@@ -147,6 +147,7 @@ const SlideConvert: React.FC<SlideConvertProps> = ({ onFolderUpdate }) => {
           )}
           {aiService === 'openrouter' && (
             <>
+              <option value="openai/o1-pro">openai/o1-pro</option>
               <option value="openai/o1">openai/o1</option>
             </>
           )}

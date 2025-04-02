@@ -53,7 +53,7 @@ const ModelProvider = () => {
   // ローカルLLMが選択された場合、AIモデルを空文字に設定
   const defaultModels = {
     openai: 'gpt-4o',
-    openrouter: 'openai/o1',
+    openrouter: 'openai/o1-pro',
     anthropic: 'claude-3-7-sonnet-latest',
     google: 'gemini-1.5-pro-latest',
     googleVertexAI: 'gemini-1.5-pro-002',
@@ -298,6 +298,7 @@ const ModelProvider = () => {
                   }
                   onChange={handleOpenAIModelChange}
                 >
+                  {/* o1だとtoolが全然呼ばれなかったので無効化<option value="o1-pro-2025-03-19">o1-pro-2025-03-19</option> */}
                   {/* o1だとtoolが全然呼ばれなかったので無効化<option value="o1">o1</option> */}
                   <option value="gpt-4o">gpt-4o</option>
                   <option value="gpt-4o-mini">gpt-4o-mini</option>
@@ -360,6 +361,7 @@ const ModelProvider = () => {
                   }
                   onChange={handleOpenRouterModelChange}
                 >
+                  <option value="openai/o1-pro">openai/o1-pro</option>
                   <option value="openai/o1">openai/o1</option>
                   <option value="direct-input">{t('DirectInputModel')}</option>
                 </select>
