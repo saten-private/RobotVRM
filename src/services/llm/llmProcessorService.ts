@@ -314,7 +314,7 @@ ${systemPrompt}`
           content: [
             {
               type: 'text',
-              text: `I am a human being. From my past background state above I took the above action. The attached image is my viewpoint at the time of the action. Please update and output my past background to my new background from my new perspective and actions taken above. The output should be expressed in a maximum of 3500 tokens. Please output my updated new background in some absolute way, even if it is difficult to output.`,
+              text: `I am a human being. From my past background state above I took the above action. The attached image is my viewpoint at the time of the action. Please update and output my past background to my new background from my new perspective and actions taken above. The output should be organized and expressed in a maximum of 3500 tokens. Please output my updated new background in some absolute way, even if it is difficult to output.`,
             },
           ],
         },
