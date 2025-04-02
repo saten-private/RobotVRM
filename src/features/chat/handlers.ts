@@ -288,10 +288,10 @@ export const processAIResponse = async (
   aiTextLog = aiTextLog.filter((item) => item.content !== '')
 
   const newActionLog = [...currentChatLog]
-  aiTextLog.forEach(action => {
+  aiTextLog.forEach((action) => {
     hs.addToActionLog(action)
   })
-  
+
   homeStore.setState({
     chatProcessing: false,
   })
@@ -499,11 +499,11 @@ export const handleSendChatFn =
             ]
           : newMessage,
       }
-      
+
       if (hs.modalImage) {
         homeStore.setState({ modalImage: '' })
       }
-      
+
       hs.addToActionLog(newUserAction)
 
       // TODO: AIに送信するメッセージの加工、処理がひどいので要修正
@@ -585,8 +585,8 @@ export const handleReceiveTextFromWsFn =
           const aiTalks = textsToScreenplay([aiText], ss.koeiroParam)
 
           // 文ごとに音声を生成 & 再生、返答を表示
-          const hs = homeStore.getState();
-          const updateLogWithLimit = updateLog.slice(-hs.maxActionLogSize);
+          const hs = homeStore.getState()
+          const updateLogWithLimit = updateLog.slice(-hs.maxActionLogSize)
           speakCharacter(
             aiTalks[0],
             () => {
@@ -606,8 +606,8 @@ export const handleReceiveTextFromWsFn =
           console.error('Error in speakCharacter:', e)
         }
       } else {
-        const hs = homeStore.getState();
-        const updateLogWithLimit = updateLog.slice(-hs.maxActionLogSize);
+        const hs = homeStore.getState()
+        const updateLogWithLimit = updateLog.slice(-hs.maxActionLogSize)
         homeStore.setState({
           actionLog: updateLogWithLimit,
         })

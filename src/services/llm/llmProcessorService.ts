@@ -60,7 +60,7 @@ ${systemPrompt}`
             },
           ],
         },
-        ]
+      ]
 
       console.log('message count=', messages.length)
 
@@ -223,7 +223,7 @@ ${direction}
           messages,
           tools,
           5,
-          'required',
+          'required'
         )
       } catch (e) {
         console.error(e)
@@ -266,7 +266,6 @@ ${systemPrompt}`
 
     let count = 0
     while (!endProcess) {
-
       const ss = settingsStore.getState()
       const language = i18n.language as Language
 
@@ -281,7 +280,10 @@ ${systemPrompt}`
           3500
         )
 
-        console.log('execute pastBackground truncatedContent=', truncatedContent)
+        console.log(
+          'execute pastBackground truncatedContent=',
+          truncatedContent
+        )
 
         setPrompt('systemPrompt', truncatedContent)
         // clear actionLog
@@ -306,7 +308,7 @@ ${systemPrompt}`
               type: 'text',
               text: pastBackgroundPrompt,
             },
-        ],
+          ],
         },
         ...actionLog,
         {
@@ -328,7 +330,7 @@ ${systemPrompt}`
           tools,
           1,
           'required',
-          1,
+          1
         )
       } catch (e) {
         console.error(e)

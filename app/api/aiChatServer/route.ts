@@ -158,7 +158,7 @@ export async function POST(req: Request) {
         undefined,
         maxSteps,
         toolChoice,
-        temperature,
+        temperature
       )
 
       if (stream) {

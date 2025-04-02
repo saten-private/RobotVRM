@@ -98,7 +98,7 @@ export async function getVercelAIChatResponse(
       tools,
       maxSteps,
       toolChoice,
-      temperature,
+      temperature
     )
     return { text: text }
   } catch (error: any) {
@@ -181,7 +181,7 @@ export async function getVercelAIChatResponseStream(
           tools,
           maxSteps,
           toolChoice,
-          temperature,
+          temperature
         )
 
         if (!result) {

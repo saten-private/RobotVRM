@@ -45,7 +45,7 @@ export async function getAIChatResponseStream(
           tools,
           maxSteps,
           toolChoice,
-          temperature,
+          temperature
         )
       } else {
         console.log('use client')

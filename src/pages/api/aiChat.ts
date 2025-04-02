@@ -209,7 +209,7 @@ export default async function handler(req: NextRequest) {
         newTools,
         maxSteps,
         toolChoice,
-        temperature,
+        temperature
       )
 
       // Ensure the promise is handled without blocking the response
@@ -241,7 +241,7 @@ export default async function handler(req: NextRequest) {
         undefined,
         maxSteps,
         toolChoice,
-        temperature,
+        temperature
       )
 
       if (stream) {
