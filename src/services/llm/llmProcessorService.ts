@@ -354,7 +354,7 @@ ${systemPrompt}`
       if (!endProcess) {
         count++
         console.log('processMemoryRequest count=', count)
-        if (count >= 3) {
+        if (count >= 1) {
           console.log('processMemoryRequest max error count=' + count)
           processActionRequest(systemPrompt)
           break
