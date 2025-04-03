@@ -222,7 +222,7 @@ ${direction}
           ss.selectAIService as AIService,
           messages,
           tools,
-          5,
+          20,
           'required'
         )
       } catch (e) {
@@ -354,8 +354,10 @@ ${systemPrompt}`
       if (!endProcess) {
         count++
         console.log('processMemoryRequest count=', count)
-        if (count > 10) {
-          throw new Error('processMemoryRequest max error count=' + count)
+        if (count >= 3) {
+          console.log('processMemoryRequest max error count=' + count)
+          processActionRequest(systemPrompt)
+          break
         }
       }
     }
