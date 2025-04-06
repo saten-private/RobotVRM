@@ -30,13 +30,13 @@ Project to develop LLM robots (smart phone robots) that can be created at low co
 
 Need a multimodal LLM that can use Tool.
 
-API rates at Claude 3 Haiku for videos are **“no more than US$5”** per hour.
+API rates at Claude 3.7 Sonnet for videos are **“no more than US$18”** per hour.
 
 - Speech synthesis is free with home server use
 
 ### Verification environment
 
-RobotVRM First Model Mina (as of 11/19/2024)
+RobotVRM Memory Model Rin (as of 4/7/2025)
 
 ## Community
 
@@ -77,7 +77,7 @@ The characters in this repository are basically **free of charge and can be used
 
 ### [スマホLLMロボット化キット(受注販売中)](https://shop.robotvrm.com/items/99407194)
 
-また、日本では無料アプリで「RobotVRM初号機ミナ」をアプリストアで配信しています。ロボットカーが無くてもカメラでの認識やチャットなどで使うこともできます。是非お試しください。
+また、日本では無料アプリで「RobotVRM」アプリシリーズをアプリストアで配信しています。ロボットカーが無くてもカメラでの認識やチャットなどで使うこともできます。是非お試しください。
 サーバーの負荷を考慮して日本のみ配信しています。
 
 ### [iOSアプリ(無料アプリ)](https://apps.apple.com/jp/app/robotvrm%E5%88%9D%E5%8F%B7%E6%A9%9F%E3%83%9F%E3%83%8A/id6737445996)

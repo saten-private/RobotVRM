@@ -3,8 +3,8 @@ import type { CapacitorConfig } from '@capacitor/cli'
 let config: CapacitorConfig
 
 const baseConfig: CapacitorConfig = {
-  appId: 'com.robotvrm.first',
-  appName: '初号機ミナ', // 実際のアプリ表示名はそれぞれのプラットフォームで管理されています(なのでここは参照されない)
+  appId: 'com.robotvrm.memory',
+  appName: '記憶機リン', // 実際のアプリ表示名はそれぞれのプラットフォームで管理されています(なのでここは参照されない)
   webDir: '.next/server/pages',
   plugins: {
     Camera: {

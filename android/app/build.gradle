@@ -4,7 +4,7 @@ android {
     namespace "com.saten.robotvrm"
     compileSdk rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.robotvrm.first"
+        applicationId "com.robotvrm.memory"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 3
