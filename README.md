@@ -56,11 +56,16 @@ See [How to Build a Robot](./docs/make_robot.md)
 
 ## Design
 
-![設計図](./docs/system_design.jpg)
+![System Design](./docs/system_design.jpg)
 
-1. periodically take camera captures and keep them in a queue (there is a maximum number in the queue and the oldest ones are deleted)
-2. request LLM with periodically kept captures and system prompts, specifying Tools for “speak”, “show emotion”, and “move”. 3.
-3. move the robot in response to Tool calls in the LLM response
+(Prerequisites) 
+
+Periodically take pictures with a camera and leave an ActionLog of the viewpoint (when the camera is ON) 
+
+(Order of processing) 
+1. (Action Process) Execute the next Action using a Tool by passing an ActionLog that leaves a viewpoint and the results of one's own action along with one's past background.
+2. (Memory Process) Update the new background of the past by passing the ActionLog that contains the viewpoint and the result of the action along with the background of the past. At that time, the ActionLog that has been saved until now is cleared.
+3. Return to the (Action Process) and repeat.
 
 ## The “robotvrm” topic on GitHub
 
