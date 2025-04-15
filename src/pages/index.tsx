@@ -84,7 +84,7 @@ const Home = () => {
         <>
           <Introduction />
           <VrmViewer />
-          <Form />
+          {/* Chat function not supported<Form /> */}
           <Menu />
           <ModalImage />
         </>
