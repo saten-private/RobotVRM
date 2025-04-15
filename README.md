@@ -58,11 +58,12 @@ See [How to Build a Robot](./docs/make_robot.md)
 
 ![System Design](./docs/system_design.jpg)
 
-(Prerequisites) 
+(Prerequisites)
 
-Periodically take pictures with a camera and leave an ActionLog of the viewpoint (when the camera is ON) 
+Periodically take pictures with a camera and leave an ActionLog of the viewpoint (when the camera is ON)
 
-(Order of processing) 
+(Order of processing)
+
 1. (Action Process) Execute the next Action using a Tool by passing an ActionLog that leaves a viewpoint and the results of one's own action along with one's past background.
 2. (Memory Process) Update the new background of the past by passing the ActionLog that contains the viewpoint and the result of the action along with the background of the past. At that time, the ActionLog that has been saved until now is cleared.
 3. Return to the (Action Process) and repeat.
