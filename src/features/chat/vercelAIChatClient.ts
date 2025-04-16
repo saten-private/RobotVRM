@@ -44,73 +44,94 @@ export async function getVercelAIChatResponse(
   toolChoice: 'auto' | 'none' | 'required' | undefined,
   temperature: number | undefined
 ) {
-  try {
-    let aiApiKey = apiKey
-    if (!aiApiKey) {
-      throw new Error('Empty API Key', {
-        cause: { errorCode: 'EmptyAPIKey', status: 400 },
-      })
-    }
+  let errorCount = 0
+  const MAX_ERROR_ATTEMPTS = 10
 
-    if (!aiService || !model) {
-      throw new Error('Invalid AI service or model', {
-        cause: { errorCode: 'AIInvalidProperty', status: 400 },
-      })
-    }
+  while (true) {
+    try {
+      let aiApiKey = apiKey
+      if (!aiApiKey) {
+        throw new Error('Empty API Key', {
+          cause: { errorCode: 'EmptyAPIKey', status: 400 },
+        })
+      }
 
-    const aiServiceConfig: AIServiceConfig = {
-      openai: () => createOpenAI({ apiKey }),
-      openrouter: () => createOpenRouter({ apiKey }),
-      anthropic: () => createAnthropic({ apiKey }),
-      azure: () =>
-        createAzure({
-          resourceName:
-            model.match(/https:\/\/(.+?)\.openai\.azure\.com/)?.[1] || '',
-          apiKey,
-        }),
-      groq: () =>
-        createOpenAI({ baseURL: 'https://api.groq.com/openai/v1', apiKey }),
-      cohere: () => createCohere({ apiKey }),
-      mistralai: () => createMistral({ apiKey }),
-      perplexity: () =>
-        createOpenAI({ baseURL: 'https://api.perplexity.ai/', apiKey }),
-      fireworks: () =>
-        createOpenAI({
-          baseURL: 'https://api.fireworks.ai/inference/v1',
-          apiKey,
-        }),
-    }
+      if (!aiService || !model) {
+        throw new Error('Invalid AI service or model', {
+          cause: { errorCode: 'AIInvalidProperty', status: 400 },
+        })
+      }
 
-    const aiServiceInstance = aiServiceConfig[aiService as AIServiceKey]
+      const aiServiceConfig: AIServiceConfig = {
+        openai: () => createOpenAI({ apiKey }),
+        openrouter: () => createOpenRouter({ apiKey }),
+        anthropic: () => createAnthropic({ apiKey }),
+        azure: () =>
+          createAzure({
+            resourceName:
+              model.match(/https:\/\/(.+?)\.openai\.azure\.com/)?.[1] || '',
+            apiKey,
+          }),
+        groq: () =>
+          createOpenAI({ baseURL: 'https://api.groq.com/openai/v1', apiKey }),
+        cohere: () => createCohere({ apiKey }),
+        mistralai: () => createMistral({ apiKey }),
+        perplexity: () =>
+          createOpenAI({ baseURL: 'https://api.perplexity.ai/', apiKey }),
+        fireworks: () =>
+          createOpenAI({
+            baseURL: 'https://api.fireworks.ai/inference/v1',
+            apiKey,
+          }),
+      }
 
-    if (!aiServiceInstance) {
-      throw new Error(`Invalid AI service: ${aiService}`, {
-        cause: { errorCode: 'InvalidAIService', status: 400 },
-      })
-    }
+      const aiServiceInstance = aiServiceConfig[aiService as AIServiceKey]
 
-    const text = getVercelAIChatResponseImplemention(
-      messages,
-      aiServiceInstance,
-      aiService,
-      model,
-      false,
-      tools,
-      maxSteps,
-      toolChoice,
-      temperature
-    )
-    return { text: text }
-  } catch (error: any) {
-    if (NoSuchToolError.isInstance(error)) {
-      // handle the no such tool error
-      console.log('NoSuchToolError=', error)
-    } else if (InvalidToolArgumentsError.isInstance(error)) {
-      // handle the invalid tool arguments error
-      console.log('InvalidToolArgumentsError=', error)
-    } else {
-      console.error(`Error fetching ${aiService} API response:`, error)
-      return { text: handleApiError(error.cause.errorCode) }
+      if (!aiServiceInstance) {
+        throw new Error(`Invalid AI service: ${aiService}`, {
+          cause: { errorCode: 'InvalidAIService', status: 400 },
+        })
+      }
+
+      const text = await getVercelAIChatResponseImplemention(
+        messages,
+        aiServiceInstance,
+        aiService,
+        model,
+        false,
+        tools,
+        maxSteps,
+        toolChoice,
+        temperature
+      )
+      return { text: text }
+    } catch (error: any) {
+      if (
+        NoSuchToolError.isInstance(error) ||
+        InvalidToolArgumentsError.isInstance(error)
+      ) {
+        // Count tool-related errors
+        errorCount++
+        console.log(`Tool error ${errorCount}/${MAX_ERROR_ATTEMPTS}:`, error)
+
+        // If we've reached the maximum number of attempts, throw the error
+        if (errorCount >= MAX_ERROR_ATTEMPTS) {
+          throw new Error(
+            `Maximum tool error attempts (${MAX_ERROR_ATTEMPTS}) reached`,
+            {
+              cause: {
+                errorCode: 'MaxToolErrorsReached',
+                status: 400,
+                originalError: error,
+              },
+            }
+          )
+        }
+        // Otherwise continue the loop to retry
+      } else {
+        console.error(`Error fetching ${aiService} API response:`, error)
+        return { text: handleApiError(error.cause.errorCode) }
+      }
     }
   }
 }
@@ -189,7 +210,8 @@ export async function getVercelAIChatResponseStream(
         }
 
         const newResult = result as StreamTextResult<
-          Record<string, CoreTool<any, any>>
+          Record<string, CoreTool<any, any>>,
+          any
         >
 
         for await (const value of newResult.textStream) {

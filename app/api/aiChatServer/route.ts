@@ -132,7 +132,8 @@ export async function POST(req: Request) {
       // Ensure the promise is handled without blocking the response
       promise.then(async (result) => {
         const newResult = result as StreamTextResult<
-          Record<string, CoreTool<any, any>>
+          Record<string, CoreTool<any, any>>,
+          any
         >
 
         for await (const value of newResult.textStream) {
@@ -163,12 +164,14 @@ export async function POST(req: Request) {
 
       if (stream) {
         const newResult = result as StreamTextResult<
-          Record<string, CoreTool<any, any>>
+          Record<string, CoreTool<any, any>>,
+          any
         >
         return newResult.toDataStreamResponse()
       } else {
         const newResult = result as unknown as GenerateTextResult<
-          Record<string, CoreTool<any, any>>
+          Record<string, CoreTool<any, any>>,
+          any
         >
         return new Response(JSON.stringify({ text: newResult.text }), {
           status: 200,

@@ -1,4 +1,4 @@
-import { Action } from '@/features/messages/messages'
+import { Action } from '@/features/tool/action'
 import { getAIChatResponse } from '@/features/chat/aiChatFactory'
 import settingsStore from '@/features/stores/settings'
 import {

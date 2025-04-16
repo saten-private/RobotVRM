@@ -1,4 +1,4 @@
-import { Action } from '@/features/messages/messages'
+import { Action } from '@/features/tool/action'
 import settingsStore from '@/features/stores/settings'
 import {
   getBestComment,
