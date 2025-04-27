@@ -50,7 +50,7 @@ export const Introduction = () => {
         case 'en':
           return 'en-US'
         default:
-          return 'en-US '
+          return 'en-US'
       }
     }
 
