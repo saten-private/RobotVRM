@@ -99,9 +99,7 @@ const settingsStore = create<SettingsState>()(
       localLlmUrl: process.env.NEXT_PUBLIC_LOCAL_LLM_URL || '',
       selectVoice:
         (process.env.NEXT_PUBLIC_ROBOTVRM_SELECT_VOICE as AIVoice) ||
-        (process.env.NEXT_PUBLIC_ENV === 'store'
-          ? 'koeiromap'
-          : 'voicevox_oss'),
+        'elevenlabs',
       openaiDirectInputModel: '',
       openrouterDirectInputModel: '',
       anthropicDirectInputModel: '',
