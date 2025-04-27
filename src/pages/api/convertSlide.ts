@@ -352,21 +352,15 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
 function getLanguage(selectLanguage: string | undefined) {
   if (!selectLanguage) {
-    return 'Japanese'
+    return 'English'
   }
   switch (selectLanguage) {
     case 'ja':
       return 'Japanese'
     case 'en':
       return 'English'
-    case 'zh':
-      return 'Chinese'
-    case 'zh-TW':
-      return 'Chinese'
-    case 'ko':
-      return 'Korean'
     default:
-      return 'Japanese'
+      return 'English'
   }
 }
 

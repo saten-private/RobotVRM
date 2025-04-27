@@ -46,26 +46,6 @@ const LanguageSetting = () => {
 
                 i18n.changeLanguage('en')
                 break
-              case 'zh':
-                settingsStore.setState({ selectLanguage: 'zh' })
-
-                if (jaVoiceSelected) {
-                  settingsStore.setState({ selectVoice: 'google' })
-                }
-                settingsStore.setState({ selectVoiceLanguage: 'zh-TW' })
-
-                i18n.changeLanguage('zh-TW')
-                break
-              case 'ko':
-                settingsStore.setState({ selectLanguage: 'ko' })
-
-                if (jaVoiceSelected) {
-                  settingsStore.setState({ selectVoice: 'google' })
-                }
-                settingsStore.setState({ selectVoiceLanguage: 'ko-KR' })
-
-                i18n.changeLanguage('ko')
-                break
               default:
                 break
             }
@@ -73,8 +53,6 @@ const LanguageSetting = () => {
         >
           <option value="ja">日本語 - Japanese</option>
           <option value="en">英語 - English</option>
-          <option value="zh">繁體中文 - Traditional Chinese</option>
-          <option value="ko">韓語 - Korean</option>
         </select>
       </div>
     </div>

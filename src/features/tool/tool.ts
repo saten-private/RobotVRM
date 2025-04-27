@@ -1,7 +1,7 @@
 import { tool } from 'ai'
 import { z } from 'zod'
 
-export type Language = 'ja' | 'en' | 'ko' | 'zh'
+export type Language = 'ja' | 'en'
 
 export const toolPrompt = (
   language: Language
@@ -69,50 +69,6 @@ export const toolPrompt = (
           Left: 'left',
           Right: 'right',
           Back: 'backward',
-        },
-      }
-    case 'ko':
-      return {
-        Speak: '한국어 말하기',
-        SpeakContent: '말하는 한국어 내용',
-        ExpressingEmotion: '감정 표현하기',
-        ExpressingEmotionContent: '감정 표현',
-        Emotion: {
-          Normal: '중립',
-          Joy: '즐거움',
-          Anger: '분노',
-          Sadness: '슬픔',
-          Calmness: '편안함',
-        },
-        Movement: '이동하기',
-        MovementContent: '이동 방향',
-        Direction: {
-          Forward: '앞으로',
-          Left: '왼쪽',
-          Right: '오른쪽',
-          Back: '뒤로',
-        },
-      }
-    case 'zh':
-      return {
-        Speak: '會說台語',
-        SpeakContent: '台語口語內容',
-        ExpressingEmotion: '表達情緒。',
-        ExpressingEmotionContent: '表達的情感',
-        Emotion: {
-          Normal: '中立',
-          Joy: '快樂',
-          Anger: '憤怒',
-          Sadness: '悲傷',
-          Calmness: '安宁',
-        },
-        Movement: '繼續前進',
-        MovementContent: '移動方向',
-        Direction: {
-          Forward: '前言',
-          Left: '左邊',
-          Right: '對',
-          Back: '向後',
         },
       }
     default:
