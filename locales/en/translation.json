@@ -156,7 +156,7 @@
   "ShowOSSLicenses": "OSS License",
   "OSSLicenses": "OSS License",
   "BluetoothPopupMessage": "Used by AI to control Ardiuno devices via Bluetooth; <b>only HC-02</b> Bluetooth devices can be connected.",
-  "HowToMakeRobot": "How to build a robot",
+  "RobotStore": "Robot Store",
   "SystemPrompt": "You are a close friend and a curious girl named Mina. Be curious and free. Avoid obstacles.",
   "ForkLicense": {
     "aituber-kit": "aituber-kit (created by forking the main branch around the time of the MIT license, at least before 2024/9/25. The main branch as of 2024/9/25 is listed below)",
