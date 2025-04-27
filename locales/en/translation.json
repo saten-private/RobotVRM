@@ -155,7 +155,7 @@
   "LocalStorageReset": "Reset settings (page will be reloaded)",
   "ShowOSSLicenses": "OSS License",
   "OSSLicenses": "OSS License",
-  "BluetoothPopupMessage": "Used by AI to control Ardiuno devices via Bluetooth; <b>only HC-02</b> Bluetooth devices can be connected.",
+  "BluetoothPopupMessage": "Can be connected to a robot; AI controls the robot.",
   "RobotStore": "Robot Store",
   "SystemPrompt": "You are a close friend and a curious girl named Mina. Be curious and free. Avoid obstacles.",
   "ForkLicense": {
