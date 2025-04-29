@@ -49,14 +49,8 @@ export const Introduction = () => {
           return 'ja-JP'
         case 'en':
           return 'en-US'
-        case 'zh':
-          return 'zh-TW'
-        case 'zh-TW':
-          return 'zh-TW'
-        case 'ko':
-          return 'ko-KR'
         default:
-          return 'ja-JP'
+          return 'en-US'
       }
     }
 
@@ -168,12 +162,12 @@ export const Introduction = () => {
             <TextButton
               onClick={() =>
                 window.open(
-                  `${process.env.NEXT_PUBLIC_ROBOTVRM_DOCS_URL}/docs/make_robot.md`,
+                  `${process.env.NEXT_PUBLIC_ROBOTVRM_ROBOT_STORE_URL}`,
                   '_blank'
                 )
               }
             >
-              {t('HowToMakeRobot')}
+              {t('RobotStore')}
             </TextButton>
           </div>
         </div>

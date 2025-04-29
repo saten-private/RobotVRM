@@ -345,8 +345,6 @@ function getGppgleTtsType(selectLanguage: Language): string {
       return 'ja-JP-Standard-B'
     case 'en':
       return 'en-US-Neural2-F'
-    case 'zh':
-      return 'cmn-TW-Standard-A'
     default:
       return 'en-US-Neural2-F'
   }

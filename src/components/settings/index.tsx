@@ -113,12 +113,12 @@ const Main = () => {
           <TextButton
             onClick={() =>
               window.open(
-                `${process.env.NEXT_PUBLIC_ROBOTVRM_DOCS_URL}/docs/make_robot.md`,
+                `${process.env.NEXT_PUBLIC_ROBOTVRM_ROBOT_STORE_URL}`,
                 '_blank'
               )
             }
           >
-            {t('HowToMakeRobot')}
+            {t('RobotStore')}
           </TextButton>
         </div>
 

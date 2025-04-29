@@ -179,17 +179,20 @@ const Voice = () => {
         >
           {process.env.NEXT_PUBLIC_ENV === 'store' ? (
             <>
+              <option value="elevenlabs">{t('UsingElevenLabs')}</option>
+              <option value="stylebertvits2">{t('UsingStyleBertVITS2')}</option>
               <option value="koeiromap">{t('UsingKoeiromap')}</option>
               <option value="voicevox_store">{t('UsingVoiceVox')}</option>
               <option value="aivis_speech_store">
                 {t('UsingAivisSpeech')}
               </option>
-              <option value="stylebertvits2">{t('UsingStyleBertVITS2')}</option>
               {/* 検証できていないかつ検証予定でないため無効化<option value="gsvitts">{t('UsingGSVITTS')}</option> */}
-              <option value="elevenlabs">{t('UsingElevenLabs')}</option>
             </>
           ) : (
             <>
+              <option value="stylebertvits2">{t('UsingStyleBertVITS2')}</option>
+              <option value="elevenlabs">{t('UsingElevenLabs')}</option>
+              <option value="google">{t('UsingGoogleTTS')}</option>
               <option value="voicevox_oss">
                 {t('UsingVoiceVox')}({t('OSSVersion')})
               </option>
@@ -203,10 +206,7 @@ const Voice = () => {
                 {t('UsingAivisSpeech')}({t('StoreVersion')})
               </option>
               <option value="koeiromap">{t('UsingKoeiromap')}</option>
-              <option value="google">{t('UsingGoogleTTS')}</option>
-              <option value="stylebertvits2">{t('UsingStyleBertVITS2')}</option>
               {/* 検証できていないかつ検証予定でないため無効化<option value="gsvitts">{t('UsingGSVITTS')}</option> */}
-              <option value="elevenlabs">{t('UsingElevenLabs')}</option>
             </>
           )}
         </select>

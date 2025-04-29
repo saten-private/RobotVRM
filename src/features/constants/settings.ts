@@ -43,11 +43,11 @@ export type AIVoice =
   | 'gsvitts'
   | 'elevenlabs'
 
-export type Language = 'en' | 'ja' | 'ko' | 'zh' // ISO 639-1
+export type Language = 'en' | 'ja' // ISO 639-1
 
-export const LANGUAGES: Language[] = ['en', 'ja', 'ko', 'zh']
+export const LANGUAGES: Language[] = ['en', 'ja']
 
 export const isLanguageSupported = (language: string): language is Language =>
   LANGUAGES.includes(language as Language)
 
-export type VoiceLanguage = 'en-US' | 'ja-JP' | 'ko-KR' | 'zh-TW'
+export type VoiceLanguage = 'en-US' | 'ja-JP'

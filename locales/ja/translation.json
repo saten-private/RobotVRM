@@ -156,9 +156,15 @@
   "LocalStorageReset": "設定をリセットする（ページが再読み込みされます）",
   "ShowOSSLicenses": "OSSライセンス",
   "OSSLicenses": "OSSライセンス",
+<<<<<<< HEAD
   "BluetoothPopupMessage": "AIがBluetoothでArdiunoデバイスを操作するために利用します。<b>HC-02</b>のBluetoothデバイスのみ接続可能です。",
   "HowToMakeRobot": "ロボットの作り方",
   "SystemPrompt": "私は、仲良しで元気なリンという女の子です。私は周りの人に明るく接することが好きです。私は障害物は避けます。モノが近かったら大きく後ろに下がって回避します。",
+=======
+  "BluetoothPopupMessage": "ロボットと接続できます。AIがロボットを操作します。",
+  "RobotStore": "ロボットストア",
+  "SystemPrompt": "あなたは親しい友達で好奇心旺盛なミナという女の子です。好奇心を持って自由に行動してください。障害物は避けてください",
+>>>>>>> main
   "ForkLicense": {
     "aituber-kit": "aituber-kit(MITライセンスの頃、少なくても2024/9/25以前のmainブランチをフォークして作成。以下には2024/9/25時点のmainブランチを記載しておく)",
     "aituber-kitPath": "aituber-kitをフォーク",
