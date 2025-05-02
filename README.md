@@ -87,23 +87,6 @@ In the future, we will create a **list of RobotVRMs**. If you have forked it, pl
 
 The characters in this repository are basically **free of charge and can be used for commercial purposes by both individuals and corporations** (for details, please refer to the [**Terms of Use of Characters in this Repository**](./CHARACTOR_LICENSE.md) for details)
 
-<<<<<<< HEAD
-## 日本でのサービス(Services in Japan) by saten
-
-日本ではスマホをLLMのロボットにするキットを受注販売中です。
-[How to Build a Robot](./docs/make_robot.md)のロボットカーの組み立てたやつの受注販売を行っています。こちらを購入することで容易にスマホをLLMのロボットにすることを実現できます。
-
-### [スマホLLMロボット化キット(受注販売中)](https://shop.robotvrm.com/items/99407194)
-
-また、日本では無料アプリで「RobotVRM」アプリシリーズをアプリストアで配信しています。ロボットカーが無くてもカメラでの認識やチャットなどで使うこともできます。是非お試しください。
-サーバーの負荷を考慮して日本のみ配信しています。
-
-### [iOSアプリ(無料アプリ)](https://apps.apple.com/jp/app/robotvrm%E5%88%9D%E5%8F%B7%E6%A9%9F%E3%83%9F%E3%83%8A/id6737445996)
-
-### [Androidアプリ(無料アプリ)](https://play.google.com/store/apps/details?id=com.robotvrm.first)
-
-=======
->>>>>>> main
 <h2 align="center">
 <a href="https://github.com/sponsors/saten-private">Sponsor</a>
 </h2>
