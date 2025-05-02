@@ -38,6 +38,21 @@ API rates at Claude 3.7 Sonnet for videos are **“no more than US$18”** per h
 
 RobotVRM Memory Model Rin (as of 4/7/2025)
 
+## Free App (iOS, Android)
+
+### [Free iOS app](https://apps.apple.com/app/id6737445996)
+
+### [Free Android app](https://play.google.com/store/apps/details?id=com.robotvrm.first)
+
+- Even if you don't have a robot car, **you can use it for camera recognition and chatting**. Please give it a try.
+- Gemini is not supported in the store version; please use the OSS version.
+
+## Robot Store
+
+### [Robot Store](https://shop.robotvrm.com/products/smartphone-llm-robotization-kit)
+
+Robots can be easily prepared in the **Robot Store**.
+
 ## Community
 
 We have a community called [**RobotVRM Community**(Discord)](https://discord.gg/UUUxwk6Xjf), so feel free to join. Even those who fork repositories are welcome to join (rather, that is the main focus). Let's exchange information together.
@@ -49,10 +64,6 @@ RobotVRM is built on the open source, [**tegnike/aituber-kit** (around the time 
 ## Building an application development environment
 
 See [Building an App Development Environment](./docs/development.md)
-
-## How to build a robot
-
-See [How to Build a Robot](./docs/make_robot.md)
 
 ## Design
 
@@ -76,6 +87,7 @@ In the future, we will create a **list of RobotVRMs**. If you have forked it, pl
 
 The characters in this repository are basically **free of charge and can be used for commercial purposes by both individuals and corporations** (for details, please refer to the [**Terms of Use of Characters in this Repository**](./CHARACTOR_LICENSE.md) for details)
 
+<<<<<<< HEAD
 ## 日本でのサービス(Services in Japan) by saten
 
 日本ではスマホをLLMのロボットにするキットを受注販売中です。
@@ -90,6 +102,8 @@ The characters in this repository are basically **free of charge and can be used
 
 ### [Androidアプリ(無料アプリ)](https://play.google.com/store/apps/details?id=com.robotvrm.first)
 
+=======
+>>>>>>> main
 <h2 align="center">
 <a href="https://github.com/sponsors/saten-private">Sponsor</a>
 </h2>
