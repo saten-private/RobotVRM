@@ -41,9 +41,9 @@ RobotVRM First Model Mina (as of 11/19/2024)
 
 ## Free App (iOS, Android)
 
-### [iOS app](https://apps.apple.com/app/id6737445996)
+### [Free iOS app](https://apps.apple.com/app/id6737445996)
 
-### [Android app](https://play.google.com/store/apps/details?id=com.robotvrm.first)
+### [Free Android app](https://play.google.com/store/apps/details?id=com.robotvrm.first)
 
 - Even if you don't have a robot car, **you can use it for camera recognition and chatting**. Please give it a try.
 - Gemini is not supported in the store version; please use the OSS version.
