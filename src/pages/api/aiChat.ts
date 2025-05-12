@@ -215,7 +215,8 @@ export default async function handler(req: NextRequest) {
       // Ensure the promise is handled without blocking the response
       promise.then(async (result) => {
         const newResult = result as StreamTextResult<
-          Record<string, CoreTool<any, any>>
+          Record<string, CoreTool<any, any>>,
+          string
         >
 
         for await (const value of newResult.textStream) {
@@ -246,12 +247,14 @@ export default async function handler(req: NextRequest) {
 
       if (stream) {
         const newResult = result as StreamTextResult<
-          Record<string, CoreTool<any, any>>
+          Record<string, CoreTool<any, any>>,
+          string
         >
         return newResult.toDataStreamResponse()
       } else {
         const newResult = result as unknown as GenerateTextResult<
-          Record<string, CoreTool<any, any>>
+          Record<string, CoreTool<any, any>>,
+          string
         >
         return new Response(JSON.stringify({ text: newResult.text }), {
           status: 200,

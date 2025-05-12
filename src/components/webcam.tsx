@@ -29,7 +29,6 @@ export const Webcam = () => {
       captureComplete = complete
       console.log('initializeCamera end complete=', complete)
       console.log('initializeCamera end captureComplete=', captureComplete)
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     } catch (error) {
       console.error('initializeCamera error:', error)
       menuStore.setState({ showWebcam: false })

@@ -1,9 +1,12 @@
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import {
+  GLTFLoader,
+  GLTFParser,
+} from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { VRMAnimation } from './VRMAnimation'
 import { VRMAnimationLoaderPlugin } from './VRMAnimationLoaderPlugin'
 
 const loader = new GLTFLoader()
-loader.register((parser) => new VRMAnimationLoaderPlugin(parser))
+loader.register((parser: GLTFParser) => new VRMAnimationLoaderPlugin(parser))
 
 export async function loadVRMAnimation(
   url: string

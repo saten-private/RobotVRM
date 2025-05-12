@@ -1,6 +1,7 @@
 // WASM 初期化用
 import { Tiktoken } from 'js-tiktoken/lite'
 import o200k_base from 'js-tiktoken/ranks/o200k_base'
+//import o200k_base from 'js-tiktoken/dist/ranks/o200k_base'
 
 /**
  * テキストが指定されたトークン数を超える場合に切り詰めます

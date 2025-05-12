@@ -56,8 +56,8 @@ export class VRMAnimation {
       if (nodeName != null) {
         const track = new THREE.VectorKeyframeTrack(
           `${nodeName}.quaternion`,
-          origTrack.times,
-          origTrack.values.map((v, i) =>
+          Array.from(origTrack.times),
+          Array.from(origTrack.values).map((v, i) =>
             metaVersion === '0' && i % 2 === 0 ? -v : v
           )
         )

@@ -569,7 +569,7 @@ export const fetchAudioGoogle = async (
 ): Promise<ArrayBuffer> => {
   const ttsVoice = await synthesizeVoiceGoogleApi(talk.message, ttsType, signal)
   const uint8Array = new Uint8Array(ttsVoice.audio.data)
-  const arrayBuffer: ArrayBuffer = uint8Array.buffer
+  const arrayBuffer = uint8Array.buffer
 
   return arrayBuffer
 }
@@ -708,8 +708,9 @@ export const fetchAudioElevenlabs = async (
     signal
   )
 
-  // const uint8Array = new Uint8Array(ttsVoice.audio);
-  const arrayBuffer: ArrayBuffer = ttsVoice.audio.buffer
+  // Convert ArrayBufferLike to ArrayBuffer
+  const uint8Array = new Uint8Array(ttsVoice.audio)
+  const arrayBuffer = uint8Array.buffer
 
   return arrayBuffer
 }

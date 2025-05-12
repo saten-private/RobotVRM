@@ -1,4 +1,5 @@
 import { VRMExpressionManager } from '@pixiv/three-vrm'
+//import { VRMExpressionManager } from '@pixiv/three-vrm-core'
 import { BLINK_CLOSE_MAX, BLINK_OPEN_MAX } from './emoteConstants'
 
 /**

@@ -76,7 +76,7 @@ export const disconnectBle = async (): Promise<void> => {
   }
 }
 
-const stringToArrayBuffer = (str: string): ArrayBuffer => {
+const stringToArrayBuffer = (str: string): Uint8Array => {
   return new TextEncoder().encode(str)
 }
 
