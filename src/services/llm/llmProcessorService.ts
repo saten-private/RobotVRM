@@ -23,12 +23,16 @@ import i18n from '@/lib/i18n'
 import { truncateToMaxTokens } from '@/utils/maxToken'
 
 export const startLlmProcessor = (): (() => void) => {
-  let isProcessing = false
+  let isLlmProcessing = false
   let hasSpokeInCurrentRequest = false
   let systemPrompt = ''
   let memoryPromptMaxToken = 1500
 
   const processActionRequest = async (systemPrompt: string) => {
+    if (!isLlmProcessing) {
+      console.log('processActionRequest: aborted at start as isProcessing is false.')
+      return
+    }
     try {
       const ss = settingsStore.getState()
 
@@ -217,6 +221,11 @@ ${direction}
       )
       hasSpokeInCurrentRequest = false
 
+      if (!isLlmProcessing) {
+        console.log('processActionRequest: aborted before LLM stream call as isProcessing is false.')
+        return
+      }
+
       let stream
       try {
         stream = await getAIChatResponseStream(
@@ -230,15 +239,29 @@ ${direction}
         console.error(e)
         stream = null
       }
+
+      if (!isLlmProcessing) {
+        console.log('processActionRequest: aborted after LLM stream call (or error) as isProcessing is false.')
+        // If stream was created and needs explicit cancel, it would be done here.
+        // For now, just ensuring no further processing.
+        return
+      }
+
       if (stream == null) {
         console.log('stream is null')
-        processActionRequest(systemPrompt)
+        if (isLlmProcessing) {
+          processActionRequest(systemPrompt)
+        }
         return
       }
       const reader = stream.getReader()
       try {
-        while (true) {
+        while (isLlmProcessing) { // Check isProcessing in loop condition
           const { done, value } = await reader.read()
+          if (!isLlmProcessing) { // Check again after await
+            if(!done) console.log('processActionRequest: LLM stream reading interrupted by isProcessing flag.')
+            break
+          }
           console.log('llmProcessorService response=', value)
           if (done) break
         }
@@ -248,16 +271,29 @@ ${direction}
         reader.releaseLock()
         stream = null
       }
-      processMemoryRequest(systemPrompt)
+
+      if (isLlmProcessing) {
+        processMemoryRequest(systemPrompt)
+      } else {
+        console.log('processActionRequest: aborted after stream processing, before calling processMemoryRequest, as isProcessing is false.')
+      }
     } catch (error) {
-      processActionRequest(systemPrompt)
       console.error('Error processing LLM request:', error)
+      if (isLlmProcessing) {
+        processActionRequest(systemPrompt)
+      } else {
+        console.log('processActionRequest: error caught, but not retrying as isProcessing is false.')
+      }
       // エラー処理（例：エラー状態の設定、エラーイベントの発火など）
       // 例: handleLlmError(error)
     }
   }
 
   const processMemoryRequest = async (systemPrompt: string) => {
+    if (!isLlmProcessing) {
+      console.log('processMemoryRequest: aborted at start as isProcessing is false.')
+      return
+    }
     console.log('processMemoryRequest')
 
     let endProcess = false
@@ -266,7 +302,7 @@ ${direction}
 ${systemPrompt}`
 
     let count = 0
-    while (!endProcess) {
+    while (!endProcess && isLlmProcessing) { // Check isProcessing in loop condition
       const ss = settingsStore.getState()
       const language = i18n.language as Language
 
@@ -275,6 +311,10 @@ ${systemPrompt}`
 
       const pastBackgroundTool = createPastBackgroundTool(async (args) => {
         const { content } = args
+        if (!isLlmProcessing) {
+          console.log('pastBackgroundTool: aborted as isProcessing is false.')
+          return { result: 'aborted' }
+        }
         const truncatedContent = await truncateToMaxTokens(
           content,
           ss.selectAIService as AIService,
@@ -292,7 +332,11 @@ ${systemPrompt}`
           actionLog: [],
         }))
         endProcess = true
-        processActionRequest(truncatedContent)
+        if (isLlmProcessing) {
+          processActionRequest(truncatedContent)
+        } else {
+          console.log('pastBackgroundTool: processing was stopped before calling processActionRequest.')
+        }
         return { result: 'success' }
       }, language)
 
@@ -323,6 +367,11 @@ ${systemPrompt}`
         },
       ]
 
+      if (!isLlmProcessing) {
+        console.log('processMemoryRequest: aborted before LLM stream call as isProcessing is false.')
+        break // Exit while loop
+      }
+
       let stream
       try {
         stream = await getAIChatResponseStream(
@@ -337,11 +386,22 @@ ${systemPrompt}`
         console.error(e)
         stream = null
       }
+
+      if (!isLlmProcessing) {
+        console.log('processMemoryRequest: aborted after LLM stream call (or error) as isProcessing is false.')
+        // If stream was created and needs explicit cancel, it would be done here.
+        break // Exit while loop
+      }
+
       if (stream != null) {
         const reader = stream.getReader()
         try {
-          while (true) {
+          while (isLlmProcessing) { // Check isProcessing in loop condition
             const { done, value } = await reader.read()
+            if (!isLlmProcessing) { // Check again after await
+              if(!done) console.log('processMemoryRequest: LLM stream reading interrupted by isProcessing flag.')
+              break
+            }
             console.log('llmProcessorService response=', value)
             if (done) break
           }
@@ -352,31 +412,66 @@ ${systemPrompt}`
           stream = null
         }
       }
+      if (!isLlmProcessing) { // Double check before retry logic
+        console.log('processMemoryRequest: loop terminating due to isProcessing false before retry logic.')
+        break;
+      }
+
       if (!endProcess) {
         count++
         console.log('processMemoryRequest count=', count)
         if (count >= 1) {
           console.log('processMemoryRequest max error count=' + count)
-          processActionRequest(systemPrompt)
+          if (isLlmProcessing) {
+            processActionRequest(systemPrompt)
+          } else {
+            console.log('processMemoryRequest: not retrying action request as isProcessing is false.')
+          }
           break
         }
       }
+    }
+    if (!isLlmProcessing) {
+        console.log('processMemoryRequest: exited main while loop as isProcessing is false.')
     }
   }
 
   // Define function to initialize and start processing
   const initialize = async () => {
-    if (isProcessing) {
+    if (isLlmProcessing) {
+      console.log('LLM processing already in progress. Ignoring llmStart event.')
       return
     }
-    isProcessing = true
+    console.log('LLM processing start requested by event.')
+    isLlmProcessing = true
     systemPrompt = await getPrompt('systemPrompt')
+    if (!isLlmProcessing) { // Check if stopped during await getPrompt
+        console.log('LLM initialization aborted as processing was stopped.')
+        return;
+    }
     processActionRequest(systemPrompt)
   }
 
+  // Define function to stop processing
+  const terminate = () => {
+    if (!isLlmProcessing) {
+        console.log('LLM processing already stopped. Ignoring llmStop event.')
+        return;
+    }
+    console.log('LLM processing stop requested by event.')
+    isLlmProcessing = false
+  }
+
   // イベントリスナーを登録し、クリーンアップ関数を取得
-  const unsubscribe = appEventEmitter.on('llmRequest', initialize)
+  const unsubscribeStart = appEventEmitter.on('llmStart', initialize)
+  const unsubscribeStop = appEventEmitter.on('llmStop', terminate)
+
 
   // クリーンアップ関数を返す
-  return unsubscribe
+  return () => {
+    unsubscribeStart()
+    unsubscribeStop()
+    isLlmProcessing = false // Ensure flag is false on cleanup
+    console.log('LLM processor event listeners removed and processing stopped.')
+  }
 }

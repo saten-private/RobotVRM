@@ -53,7 +53,8 @@ export class EventEmitter<EventMap extends Record<string, any>> {
 }
 
 export interface AppEvents {
-  llmRequest: void
+  llmStart: void
+  llmStop: void
   // 他のイベントタイプ...
 }
 
