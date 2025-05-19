@@ -55,7 +55,8 @@ const Home = () => {
 
       const hs = homeStore.getState()
       if (!hs.initialLaunchCompleted) {
-        await SecureStorage.clear() // 設定したPrefixのだけ削除されるよう
+        // Delete this part of the process in order to move the clear process to the main application.
+        //await SecureStorage.clear() // Only the prefix you set will be deleted.
         console.log('First launch detected, cleaning up SecureStorage')
         homeStore.setState({ initialLaunchCompleted: true })
       }
