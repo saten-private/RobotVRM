@@ -16,6 +16,7 @@ import YouTube from './youtube'
 import Slide from './slide'
 import Licenses from './licenses'
 import { TextButton } from '../textButton'
+import { Browser } from '@capacitor/browser'
 
 type Props = {
   onClickClose: () => void
@@ -112,10 +113,9 @@ const Main = () => {
         <div className="my-40">
           <TextButton
             onClick={() =>
-              window.open(
-                `${process.env.NEXT_PUBLIC_ROBOTVRM_ROBOT_STORE_URL}`,
-                '_blank'
-              )
+              Browser.open({
+                url: `${process.env.NEXT_PUBLIC_ROBOTVRM_ROBOT_STORE_URL}`,
+              })
             }
           >
             {t('RobotStore')}
@@ -137,9 +137,11 @@ const Main = () => {
         {eulaUrl && (
           <div className="mt-2">
             <a
-              href={eulaUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#"
+              onClick={(e) => {
+                e.preventDefault()
+                Browser.open({ url: eulaUrl })
+              }}
               className="underline hover:opacity-80"
             >
               {t('EulaLink')}

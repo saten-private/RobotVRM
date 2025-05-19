@@ -44,6 +44,9 @@ importers:
       '@capacitor/android':
         specifier: ^6.2.0
         version: 6.2.0(@capacitor/core@6.2.0)
+      '@capacitor/browser':
+        specifier: ^6.0.5
+        version: 6.0.5(@capacitor/core@6.2.0)
       '@capacitor/core':
         specifier: ^6.2.0
         version: 6.2.0
@@ -402,6 +405,11 @@ packages:
 
   '@capacitor/app@6.0.2':
     resolution: {integrity: sha512-SiGTGgslK4TbWJVImCUL1odul7/YFkVfkYtAYS9AAEzQpxBECBeRnuN3FFBcfZ9eiN1XxFBFchhiwpxtx/c7yQ==}
+    peerDependencies:
+      '@capacitor/core': ^6.0.0
+
+  '@capacitor/browser@6.0.5':
+    resolution: {integrity: sha512-TjA1YCiYT7wb7CLmI6zLLoS09vm7d+h4oAKXAVWDwjOyKdbAPKh75ZtzlN+lum8+sOtO9YJ+1Zdi6rdw6dxYYw==}
     peerDependencies:
       '@capacitor/core': ^6.0.0
 
@@ -4200,6 +4208,10 @@ snapshots:
       '@capacitor/core': 6.2.0
 
   '@capacitor/app@6.0.2(@capacitor/core@6.2.0)':
+    dependencies:
+      '@capacitor/core': 6.2.0
+
+  '@capacitor/browser@6.0.5(@capacitor/core@6.2.0)':
     dependencies:
       '@capacitor/core': 6.2.0
 

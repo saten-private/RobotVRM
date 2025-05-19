@@ -13,6 +13,7 @@ import ModelProvider from './settings/modelProvider'
 import Voice from './settings/voice'
 import { hasLlmApiKey } from '@/features/chat/hasLlmApiKey'
 import { TextButton } from './textButton'
+import { Browser } from '@capacitor/browser'
 
 export const Introduction = () => {
   const selectLanguage = settingsStore((s) => s.selectLanguage)
@@ -161,10 +162,9 @@ export const Introduction = () => {
           <div className="my-40">
             <TextButton
               onClick={() =>
-                window.open(
-                  `${process.env.NEXT_PUBLIC_ROBOTVRM_ROBOT_STORE_URL}`,
-                  '_blank'
-                )
+                Browser.open({
+                  url: `${process.env.NEXT_PUBLIC_ROBOTVRM_ROBOT_STORE_URL}`,
+                })
               }
             >
               {t('RobotStore')}
@@ -188,7 +188,18 @@ export const Introduction = () => {
                 <Trans
                   i18nKey="AcceptEula"
                   components={{
-                    eula: <Link url={eulaUrl} label={t('EulaLink')} />,
+                    eula: (
+                      <a
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          Browser.open({ url: eulaUrl })
+                        }}
+                        className="underline hover:opacity-80"
+                      >
+                        {t('EulaLink')}
+                      </a>
+                    ),
                   }}
                 />
               </label>
