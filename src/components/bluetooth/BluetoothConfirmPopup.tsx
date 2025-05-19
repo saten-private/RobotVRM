@@ -2,7 +2,7 @@ import React from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { Dialog } from '@headlessui/react'
 import { TextButton } from '../textButton'
-import { Browser } from '@capacitor/browser'
+import { InAppBrowser } from '@capacitor/inappbrowser'
 
 interface Props {
   onConfirm: (doNotShowAgain: boolean) => void
@@ -40,8 +40,8 @@ export const BluetoothConfirmPopup: React.FC<Props> = ({
 
           <div className="my-16">
             <TextButton
-              onClick={() =>
-                Browser.open({
+              onClick={async () =>
+                await InAppBrowser.openInExternalBrowser({
                   url: `${process.env.NEXT_PUBLIC_ROBOTVRM_ROBOT_STORE_URL}`,
                 })
               }

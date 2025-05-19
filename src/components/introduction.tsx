@@ -13,7 +13,7 @@ import ModelProvider from './settings/modelProvider'
 import Voice from './settings/voice'
 import { hasLlmApiKey } from '@/features/chat/hasLlmApiKey'
 import { TextButton } from './textButton'
-import { Browser } from '@capacitor/browser'
+import { InAppBrowser } from '@capacitor/inappbrowser'
 
 export const Introduction = () => {
   const selectLanguage = settingsStore((s) => s.selectLanguage)
@@ -161,8 +161,8 @@ export const Introduction = () => {
 
           <div className="my-40">
             <TextButton
-              onClick={() =>
-                Browser.open({
+              onClick={async () =>
+                await InAppBrowser.openInExternalBrowser({
                   url: `${process.env.NEXT_PUBLIC_ROBOTVRM_ROBOT_STORE_URL}`,
                 })
               }
@@ -191,9 +191,11 @@ export const Introduction = () => {
                     eula: (
                       <a
                         href="#"
-                        onClick={(e) => {
+                        onClick={async (e) => {
                           e.preventDefault()
-                          Browser.open({ url: eulaUrl })
+                          await InAppBrowser.openInExternalBrowser({
+                            url: eulaUrl,
+                          })
                         }}
                         className="underline hover:opacity-80"
                       >

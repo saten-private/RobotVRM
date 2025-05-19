@@ -16,7 +16,7 @@ import YouTube from './youtube'
 import Slide from './slide'
 import Licenses from './licenses'
 import { TextButton } from '../textButton'
-import { Browser } from '@capacitor/browser'
+import { InAppBrowser } from '@capacitor/inappbrowser'
 
 type Props = {
   onClickClose: () => void
@@ -112,8 +112,8 @@ const Main = () => {
 
         <div className="my-40">
           <TextButton
-            onClick={() =>
-              Browser.open({
+            onClick={async () =>
+              await InAppBrowser.openInExternalBrowser({
                 url: `${process.env.NEXT_PUBLIC_ROBOTVRM_ROBOT_STORE_URL}`,
               })
             }
@@ -138,9 +138,11 @@ const Main = () => {
           <div className="mt-2">
             <a
               href="#"
-              onClick={(e) => {
+              onClick={async (e) => {
                 e.preventDefault()
-                Browser.open({ url: eulaUrl })
+                await InAppBrowser.openInExternalBrowser({
+                  url: eulaUrl,
+                })
               }}
               className="underline hover:opacity-80"
             >
