@@ -206,6 +206,12 @@ export const Menu = () => {
     menuStore.setState({ showCapture: false }) // Webcamを表示するときCaptureを非表示にする
   }, [])
 
+  // Add goBack function
+  const goBack = () => {
+    // Use the browser's history API to go back
+    window.history.back()
+  }
+
   return (
     <>
       <div className="absolute z-15 m-24 fixed-top">
@@ -223,22 +229,12 @@ export const Menu = () => {
                 ></IconButton>
               </div>
               <div className="md:order-2 order-1">
-                {showChatLog ? (
-                  <IconButton
-                    iconName="24/CommentOutline"
-                    label={t('ChatLog')}
-                    isProcessing={false}
-                    onClick={() => setShowChatLog(false)}
-                  />
-                ) : (
-                  <IconButton
-                    iconName="24/CommentFill"
-                    label={t('ChatLog')}
-                    isProcessing={false}
-                    disabled={chatLog.length <= 0}
-                    onClick={() => setShowChatLog(true)}
-                  />
-                )}
+                <IconButton
+                  iconName="24/Prev"
+                  label={t('Back') || '戻る'}
+                  isProcessing={false}
+                  onClick={goBack}
+                />
               </div>
               {!youtubeMode &&
                 multiModalAIServices.includes(
