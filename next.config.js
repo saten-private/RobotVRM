@@ -8,6 +8,7 @@ const nextConfig = {
     root: process.env.BASE_PATH || '',
     // ビルド時のタイムスタンプを追加
     buildTime: new Date().toISOString(),
+    appId: 'com.robotvrm.first',
   },
   // 静的ファイルの出力時にタイムスタンプをファイル名に付与
   generateBuildId: async () => {

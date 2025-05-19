@@ -1,7 +1,9 @@
 import { SecureStorage } from '@aparajita/capacitor-secure-storage'
 import i18n from '@/lib/i18n'
 import homeStore from '@/features/stores/home'
+import getConfig from 'next/config'
 
+const { publicRuntimeConfig } = getConfig()
 export const multiModalAIServices = [
   'openai',
   'openrouter',
@@ -15,21 +17,29 @@ type multiModalAPIKeys = {
   [K in multiModalAIServiceKey as `${K}Key`]: string
 }
 
-type APIKey =
-  | 'openaiKey'
-  | 'openrouterKey'
-  | 'anthropicKey'
-  | 'googleKey'
-  | 'azureKey'
-  | 'groqKey'
-  | 'difyKey'
-  | 'cohereKey'
-  | 'mistralaiKey'
-  | 'perplexityKey'
-  | 'fireworksKey'
-  | 'koeiromapKey'
-  | 'youtubeApiKey'
-  | 'elevenlabsApiKey'
+export const hasAPIKeyAIServices = [
+  'openai',
+  'openrouter',
+  'anthropic',
+  'google',
+  'azure',
+  'groq',
+  'dify',
+  'cohere',
+  'mistralai',
+  'perplexity',
+  'fireworks',
+  'koeiromap',
+  'youtubeApi',
+  'elevenlabsApi',
+] as const
+export type hasAPIKeyAIServiceKey = (typeof hasAPIKeyAIServices)[number]
+
+type APIKeys = {
+  [K in hasAPIKeyAIServiceKey as `${K}Key`]: string
+}
+
+type APIKey = keyof APIKeys
 
 export const getAPIKey = async (key: APIKey): Promise<string> => {
   try {
@@ -58,11 +68,14 @@ export const setAPIKey = async (key: APIKey, value: string) => {
   return result
 }
 
-type PromptType = 'systemPrompt'
+export const promptTypes = ['systemPrompt'] as const
+export type PromptType = (typeof promptTypes)[number]
 
 export const getPrompt = async (key: PromptType): Promise<string> => {
   try {
-    const result = await SecureStorage.getItem(key)
+    const result = await SecureStorage.getItem(
+      `${publicRuntimeConfig.appId}-${key}`
+    )
     if (result) {
       return result
     }
@@ -80,5 +93,22 @@ export const getPrompt = async (key: PromptType): Promise<string> => {
 }
 
 export const setPrompt = async (key: PromptType, value: string) => {
-  return await SecureStorage.setItem(key, value)
+  return await SecureStorage.setItem(
+    `${publicRuntimeConfig.appId}-${key}`,
+    value
+  )
+}
+
+export const clearThisRobotVRM = async () => {
+  // Delete all API keys from secure storage
+  const apiKeys = hasAPIKeyAIServices.map(
+    (service) => `${service}Key` as APIKey
+  )
+  for (const key of apiKeys) {
+    await SecureStorage.removeItem(key)
+  }
+  for (const key of promptTypes) {
+    await SecureStorage.removeItem(`${publicRuntimeConfig.appId}-${key}`)
+  }
+  homeStore.setState({ validateApiKey: true })
 }

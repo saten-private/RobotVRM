@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import settingsStore from '@/features/stores/settings'
 import { TextButton } from '../textButton'
-import { SecureStorage } from '@aparajita/capacitor-secure-storage'
+import { clearThisRobotVRM } from '@/features/stores/secureStorage'
 
 const AdvancedSettings = () => {
   const selectLanguage = settingsStore((s) => s.selectLanguage)
@@ -24,7 +24,7 @@ const AdvancedSettings = () => {
         <TextButton
           onClick={async () => {
             settingsStore.persist.clearStorage()
-            await SecureStorage.clear()
+            await clearThisRobotVRM()
             window.location.reload()
           }}
         >
