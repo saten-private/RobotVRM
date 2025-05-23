@@ -18,18 +18,20 @@ import { InAppBrowser } from '@capacitor/inappbrowser'
 export const Introduction = () => {
   const selectLanguage = settingsStore((s) => s.selectLanguage)
 
-  const [displayIntroduction, setDisplayIntroduction] = useState(false)
+  // const [displayIntroduction, setDisplayIntroduction] = useState(false)
   const [hasApiKey, setHasApiKey] = useState<boolean | null>(null)
   const validateApiKey = homeStore((s) => s.validateApiKey)
   const acceptedEula = homeStore((s) => s.acceptedEula)
+  const [checkedEula, setCheckedEula] = useState(false)
 
   const { t } = useTranslation()
 
   const checkAPIKey = useCallback(async () => {
     const result = await hasLlmApiKey()
-    if (hasApiKey === null) {
-      setDisplayIntroduction(!result)
-    }
+    // Modified to show dependence on acceptEula instead of API key dependence
+    // if (hasApiKey === null) {
+    //   setDisplayIntroduction(!result)
+    // }
     setHasApiKey(result)
   }, [hasApiKey])
 
@@ -63,7 +65,7 @@ export const Introduction = () => {
 
   const eulaUrl = process.env.NEXT_PUBLIC_ROBOTVRM_EULA_URL || ''
 
-  return displayIntroduction ? (
+  return !acceptedEula ? (
     <div className="absolute z-40 w-full h-full px-24 py-40 bg-black/30 font-M_PLUS_2">
       <div className="relative mx-auto my-auto max-w-3xl max-h-full p-24 overflow-auto bg-white/80 backdrop-blur rounded-16">
         <div className="my-24">
@@ -178,9 +180,9 @@ export const Introduction = () => {
               <input
                 type="checkbox"
                 id="eula-checkbox"
-                checked={acceptedEula}
+                checked={checkedEula}
                 onChange={(e) => {
-                  homeStore.setState({ acceptedEula: e.target.checked })
+                  setCheckedEula(e.target.checked)
                 }}
                 className="w-16 h-16"
               />
@@ -210,11 +212,14 @@ export const Introduction = () => {
 
           <button
             onClick={() => {
-              setDisplayIntroduction(false)
+              if (checkedEula) {
+                homeStore.setState({ acceptedEula: true })
+              }
+              // setDisplayIntroduction(false)
               updateLanguage()
             }}
             className="font-bold bg-secondary hover:bg-secondary-hover active:bg-secondary-press disabled:bg-secondary-disabled text-white px-24 py-8 rounded-oval"
-            disabled={!hasApiKey || (!!eulaUrl && !acceptedEula)}
+            disabled={!hasApiKey || (!!eulaUrl && !checkedEula)}
           >
             {t('StartWithAISettings')}
           </button>
