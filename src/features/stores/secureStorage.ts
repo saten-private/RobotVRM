@@ -112,18 +112,3 @@ export const clearThisRobotVRM = async () => {
   }
   homeStore.setState({ validateApiKey: true })
 }
-
-// old systemPrompt (first v1)
-export const getOld20250524SystemPrompt = async (): Promise<string | null> => {
-  try {
-    const result = await SecureStorage.getItem('systemPrompt')
-    return result
-  } catch (error) {
-    console.error('getOldSystemPrompt error', error)
-    return null
-  }
-}
-
-export const removeOld20250524SystemPrompt = async () => {
-  return await SecureStorage.removeItem('systemPrompt')
-}
