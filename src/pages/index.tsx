@@ -62,6 +62,7 @@ const Home = () => {
         console.log('First launch detected, cleaning up SecureStorage')
         homeStore.setState({ initialLaunchCompleted: true })
       }
+      await migrateStore()
       setIsInitialized(true)
       console.log('Application initialization SecureStorage end')
     } catch (error) {
@@ -73,7 +74,6 @@ const Home = () => {
   useEffect(() => {
     console.log('Home start')
     initalizeSecureStorage()
-    migrateStore()
     const unsubscribe = startLlmProcessor()
     return () => {
       console.log('Home end')
