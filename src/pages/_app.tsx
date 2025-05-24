@@ -6,7 +6,7 @@ import { isLanguageSupported } from '@/features/constants/settings'
 import homeStore from '@/features/stores/home'
 import settingsStore from '@/features/stores/settings'
 import '@/styles/globals.css'
-// import migrateStore from '@/utils/migrateStore'
+import migrateStore from '@/utils/migrateStore'
 import i18n from '../lib/i18n'
 
 // ネイティブ以外からアクセスされた場合はアクセス拒否
@@ -26,8 +26,6 @@ export async function getServerSideProps(context: any) {
 }
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    // migrateStore()
-
     const hs = homeStore.getState()
     const ss = settingsStore.getState()
 
@@ -35,6 +33,8 @@ export default function App({ Component, pageProps }: AppProps) {
       i18n.changeLanguage(ss.selectLanguage)
       return
     }
+
+    migrateStore()
 
     const browserLanguage = navigator.language
     const languageCode = browserLanguage.match(/^zh/i)

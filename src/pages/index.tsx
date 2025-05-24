@@ -16,8 +16,6 @@ import {
 import { readFileToBlob } from '@/utils/fileSystem'
 import { Directory } from '@capacitor/filesystem'
 import settingsStore from '@/features/stores/settings'
-import migrateStore from '@/utils/migrateStore'
-
 // ネイティブ以外からアクセスされた場合はアクセス拒否
 export async function getServerSideProps(context: any) {
   if (!/RobotVRM/.test(context.req.headers['user-agent'])) {
@@ -73,7 +71,6 @@ const Home = () => {
   useEffect(() => {
     console.log('Home start')
     initalizeSecureStorage()
-    migrateStore()
     const unsubscribe = startLlmProcessor()
     return () => {
       console.log('Home end')
